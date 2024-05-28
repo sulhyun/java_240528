@@ -49,7 +49,7 @@ public class VariavleEx01 {
 		
 		// 논리형
 		boolean isEven = true;
-		
+		boolean infinitySpace = false;
 	}	
 
 }
