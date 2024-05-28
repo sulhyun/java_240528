@@ -50,6 +50,9 @@ public class VariavleEx01 {
 		// 논리형
 		boolean isEven = true;
 		boolean infinitySpace = false;
+		
+		System.out.println(isEven);
+		System.out.println(infinitySpace);
 	}	
 
 }
