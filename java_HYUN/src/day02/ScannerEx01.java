@@ -33,7 +33,7 @@ public class ScannerEx01 {
 		
 		System.out.print("문자를 입력하세요 : ");
 		/*
-		next()를 통해서 문자열을 가져오고,
+		next() 를 통해서 문자열을 가져오고,
 		String 클래스에서 제공하는 charAt(인덱스) 기능을 통해
 		인덱스0(첫번째) 글자를 가져옴
 		*/

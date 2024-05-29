@@ -23,7 +23,7 @@ public class ScannerEx02 {
 		int num2 = scan.nextInt();
 		System.out.print("연산자를 입력하세요 : ");
 		char ch = scan.next().charAt(0);
-		System.out.println("" + num1 + " " + ch + " " + num2);
+		System.out.println(num1 + " " + ch + " " + num2);
 
 	}
 
