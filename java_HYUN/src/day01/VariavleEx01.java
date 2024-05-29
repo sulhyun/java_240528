@@ -4,6 +4,7 @@ public class VariavleEx01 {
 
 	public static void main(String[] args) {
 		
+		// 빈 문자를 넣고 싶으면 ' ' (띄워쓰기)
 		// 문자형 변수 ch1를 선언
 		char ch1;
 		
@@ -36,8 +37,8 @@ public class VariavleEx01 {
 		끝자리 1더해주기(2의보수) => 1111 1011 : -5
 		*/
 		
-		// 정수 리터럴은 기본이 int
-		// 실수 리터럴은 기본이 double
+		// 정수 리터럴은 기본이 (int)
+		// 실수 리터럴은 기본이 (double)
 		
 		// 실수(근사치이기 때문에 항상 오차 발생)
 		// 3.14는 double 형이기 때문에 반드시 접미사 F를 붙여야함
