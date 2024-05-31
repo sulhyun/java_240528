@@ -2,7 +2,7 @@ package day04.homework;
 
 import java.util.Scanner;
 
-public class UpDownGame01 {
+public class UpDownGame03 {
 
 	public static void main(String[] args) {
 		
@@ -21,19 +21,18 @@ public class UpDownGame01 {
 		*/
 		
 		final int MIN = 1, MAX = 100;
-		int random = (int)(Math.random() * (MAX - MIN + 1) + MIN);
-		// System.out.println("랜덤한 수 : " + random);
-		
+		int random = (int)(Math.random() * (MAX - MIN + 1) + MIN );
+		int cnt = 0;
+		int num;
 		Scanner sc = new Scanner(System.in);
-		
 		System.out.println("GAME START!! (1 ~ 100)");
-		for (int i = 1;; i++) {
+		do {
 			System.out.print("정수 입력 : ");
-			int num = sc.nextInt();
+			num = sc.nextInt();
+			cnt++;
 			if (num == random) {
-				System.out.println("정답입니다!");
-				System.out.println(i + "번째 시도만에 맞추셨습니다.");
-				break;
+				System.out.println("정답입니다.");
+				System.out.println(cnt + "번째만에 맞추셨습니다.");
 			} else if (num > random) {
 				System.out.println("DOWN!");
 			} else if (num < random) {
@@ -41,9 +40,8 @@ public class UpDownGame01 {
 			} else {
 				System.out.println("잘못된 값입니다.");
 			}
-		}
+		}while(num != random);
 		sc.close();
-		
 	}
 
 }
