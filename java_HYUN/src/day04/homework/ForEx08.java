@@ -14,7 +14,18 @@ public class ForEx08 {
 		8과 12의 최대 공약수 : 4
 		*/
 		
-
+		int num1 = 8, num2 = 12;
+		int result = 1;
+		
+		for (int i = 1; i < 9; i++) {
+			if (num2 % i == 0) {
+				if (num1 % i == 0) { 
+					result = i;
+				}
+			}
+		}
+		System.out.println(num1 + ", " + num2 +
+					"의 최대공약수 : " + result);
 		
 	}
 
