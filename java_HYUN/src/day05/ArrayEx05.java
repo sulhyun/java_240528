@@ -33,8 +33,8 @@ public class ArrayEx05 {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("정수를 입력하세요 : ");
-		int i = 0;
 		int num = sc.nextInt();
+		int i = 0;
 		for (i = 0; i < nums.length; i++) {
 			if (num == nums[i]) {
 				break;
