@@ -44,7 +44,7 @@ public class ArrayEx07 {
 		int num; // 게임
 		int menu; // 메뉴
 		int cnt = 0; // 게임에서 시도한 수
-		int gameCount = 0;
+		int gameCount = 0; // 게임수
 		
 		do {
 			System.out.println("메뉴");

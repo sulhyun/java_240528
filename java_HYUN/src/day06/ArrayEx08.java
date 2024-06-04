@@ -23,8 +23,6 @@ public class ArrayEx08 {
 			System.out.println(tmp);
 		}
 		
-		
-		
 	}
 
 }
