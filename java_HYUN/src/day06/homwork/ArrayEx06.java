@@ -1,4 +1,4 @@
-package homwork;
+package day06.homwork;
 
 public class ArrayEx06 {
 

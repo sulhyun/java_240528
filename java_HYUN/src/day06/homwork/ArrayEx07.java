@@ -1,4 +1,4 @@
-package homwork;
+package day06.homwork;
 
 import java.util.Arrays;
 import java.util.Scanner;
