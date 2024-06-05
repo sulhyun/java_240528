@@ -96,9 +96,9 @@ public class Exam04 {
 				System.out.println("-----------");
 				while(true) {
 					System.out.print("단어 입력 (종료:-1) : ");
-					word = sc.next();
+					tmp = sc.next();
 					
-					if (word.equals("-1")) {
+					if (tmp.equals("-1")) {
 						System.out.println("종료합니다.");
 						break;
 					}
@@ -106,7 +106,7 @@ public class Exam04 {
 					boolean isTrue = false;
 					for (int i = 0; i < count; i++) {
 						String tmp1 = list[i];
-						if (word.equals(tmp1)) {
+						if (tmp.equals(tmp1)) {
 							isTrue = true;
 						}
 					}
