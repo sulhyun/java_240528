@@ -19,17 +19,17 @@ public class ArrayEx09 {
 		String st = sc.next();
 
 		for (String tmp : list) {
-			if (tmp.equals(st)) {
+			if (st.equals(tmp)) {
 				isTrue = true;
 				break;
 			}
 		}
 		
 		if(isTrue) {
-			System.out.println("있습니다.");
+			System.out.println(st + "가 있습니다.");
 		}
 		else {
-			System.out.println("없습니다.");
+			System.out.println(st + "가 없습니다.");
 		}
 	}
 

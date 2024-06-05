@@ -18,7 +18,7 @@ public class ArrayEx05 {
 			} 
 			for (int j = 2 * i; j < arr.length; j += i) {
 					arr[j] = 1;
-				}
+			}
 				
 		}
 		// 2부터 100까지 x체크 안된 수(값이 0인 수)를 출력
