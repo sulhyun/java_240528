@@ -11,6 +11,29 @@ public class ArrayEx05 {
 		소수 : 0 , 소수 아님(x) : 1
 		*/
 		
+		int[] nums = new int[101];
+		
+		nums[0] = 1;
+		nums[1] = 1;
+		
+		for (int i = 2; i < nums.length; i++) {
+			
+			if (nums[i] == 1) {
+				continue;
+			}
+			
+			for (int j = i * 2; j < nums.length; j += i) {
+				nums[j] = 1;
+			}
+		}
+		
+		for (int i = 2; i < nums.length; i++) {
+			
+			if(nums[i] == 0) {
+				System.out.print(i + " ");
+			}
+		}
+		System.out.println();
 	
 	}
 
