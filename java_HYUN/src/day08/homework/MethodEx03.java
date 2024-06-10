@@ -30,9 +30,9 @@ public class MethodEx03 {
 		return randArray(createArray(n));
 	}
 
-	public static int[] createArray(int n) {
+	public static int[] createArray(int size) {
 		
-		return new int[n];
+		return new int[size];
 	}
 	
 	public static int[] randArray(int[] arr) {
