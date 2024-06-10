@@ -1,4 +1,4 @@
-package day09;
+package day09.homework;
 
 import java.util.Scanner;
 
@@ -161,6 +161,15 @@ public class StudentEx01 {
 		System.out.println("3. 성적 확인");
 		System.out.println("4. 종료");
 		System.out.print("메뉴 선택 : ");
+	}
+	
+	public static void inPut(Scanner scan) {
+		System.out.print("학년 : ");
+		int grade = scan.nextInt();
+		System.out.print("반 : ");
+		int classNum = scan.nextInt();
+		System.out.print("번호 : ");
+		int num = scan.nextInt();
 	}
 	
 	/* 기능 : 메뉴에 맞는 기능을 실행하는 메소드 
