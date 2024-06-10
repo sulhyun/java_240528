@@ -1,6 +1,6 @@
 package day08;
 
-public class ClassEx02 {
+public class MethodEx01 {
 	
 	/*
 	주어진 num가 소수인지 아닌지 판별하는 코드를 작성하세요.
