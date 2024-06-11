@@ -54,25 +54,51 @@ public class VocabularyEx01 {
 				// 검색할 단어를 입력
 				System.out.print("단어 입력 : ");
 				word = scan.next();
-				// 단어의 중복이 있는지 확인후
-				
+				int count = 0;
+				// 단어의 중복이 있는지 확인 후
+				for (int i = 0; i < wordCount; i++) {
+					if (word.equals(list[i].getWord())) {
+						list[i].print();
+						count++;
+					}
+				}
 				// 검색할 단어가 없으면 안내문구 출력 후 종료
-				
-				// 있다면 해당 객체를 출력	
+				if (count == 0) {
+					System.out.println("일치하는 단어가 없습니다.");
+					break;
+				}
 				break;
 			case 4: 
-				// 단어를 입력
+				// 삭제할 단어를 입력
 				System.out.print("단어 입력 : ");
 				word = scan.next();
-				index = -1;
-				// 입력받은 단어로 객체 생성
-				tmp = new Word(word, "", "");
-				
-				index = indexOf(list, wordCount, tmp);
-				
-				System.out.println("단어 삭제 기능 구현중입니다.");
-				// 해당 객체를 생성자를 이용하여 초기화
-				list[index] = new Word();
+				count = 0; // 일치하는 단어가 몇개 있는지 확인하는 변수
+				// 단어 리스트에 수정할 단어와 일치하는 단어들을 번호와 함께 출력
+				for (int i = 0; i < wordCount; i++) {
+					if (word.equals(list[i].getWord())) {
+						System.out.println(i+1 + ".");
+						list[i].print();
+						count++;
+					}
+				}
+				// 수정할 단어가 없으면 안내문구 출력 후 종료
+				if (count == 0) {
+					System.out.println("일치하는 단어가 없습니다.");
+					return;
+				}
+				// 수정할 단어를 선택
+				System.out.print("삭제할 단어의 번호를 입력 : ");
+				int num = scan.nextInt();
+				boolean res = checkWord(list, word, num - 1);
+				if(!res) {
+					System.out.println("잘못된 번호를 선택하였습니다.");
+					return;
+				}
+				list[num - 1] = null;
+				for (int i = num - 1; i < wordCount - 1; i++) {
+					list[i] = list[i + 1];
+				}
+				wordCount--;
 				break;
 			case 5:
 				System.out.println("프로그램을 종료합니다.");
