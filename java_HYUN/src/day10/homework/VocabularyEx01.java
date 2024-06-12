@@ -21,9 +21,8 @@ public class VocabularyEx01 {
 		Word[] list = new Word[WORD_MAX]; // 단어 리스트
 		int wordCount = 0; // 저장된 단어 갯수
 		int menu; // 메뉴
-		String word, wordClass, meaning;
-		Word tmp;
-		int index;
+		String word;
+
 		// 반복 : 종료를 선택하지 않을 때까지
 		do {
 			// 메뉴 출력
@@ -54,51 +53,35 @@ public class VocabularyEx01 {
 				// 검색할 단어를 입력
 				System.out.print("단어 입력 : ");
 				word = scan.next();
-				int count = 0;
-				// 단어의 중복이 있는지 확인 후
-				for (int i = 0; i < wordCount; i++) {
-					if (word.equals(list[i].getWord())) {
-						list[i].print();
-						count++;
-					}
-				}
-				// 검색할 단어가 없으면 안내문구 출력 후 종료
-				if (count == 0) {
-					System.out.println("일치하는 단어가 없습니다.");
-					break;
-				}
+				// 저장된 단어들 중에서 검색할 단어가 있는지 찾아서 있으면 출력
+				printSearchWord(list, wordCount, word);
 				break;
-			case 4: 
+			case 4:
 				// 삭제할 단어를 입력
 				System.out.print("단어 입력 : ");
 				word = scan.next();
-				count = 0; // 일치하는 단어가 몇개 있는지 확인하는 변수
-				// 단어 리스트에 수정할 단어와 일치하는 단어들을 번호와 함께 출력
-				for (int i = 0; i < wordCount; i++) {
-					if (word.equals(list[i].getWord())) {
-						System.out.println(i+1 + ".");
-						list[i].print();
-						count++;
-					}
-				}
-				// 수정할 단어가 없으면 안내문구 출력 후 종료
-				if (count == 0) {
-					System.out.println("일치하는 단어가 없습니다.");
-					return;
-				}
-				// 수정할 단어를 선택
+				// 삭제할 단어를 출력
+				printSearchWord(list, wordCount, word);
+				// 삭제할 단어를 선택
 				System.out.print("삭제할 단어의 번호를 입력 : ");
 				int num = scan.nextInt();
 				boolean res = checkWord(list, word, num - 1);
+				// 아니면 잘못 선택했다고 알림
 				if(!res) {
 					System.out.println("잘못된 번호를 선택하였습니다.");
-					return;
+					break;
 				}
+				// 올바른 선택이면 삭제
 				list[num - 1] = null;
+				// 삭제하려는 번지 다음에 있는 단어들부터 앞으로 한칸 씩 당기고 마지막 단어를 null로 만듬
 				for (int i = num - 1; i < wordCount - 1; i++) {
 					list[i] = list[i + 1];
 				}
+				// 저장된 단어수를 1감소
 				wordCount--;
+				System.out.println("--------------------");
+				System.out.println("단어 삭제가 완료했습니다.");
+				System.out.println("--------------------");
 				break;
 			case 5:
 				System.out.println("프로그램을 종료합니다.");
@@ -108,11 +91,11 @@ public class VocabularyEx01 {
 		} while(menu != 5);
 	}
 	
-	/** 기능 : list에 index 번지에 있는 단어가 word인지 아닌지 알려주는 메소드
+	/** 기능 : list 에 index 번지에 있는 단어가 word 인지 아닌지 알려주는 메소드
 	 * @param list 단어 리스트
 	 * @param word 검색할 단어
 	 * @param index 해당 단어의 번지
-	 * @param index 번지에 word가 있으면 true, 없으면 false
+	 * @param index 번지에 word 가 있으면 true, 없으면 false
 	 * */
 	public static boolean checkWord(Word[] list, String word, int index) {
 		if(list.length <= index || index < 0) {
@@ -195,7 +178,7 @@ public class VocabularyEx01 {
 		}
 		
 		Word[] tmp = new Word[size];
-		// list 0번지부터 list.length를 tmp의 0번지부터 복붙
+		// list 0번지부터 list.length를 tmp 의 0번지부터 복붙
 		System.arraycopy(list, 0, tmp, 0, list.length);
 		return tmp;
 	}
@@ -222,20 +205,7 @@ public class VocabularyEx01 {
 		// 수정할 단어를 입력
 		System.out.print("단어 입력 : ");
 		String word = scan.next();
-		int count = 0; // 일치하는 단어가 몇개 있는지 확인하는 변수
-		// 단어 리스트에 수정할 단어와 일치하는 단어들을 번호와 함께 출력
-		for (int i = 0; i < wordCount; i++) {
-			if (word.equals(list[i].getWord())) {
-				System.out.println(i+1 + ".");
-				list[i].print();
-				count++;
-			}
-		}
-		// 수정할 단어가 없으면 안내문구 출력 후 종료
-		if (count == 0) {
-			System.out.println("일치하는 단어가 없습니다.");
-			return;
-		}
+		printSearchWord(list,wordCount, word);
 		// 수정할 단어를 선택
 		System.out.print("수정할 단어의 번호를 입력 : ");
 		int num = scan.nextInt();
@@ -256,13 +226,46 @@ public class VocabularyEx01 {
 		System.out.println("--------------------");
 	}
 	
+	/** 기능 : 단어 리스트에 단어가 있으면 해당 단어를 출력하고 없으면 없다고 출력하는 메소드
+	 * @param list 단어 리스트
+	 * @param word 단어
+	 * @param wordCount 저장된 단어 수
+	 * */
+	public static void printSearchWord(Word[] list, int wordCount, String word) {
+		int count = 0; // 일치하는 단어가 몇개 있는지 확인하는 변수
+		// 단어 리스트에 검색할 단어와 일치하는 단어들을 번호와 함께 출력
+		for (int i = 0; i < wordCount; i++) {
+			if (word.equals(list[i].getWord())) {
+				System.out.println(i+1 + ".");
+				list[i].print();
+				count++;
+			}
+		}
+		// 검색할 단어가 없으면 안내문구 출력 후 종료
+		if (count == 0) {
+			System.out.println("일치하는 단어가 없습니다.");
+			return;
+		}
+	}
+	
+	/** 기능 : 단어를 입력받아 단어 리스트에 해당 언어가 있는지 출력하는 메소드
+	 * @param list 단어 리스트
+	 * @param wordCount 저장된 단어 개수
+	 * */
+	public static void searchWord(Word[] list, int wordCount) {
+		// 삭제할 단어를 입력
+		System.out.print("단어 입력 : ");
+		String word = scan.next();
+		printSearchWord(list,wordCount, word);
+	}
+	
 }
 
-/* 영어 단어를 관리하기 위한 Word 클래스를 만들고,
- * 필요한 멤버변수들을 선언해보세요.
- * */
 
 class Word {
+	/* 영어 단어를 관리하기 위한 Word 클래스를 만들고,
+	 * 필요한 멤버변수들을 선언해보세요. */
+	
 	// 단어, 뜻, 품사(명사,동사,형용사)
 	private String word, meaning, wordClass;
 	
