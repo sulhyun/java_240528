@@ -49,5 +49,4 @@ public class StringEx01 {
 		String[] fruits = fruit.split(",");
 		System.out.println(Arrays.toString(fruits));
 	}
-
 }
