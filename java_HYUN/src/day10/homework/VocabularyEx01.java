@@ -89,7 +89,7 @@ public class VocabularyEx01 {
 			default:
 			}
 		} while(menu != 5);
-	}
+	} 
 	
 	/** 기능 : list 에 index 번지에 있는 단어가 word 인지 아닌지 알려주는 메소드
 	 * @param list 단어 리스트
