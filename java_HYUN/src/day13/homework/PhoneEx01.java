@@ -3,8 +3,6 @@ package day13.homework;
 import java.util.Scanner;
 
 public class PhoneEx01 {
-
-	private static Scanner scan = new Scanner(System.in);
 	
 	/* 연락처 관리를 위한 프로그램을 만드세요.
 	 * 메뉴
@@ -108,101 +106,181 @@ public class PhoneEx01 {
 	 * 번호를 삭제했습니다.
 	 * */
 	
+	private static Scanner scan = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		
-		int menu;
-		Phone[] ph = new Phone[3];
-		String name, phoneNum;
-		int phoneCnt = 0;
-		boolean isTrue;
+		int menu; // 메뉴 입력
+		Phone[] phone = new Phone[5]; // 이름 번호 저장
+		String name, phoneNum; // 이름과 번호 입력
+		int phoneCount = 0; // 현재 저장된 번호 갯수
+		boolean isFalse; // 동일한 번호가 있는지 확인
+		int num = 0;
 		int count = 0;
-		int num;
 		
 		do {
-			printMenu();
+			System.out.println("메뉴");
+			System.out.println("1. 연락처 추가");
+			System.out.println("2. 연락처 수정");
+			System.out.println("3. 연락처 삭제");
+			System.out.println("4. 연락처 검색");
+			System.out.println("5. 프로그램 종료");
+			System.out.print("메뉴 선택 : ");
 			menu = scan.nextInt();
-			switch(menu) {
-			case 1:// 연락처 추가
-				if (phoneCnt == ph.length) {
-					System.out.println("더이상 등록될 수 없습니다.");
+			// 메뉴를 입력 받으면 그 값에 맞는 case 문으로 이동
+			// 정수말고 다른 리터럴을 넣으면 예외 발생 : InputMismatchException
+			switch(menu) { 
+			case 1: // 연락처 추가
+				// 배열에 꽉 차면 저장공간이 없습니다. 출력후 종료
+				if (phone.length == phoneCount) {
+					System.out.println("저장 공간이 없습니다.");
 					break;
 				}
+				// 이름과 번호를 입력
 				System.out.print("이름 : ");
 				name = scan.next();
 				System.out.print("번호 : ");
 				phoneNum = scan.next();
-				isTrue = false;
-				for(int i = 0; i < phoneCnt; i++) {
-					if (phoneNum.equals(ph[i].getPhoneNum())) {
-						System.out.println("이미 등록된 번호입니다.");
-						isTrue = true;
-						break;
-					}
-				}
-				if(!isTrue) {
-					ph[phoneCnt] = new Phone(name, phoneNum);
+				// 등일한 번호가 있는지 확인
+				isFalse = phoneTF(phone, phoneCount, phoneNum);
+				// 없다면 객체 배열에 넣어주기
+				if(!isFalse) {
+					phone[phoneCount] = new Phone(name, phoneNum);
+					phoneCount++;
 					System.out.println("등록이 완료되었습니다.");
-					phoneCnt++;
+				}
+				// 이름 순으로 정렬
+				phoneSort(phone, phoneCount);
+				// 저장된 값 확인 용도
+				for (Phone tmp : phone) {
+					if(tmp != null) {
+						tmp.print();
+					}
 				}
 				break;
 			case 2: // 연락처 수정
-				System.out.print("이름 : ");
+				// 이름을 입력
+				System.out.print("이름 입력 : ");
 				name = scan.next();
-				for(int i = 0; i < phoneCnt; i++) {
-					if(ph[i].getName().contains(name)) {
-						System.out.println(count + 1 + ". " + ph[i].getName() + " : " 
-								+ ph[i].getPhoneNum());
-						count++;
+				// 동일한 이름 확인
+				phoneDuplication(phone, phoneCount, name);
+				// 번호 입력
+				System.out.print("번호 입력 : ");
+				num = scan.nextInt();
+				// 번호가 해당 숫자를 넘어간다면 잘못 입려됐다고 출력후 종료
+				if (phone.length <= num || num < 0) {
+					System.out.println("잘못된 번호입니다.");
+					break;
+				}
+				if(phone[num] == null) {
+					System.out.println("잘못된 번호입니다.");
+					break;
+				}
+				// 이름과 번호를 입력
+				System.out.print("이름 입력 : ");
+				name = scan.next();
+				System.out.print("번호 입력 : ");
+				phoneNum = scan.next();
+				// 동일한 번호가 있는지 확인
+				isFalse = phoneTF(phone, phoneCount, phoneNum);
+				// 없다면 해당 번호 정보 수정
+				if (!isFalse) {
+					phone[num - 1].updateData(name, phoneNum);
+				}
+				// 이름 순으로 정렬
+				phoneSort(phone, phoneCount);
+				// 저장된 값 확인 용도
+				for (Phone tmp : phone) {
+					if(tmp != null) {
+						tmp.print();
 					}
 				}
-				if(count == 0) {
-					System.out.println("이미 등록된 번호입니다.");
-				}
-				// 번호 선택을 받고
-				System.out.print("번호 선택 : ");
-				num = scan.nextInt();
-				// 있는 번호라면 이미 등록된 번호라고 출력
-				
-				// 없으면 해당 번호 수정
-				
 				break;
 			case 3: // 연락처 삭제
+				System.out.println("삭제 기능 구현 중입니다.");
 				break;
 			case 4: // 연락처 검색
+				System.out.println("검색 기능 구현 중입니다.");
 				break;
-			case 5:
-				System.out.println("프로그램을 종료합니다.");
+			case 5: // 프로그램 종료
+				System.out.println("프로그램 종료입니다.");
 				break;
-			default:
+			default: // 잘못된 메뉴를 넣으면 잘못된 명령이라고 출력
 				System.out.println("잘못된 명령입니다.");
 			}
-		} while(menu != 5);
-		
-		
-		
+		} while(menu != 5); // 메뉴가 5가 아니면 계속 반복
 	}
 	
-	public static void printMenu() {
-		System.out.println("메뉴");
-		System.out.println("1. 연락처 추가");
-		System.out.println("2. 연락처 수정");
-		System.out.println("3. 연락처 삭제");
-		System.out.println("4. 연락처 검색");
-		System.out.println("5. 프로그램 종료");
-		System.out.print("메뉴 선택 : ");
+	/**기능 : 동일한 번호가 있는 판별하는 메소드 있으면 true 없으면 false
+	 * @param String phoneNum
+	 * @param int phoneCount
+	 * @param Phone[] phone
+	 * @return true, false */
+	public static boolean phoneTF(Phone[] phone, int phoneCount, String phoneNum) {
+		// 등일한 번호가 있는지 확인
+		for(int i = 0; i < phoneCount; i++) {
+			// 있다면 츌력문을 출력하고 종료
+			if(phone[i].getPhoneNum().equals(phoneNum)) {
+				System.out.println("이미 등록된 번호입니다.");
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/** 기능 : 이름을 따라 사전 순으로 정렬하는 메소드
+	 * @param Phone[] phone
+	 * @param int phoneCount*/
+	public static void phoneSort(Phone[] phone, int phoneCount) {
+		for(int i = 0; i < phoneCount - 1; i++) {
+			for(int j = 0; j < phoneCount - 1 - i; j++) {
+				if(phone[j].getName().compareTo(phone[j+1].getName()) > 0) {
+					Phone tmp = phone[j];
+					phone[j] = phone[j+1];
+					phone[j+1] = tmp;
+				}
+			}
+		}
+	}
+	
+	public static void phoneDuplication(Phone[] phone, int phoneCount, String name) {
+		int count = 0;
+		for (int i = 0; i < phoneCount; i++) {
+			// 같은 이름이 있는지 확인
+			if(phone[i].getName().contains(name)) {
+				// 있다면 번호 부여해서 출력
+				System.out.println(i + 1 + ". " + phone[i].getName() + " : "
+						+ phone[i].getPhoneNum());
+				count++;
+			}
+		}
+		// 없다면 출력후 종료
+		if (count == 0) {
+			System.out.println("등록된 이름이 없습니다.");
+		}
 	}
 
 }
 
 class Phone {
-	private String name;
-	private String phoneNum;
+	
+	private String name, phoneNum;
 	
 	public Phone() {}
-	
+
 	public Phone(String name, String phoneNum) {
 		this.name = name;
 		this.phoneNum = phoneNum;
+	}
+	
+	public void updateData(String name, String phoneNum) {
+		this.name = name;
+		this.phoneNum = phoneNum;
+	}
+	
+	public void print() {
+		System.out.println("이름 : " + name);
+		System.out.println("번호 : " + phoneNum);
 	}
 
 	public String getName() {
@@ -220,25 +298,5 @@ class Phone {
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
