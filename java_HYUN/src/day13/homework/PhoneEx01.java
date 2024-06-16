@@ -116,7 +116,6 @@ public class PhoneEx01 {
 		int phoneCount = 0; // 현재 저장된 번호 갯수
 		boolean isFalse; // 동일한 번호가 있는지 확인
 		int num = 0;
-		int count = 0;
 		
 		do {
 			System.out.println("메뉴");
@@ -197,10 +196,38 @@ public class PhoneEx01 {
 				}
 				break;
 			case 3: // 연락처 삭제
-				System.out.println("삭제 기능 구현 중입니다.");
+				// 이름을 입력
+				System.out.print("이름 입력 : ");
+				name = scan.next();
+				// 동일한 이름 확인
+				phoneDuplication(phone, phoneCount, name);
+				// 번호 입력
+				System.out.print("번호 입력 : ");
+				num = scan.nextInt();
+				// 번호가 해당 숫자를 넘어간다면 잘못 입려됐다고 출력후 종료
+				if (phone.length <= num || num < 0) {
+					System.out.println("잘못된 번호입니다.");
+					break;
+				}
+				if(phone[num - 1] == null) {
+					System.out.println("잘못된 번호입니다.");
+					break;
+				}
+				phone[num - 1] = null;
+				
+				// 삭제하려는 번지 다음에 있는 단어들부터 앞으로 한칸 씩 당기고 마지막 단어를 null로 만듬
+				for (int i = num - 1; i < phoneCount - 1; i++) {
+					phone[i] = phone[i + 1];
+				}
+				// 저장된 단어수를 1감소
+				phoneCount--;
 				break;
 			case 4: // 연락처 검색
-				System.out.println("검색 기능 구현 중입니다.");
+				// 이름을 입력
+				System.out.print("이름 입력 : ");
+				name = scan.next();
+				// 동일한 이름 확인
+				phoneDuplication(phone, phoneCount, name);
 				break;
 			case 5: // 프로그램 종료
 				System.out.println("프로그램 종료입니다.");
