@@ -23,6 +23,14 @@ public class ClassEx01 {
 		System.out.println("t1 의 채널 : " + t1.channel); // 7
 		System.out.println("t2 의 채널 : " + t2.channel); // 7
 		
+		CaptionTv ctv = new CaptionTv();
+		ctv.channel = 10;
+		ctv.channelUp();
+		System.out.println("ctv 의 채널 : " + ctv.channel);
+		ctv.displayCaption("Hello World1"); // caption 은 boolean 기본값은 false 그래서 출력되지 않음
+		ctv.caption = true;
+		ctv.displayCaption("Hello World2");
+		
 	}
 
 }
@@ -45,5 +53,15 @@ class Tv {
 	
 	void channelDown() {
 		--channel;
+	}
+}
+
+class CaptionTv extends Tv {
+	boolean caption;
+	
+	void displayCaption(String text) {
+		if(caption) {
+			System.out.println(text);
+		}
 	}
 }

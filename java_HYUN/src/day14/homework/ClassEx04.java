@@ -14,6 +14,7 @@ public class ClassEx04 {
 		System.out.println(mm.add(2, 4));
 		System.out.println(mm.subtract(2, 4));
 		
+		
 	}
 }
 
@@ -24,6 +25,7 @@ class myMath {
 	}
 	
 	long subtract(long a, long b) {
-		return a- b;
+		return a - b;
 	}
+	 
 }
