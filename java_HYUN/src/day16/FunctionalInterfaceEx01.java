@@ -11,6 +11,7 @@ import java.util.function.UnaryOperator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+
 public class FunctionalInterfaceEx01 {
 
 	public static void main(String[] args) {

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NonNull;
 
+
+
 public class Ex01 {
 
 	public static void main(String[] args) {
@@ -64,5 +66,6 @@ class Student {
 	@NonNull
 	private String name;
 	private int kor, eng, math;
+	
 		
 }
