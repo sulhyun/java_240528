@@ -3,53 +3,84 @@ package practice;
 public class ClassEx02 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		SutdaDeck deck = new SutdaDeck();
+		
+		for(int i = 0; i < deck.cards.length; i++) {
+			System.out.print(deck.cards[i] + ",");
+		}
+		System.out.println();
+		
+		deck.Shuffle();
+		
+		for(int i = 0; i < deck.cards.length; i++) {
+			System.out.print(deck.cards[i] + ",");
+		}
+		System.out.println();
+		
+		System.out.println(deck.pick(5));
+		System.out.println(deck.pick());
 	}
 
 }
 
-class Point {
+class SutdaDeck {
+	final int CARD_NUM = 20;
+	SutdaCard[] cards = new SutdaCard[CARD_NUM];
 	
-	int x;
-	int y;
-	
-	public Point(int x, int y) {
-		this.x = x;
-		this.y = y;
+	SutdaDeck() {
+		for(int i = 0; i < CARD_NUM; i++) {
+			if(i == 0 || i == 2 || i == 7) {
+				cards[i] = new SutdaCard(i + 1, true);
+			}
+			else {
+				cards[i] = new SutdaCard(i % 10 + 1, false);
+			}
+		}
 	}
 	
-	public Point() {
-		this(0,0);
+	void Shuffle() {
+		SutdaCard tmp;
+		int min = 0, max = 19;
+		for(int i = 0; i < cards.length; i++) {
+			int random = (int)(Math.random() * (max - min + 1) + min);
+			tmp = cards[random];
+			cards[random] = cards[i];
+			cards[i] = tmp;
+		}
 	}
+	
+	SutdaCard pick(int index) {
+		if(0 > index || CARD_NUM - 1 < index) {
+			return null;
+		}
+		return cards[index];
+	}
+	
+	SutdaCard pick() {
+		int min = 0, max = 19;
+		int random = (int)(Math.random() * (max - min + 1) + min);
+		return cards[random];
+	}
+	
 }
 
-class Circle {
+class SutdaCard {
+	int num;
+	boolean isKwang;
 	
-	Point center;
-	int r;
-	
-	public Circle(Point center, int r) {
-		this.center = center;
-		this.r = r;
+	SutdaCard() {
+		this(1, true);
 	}
 	
-	public Circle() {
-		this(new Point(0,0), 100);
+	SutdaCard(int num, boolean isKwang){
+		this.num = num;
+		this.isKwang = isKwang;
 	}
-}
+	
+	@Override
+	public String toString() {
+		return num + (isKwang ? "K" : "");
+	}
 
-class Triangle {
-	
-	Point[] p = new Point[3];
-	
-	public Triangle(Point[] p) {
-		this.p = p;
-	}
-	
-	public Triangle(Point p1, Point p2, Point p3) {
-		p[0] = p1;
-		p[1] = p2;
-		p[2] = p3;
-	}
 }
