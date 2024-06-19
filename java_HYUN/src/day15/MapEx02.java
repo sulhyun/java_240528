@@ -17,7 +17,7 @@ public class MapEx02 {
 		map.put("2024160002", "홍길동");
 		map.put("2024135001", "임꺽정");
 		
-		// 방법1. keySet을 이용하여 set 으로 만든후 set 을 바복문을 이용하여 원하는 작업
+		// 방법1. keySet을 이용하여 set 으로 만든후 set 을 반복문을 이용하여 원하는 작업
 		
 		Set<String> set = map.keySet();
 		Iterator<String> it = set.iterator();

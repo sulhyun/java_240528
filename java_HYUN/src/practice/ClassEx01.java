@@ -1,4 +1,4 @@
-package day15.homework;
+package practice;
 
 public class ClassEx01 {
 
