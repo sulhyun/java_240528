@@ -9,23 +9,52 @@ public class ClassEx04 {
 	
 	public static void main(String[] args) {
 		
-		myMath mm = new myMath();
+		MyTv2 t = new MyTv2();
 		
-		System.out.println(mm.add(2, 4));
-		System.out.println(mm.subtract(2, 4));
+		t.setChannel(10);
+		System.out.println("CH: " + t.getChannel());
 		
+		t.setVolume(20);
+		System.out.println("VOL: " + t.getVolume());
 		
 	}
 }
 
-class myMath {
+class MyTv2 {
+	private boolean isPowerOn;
+	private int channel;
+	private int volume;
+	private int preChannel;
 	
-	long add(long a, long b) {
-		return a + b;
+	final int MAX_VOLUME = 100;
+	final int MIN_VOLUME = 0;
+	final int MAX_CHANNEL = 100;
+	final int MIN_CHANNEL = 1;
+	
+	public boolean isPowerOn() {
+		return isPowerOn;
+	}
+	public void setPowerOn(boolean isPowerOn) {
+		this.isPowerOn = isPowerOn;
+	}
+	public int getChannel() {
+		return channel;
+	}
+	public void setChannel(int channel) {
+		if(channel > MAX_CHANNEL || channel < MIN_CHANNEL) {
+			return;
+		}
+		this.channel = channel;
+	}
+	public int getVolume() {
+		return volume;
+	}
+	public void setVolume(int volume) {
+		if(volume > MAX_VOLUME || volume < MIN_VOLUME) {
+			return;
+		}
+		this.volume = volume;
 	}
 	
-	long subtract(long a, long b) {
-		return a - b;
-	}
-	 
+	
 }
