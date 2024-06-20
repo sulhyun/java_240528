@@ -2,6 +2,7 @@ package day15;
 
 import java.util.ArrayList;
 
+
 public class ListEx01 {
 
 	public static void main(String[] args) {
@@ -47,6 +48,7 @@ public class ListEx01 {
 		System.out.println("리스트에 홍길동이 몇번지에 있습니까 ? " + list.indexOf("홍길동"));
 		
 		System.out.println(list);
+
 	}
 
 }
