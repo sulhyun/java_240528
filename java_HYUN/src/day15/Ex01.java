@@ -27,50 +27,6 @@ public class Ex01 {
 		list.remove(scan.next());
 		
 		System.out.println(list);
-		
-		
-		ArrayList<Phone> ph = new ArrayList<Phone>();
-		
-		
-		for(int i = 0; i < 5; i++) {
-			System.out.print("이름 입력 :" );
-			String name = scan.next();
-			System.out.print("번호 입력 : ");
-			String number = scan.next();
-			ph.add(new Phone(name, number));
-			
-		}
-		System.out.println(ph);
-	}
 
-}
-
-class Phone {
-	
-	private String name;
-	private String number;
-	
-	public Phone(String name, String number) {
-		super();
-		this.name = name;
-		this.number = number;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-	
-	
 }

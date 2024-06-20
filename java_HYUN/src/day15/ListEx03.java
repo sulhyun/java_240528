@@ -53,7 +53,6 @@ class Contact {
 	public String number;
 	
 	public Contact(String name, String number) {
-		super();
 		this.name = name;
 		this.number = number;
 	}
