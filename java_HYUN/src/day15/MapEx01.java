@@ -9,6 +9,14 @@ public class MapEx01 {
 		// Map 기본예제
 		// key 중복 불가능 value 중복 가능
 		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<Integer, Integer> map2 = new HashMap<Integer, Integer>();
+		
+		int count = 0;
+		map2.put(1, count);
+
+		count++;
+		map2.put(1, count);
+		System.out.println(map2);
 		
 		/* put(key, value) : key 와 value 를 추가, 이미 key 가 등록되어 있으면
 		 * 새 value 를 저장하고 기존 value 를 반환 (덮어쓰기)*/
