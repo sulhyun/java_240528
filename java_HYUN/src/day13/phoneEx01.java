@@ -276,7 +276,7 @@ public class phoneEx01 {
 		if(index < 0 || index >= count) {
 			return false;
 		}
-		return list[index].getName().equals(name);
+		return list[index].getName().contains(name);
 	}
 	
 	/** 기능 : 연락처 리스트에서 연락처 입력받아 수정하는 메소드
