@@ -1,5 +1,9 @@
 package day19.post;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,7 +22,7 @@ public class PostManager implements Program {
 	private final int SEARCH = 4;
 	private final int EXIT = 5;
 	
-	private String fileName = "src/day19/exam/data.txt";
+	private String fileName = "src/day19/post/data.txt";
 	
 	@Override
 	public void printMenu() {
@@ -58,14 +62,27 @@ public class PostManager implements Program {
 		save(fileName);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void load(String fileName) {
-		
+
+		try(FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(fis)) {
+			list = (List<Post>)ois.readObject();
+		} catch (Exception e) {
+			System.out.println("불러오기에 실패했습니다...ㅠㅅㅠ");
+		} 
 	}
 	
 	@Override
 	public void save(String fileName) {
-		
+		try(FileOutputStream fos = new FileOutputStream(fileName);
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+					oos.writeObject(list);
+			
+		} catch (Exception e) {
+					System.out.println("저장에 실패했습니다...ㅠㅅㅠ");
+		}
 	}
 	
 	@Override
@@ -106,35 +123,53 @@ public class PostManager implements Program {
 		String search = sc.nextLine();
 		printBar();
 		// 게시글에서 검색어가 제목 또는 내용에 들어간 게시글 리스트를 가져옴
-		System.out.println("검색결과");
-		for (Post tmp : list) {
-			if(tmp.getTitle().contains(search) && tmp.getContents().contains(search)) {
-				System.out.println(tmp);
+		List<Post> tmp = new ArrayList<Post>();
+		for (Post post : list) {
+			if(post.getTitle().contains(search) || post.getContents().contains(search)) {
+				tmp.add(post);
 			}
 		}
 		// 게시글 리스트가 비어 있으면 안내문구 출력 후 종료
-		
+		if(tmp.size() == 0) {
+			System.out.println("검색결과가 없습니다.");
+			printBar();
+			return;
+		}
 		// 가져온 게시글 리스트를 출력
-		
+		System.out.println("검색 결과");
+		System.out.println(tmp);
+		printBar();
 		// 게시글을 확인할건지 선택
-		
+		System.out.print("게시글 확인하시겠습니까? (y/n) : ");
+		char yn = sc.next().charAt(0);
+		printBar();
 		// 확인하지 않겠다고 하면 종료
-		
+		if(yn == 'n') {
+			System.out.println("메뉴로 돌아갑니다.");
+			return;
+		}
 		// 확인하면 게시글 번호를 입력
-		
+		System.out.print("검색 결과 중 확인할 게시글 번호 선택 : ");
+		int num = sc.nextInt();
+		printBar();
 		// 입력받은 게시글 번호로 객체를 생성
-		
+		Post post = new Post(num);
 		// 검색 리스트에서 생성된 객체와 일치하는 번지를 확인
-		
+		int index = tmp.indexOf(post);
 		// 번지가 유효하지 않으면 안내문구 출력후 종료
-		
+		if(index < 0) {
+			System.out.println("잘못된 번호입니다.");
+		}
 		// 번지에 있는 게시글을 가져옴
-		
+		post = list.get(index);
 		// 가져온 게시글을 출력
-		
+		post.print();
 		// 메뉴로 돌아가려면... 문구 출력
-		
+		System.out.println("메뉴로 돌아가려면 엔터를 누르세요");
 		// 엔터를 입력받도록 처리
+		sc.nextLine();
+		sc.nextLine();
+		
 	}
 
 
