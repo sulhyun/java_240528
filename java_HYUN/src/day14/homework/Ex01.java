@@ -43,7 +43,7 @@ public class Ex01 {
 		System.out.println("3. 연락처 삭제");
 		System.out.println("4. 연락처 검색");
 		System.out.println("5. 종료");
-		System.out.print("번호 입력 : ");
+		System.out.print("메뉴 입력 : ");
 	}
 	
 	public static int runMenu(int menu, Contact[] list, int count) throws Exception {
@@ -76,21 +76,61 @@ public class Ex01 {
 			name = sc.nextLine();
 			// 연락처 리스트에서 이름과 일치하는 연락처를 번지 +1과 함께 출력
 			for(int i = 0; i < count; i++) {
-				if(list[i].getName().equals(name)) {
-					System.out.println();
+				if(list[i].getName().contains(name)) {
+					System.out.println(i+1 + ". " + list[i]);
 				}
 			}
 			// 번호 선택
-			
+			System.out.println("번호 : ");
+			int num = sc.nextInt() - 1;
 			// 번호가 올바르지 않으면 잘못 선택했습니다.하고 종료
-			
+			boolean isTrue = checkContact(list, count, num, name);
+			if(!isTrue) {
+				System.out.println("번호가 올바르지 않습니다.");
+				break;
+			}
 			// 올바르면 이름, 번호를 입력받음
-			
+			sc.nextLine();
+			System.out.print("수정할 이름 : ");
+			String newName = sc.nextLine();
+			System.out.println("수정할 번호 :");
+			String newNumber = sc.nextLine();
 			// 이름, 번호를 이용하여 객체를 생성
-			
+			tmp = new Contact(newName, newNumber);
 			// 생성된 객체를 선택한 번호를 이용하여 수정
+			list[num] = tmp;
+			System.out.println("수정이 완료되었습니다.");
 			break;
 		case 3:
+			// 이름 입력
+			sc.nextLine();
+			System.out.println("이름 : ");
+			name = sc.nextLine();
+			// 연락처 리스트에서 이름과 일치하는 연락처를 번지 +1과 함께 출력
+			for(int i = 0; i < count; i++) {
+				if(list[i].getName().contains(name)) {
+					System.out.println(i+1 + ". " + list[i]);
+				}
+			}
+			// 번호 선택
+			System.out.println("번호 : ");
+			num = sc.nextInt() - 1;
+			// 번호가 올바르지 않으면 잘못 선택했습니다.하고 종료
+			isTrue = checkContact(list, count, num, name);
+			if(!isTrue) {
+				System.out.println("번호가 올바르지 않습니다.");
+				break;
+			}
+			// 삭제할 부분 null로 바꿔주고
+			list[num] = null;
+			// 삭제한 부분 이후부터 앞으로 한칸씩 댕겨주기
+			for(int i = num; i < count; i++) {
+				Contact contact = list[i];
+				list[i] = list[i+1];
+				list[i+1] = contact;
+			}
+			System.out.println("삭제가 완료되었습니다.");
+			
 			break;
 		case 4:
 			break;
@@ -103,6 +143,16 @@ public class Ex01 {
 		return count;
 	}
 	
+	public static boolean checkContact(Contact[] list, int count, int num, String name) {
+		if(list == null || count == 0) {
+			return false;
+		}
+		if(num < 0 || num >= count) {
+			return false;
+		}
+		return list[num].getName().contains(name);
+	}
+
 	public static int indexOf(Contact[] list, int count, Contact tmp) {
 		if(list == null || count == 0) {
 			return -1;

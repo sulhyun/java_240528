@@ -273,7 +273,7 @@ public class phoneEx01 {
 			return false;
 		}
 		
-		if(index < 0 || index >= count) {
+		if(index < 0 || index > count) {
 			return false;
 		}
 		return list[index].getName().contains(name);
