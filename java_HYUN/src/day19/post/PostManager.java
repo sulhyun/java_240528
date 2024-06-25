@@ -65,9 +65,10 @@ public class PostManager implements Program {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void load(String fileName) {
-
 		try(FileInputStream fis = new FileInputStream(fileName);
 			ObjectInputStream ois = new ObjectInputStream(fis)) {
+			int count = ois.read();
+			Post.setCount(count);
 			list = (List<Post>)ois.readObject();
 		} catch (Exception e) {
 			System.out.println("불러오기에 실패했습니다...ㅠㅅㅠ");
@@ -77,11 +78,12 @@ public class PostManager implements Program {
 	@Override
 	public void save(String fileName) {
 		try(FileOutputStream fos = new FileOutputStream(fileName);
-				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-					oos.writeObject(list);
+			ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.write(Post.getCount());
+				oos.writeObject(list);
 			
 		} catch (Exception e) {
-					System.out.println("저장에 실패했습니다...ㅠㅅㅠ");
+			System.out.println("저장에 실패했습니다...ㅠㅅㅠ");
 		}
 	}
 	
