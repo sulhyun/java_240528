@@ -1,15 +1,24 @@
 package Student;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Subject {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Subject implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	// 과목명, 학년, 학기, 중간, 기말, 수행평가
 	private String name;
 	private int grade;
 	private int semester;
 	private int midterm;
 	private int finals;
-	private int perfomace;
+	private int performance;
 	
 	// 한 학생에게 같은 과목명, 학년, 학기 성적의 여러개 있을 수 없기 때문에
 	// equals를 과목명, 학년, 학기를 이용하여 오버라이딩
@@ -30,8 +39,21 @@ public class Subject {
 		return grade == other.grade && Objects.equals(name, other.name) && semester == other.semester;
 	}
 	
+	public void update(int midterm, int finals, int performance) {
+		this.midterm = midterm;
+		this.finals = finals;
+		this.performance = performance;
+	}
 	
-
+	@Override
+	public String toString() {
+		return "과목 : " + name + "\n" + grade + "학년 ," + semester + "학기\n중간 : " + midterm
+				+ "\n기말 : " + finals + "\n수행 :" + performance + "\n총점 : " + getTotal();
+	}
 	
+	private double getTotal() {
+		
+		return midterm * 0.4 + finals * 0.5 + performance * 0.1;
+	}
 	
 }
