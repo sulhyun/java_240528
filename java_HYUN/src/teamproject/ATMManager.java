@@ -13,7 +13,7 @@ public class ATMManager implements Program {
 
 	Scanner sc = new Scanner(System.in);
 	List<ATM> list = new ArrayList<ATM>();
-	Set<String> set = new HashSet<String>(); // 계좌번호 생성할 공간
+	Set<String> set = new HashSet<String>(); // 계좌번호 중복 확인을 위한 Set
 	
 	@Override
 	public void printMenu() {
