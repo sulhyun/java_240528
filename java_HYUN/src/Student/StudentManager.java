@@ -10,7 +10,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import day19.post.Post;
 import program.Program;
 
 public class StudentManager implements Program {
