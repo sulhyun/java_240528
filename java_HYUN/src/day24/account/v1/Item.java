@@ -1,4 +1,4 @@
-package account;
+package day24.account.v1;
 
 import java.io.Serializable;
 import java.util.Objects;

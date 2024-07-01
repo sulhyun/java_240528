@@ -1,4 +1,4 @@
-package account;
+package day24.account.v1;
 
 public class Main {
 

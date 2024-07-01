@@ -1,4 +1,4 @@
-package account;
+package day24.account.v1;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,7 +18,7 @@ public class AccountManager implements Program {
 	private Scanner scan = new Scanner(System.in);
 	private List<String> incomeCategoryList = Arrays.asList("월급", "용돈", "부수입");
 	private List<String> expensesCategoryList = Arrays.asList("교통비", "식비", "취미", "기타");
-	private String fileName = "src/account/v1/data.txt";
+	private String fileName = "src/account/data.txt";
 	
 	@Override
 	public void printMenu() {
