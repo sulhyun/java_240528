@@ -1,5 +1,7 @@
 package day17;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -17,6 +19,18 @@ public class CharStreamEx02 {
 			fw.write(str);
 		} catch (IOException e) {
 			System.out.println("파일 입출력 예외가 발생했습니다.");
+		}
+		
+		try(FileReader fr = new FileReader(fileName)) {
+			
+			while(fr.ready()) {
+				char ch = (char)fr.read();
+				System.out.print(ch);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -41,6 +41,7 @@ public class ObjectStreamEx01 {
 				if(tmp != null) {
 					points2.add(tmp);
 				}
+				System.out.println(tmp);
 			}while(tmp != null);
 		} catch (IOException e) {
 			System.out.println("입출력 예외가 발생했습니다.");

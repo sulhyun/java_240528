@@ -20,7 +20,7 @@ public class ClientEx01 {
 		List<String> list = Arrays.asList("21", "100", "23", "-1");
 		
 		// 1. 소켓을 생성하고 대기
-		System.out.println("서버 연결 요청]");
+		System.out.println("[서버 연결 요청]");
 		
 		try(Socket socket = new Socket(ip, port)) {
 			System.out.println("[서버 연결 완료]");

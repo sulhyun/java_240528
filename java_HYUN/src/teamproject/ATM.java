@@ -8,13 +8,17 @@ public class ATM {
 	private String name;		// 예금주
 	private String accountNum;	// 계좌번호
 	private String pw;			// 비밀번호
-	private int money;			// 잔액
+	private int money = 0;		// 잔액
 	
 	public ATM(String name, String pw) throws Exception {
 		this.name = name;
 		setPw(pw);
 	}
-
+	
+	public ATM(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(name, pw);
@@ -32,6 +36,26 @@ public class ATM {
 		return Objects.equals(name, other.name) && Objects.equals(pw, other.pw);
 	}
 
+	@Override
+	public String toString() {
+		return name + " : " + accountNum;
+	}
+	
+	// 입금
+	public void deposit(int money) {
+		this.money += money;
+	}
+	
+	// 출금
+	public boolean withdraw(int money) {
+		if(this.money - money < 0) {
+			System.out.println("잔액이 부족합니다.");
+			return false;
+		}
+		this.money -= money;
+		return true;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -66,8 +90,9 @@ public class ATM {
 	}
 
 	public void setMoney(int money) {
-		this.money = money;
+		this.money += money;
 	}
+
 	
 	
 }

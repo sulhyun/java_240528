@@ -21,10 +21,8 @@ public class ATMManager implements Program {
 		System.out.println("1. 계좌등록");
 		System.out.println("2. 입금");
 		System.out.println("3. 출금");
-		System.out.println("4. 계좌이체");
-		System.out.println("5. 계좌목록");
-		System.out.println("6. 거래내역");
-		System.out.println("7. 종료");
+		System.out.println("4. 계좌목록");
+		System.out.println("5. 종료");
 		System.out.print("메뉴 입력 : ");
 	}
 
@@ -43,7 +41,7 @@ public class ATMManager implements Program {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-		} while(menu != 7);
+		} while(menu != 5);
 	}
 	
 	@Override
@@ -51,24 +49,92 @@ public class ATMManager implements Program {
 		
 		switch(menu) {
 		case 1:
-			registration(); // 계좌 등록
+			registration();	// 계좌 등록
 			break;
 		case 2:
+			deposit();		// 입금
 			break;
 		case 3:
+			withdraw();		// 출금
 			break;
-		case 4:
+		case 4:				// 계좌목록
+			accountList(); 
 			break;
 		case 5:
-			break;
-		case 6:
-			break;
-		case 7:
+			exit();
 			break;
 		default:
 		}
 	}
 	
+	private void exit() {
+		System.out.println("프로그램을 종료합니다.");
+	}
+
+
+	private void accountList() {
+		
+	}
+
+
+	private void withdraw() throws Exception {
+		// 이름과 비밀번호를 입력받고
+		System.out.print("이름 : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		System.out.print("비밀번호(4자리) : ");
+		String pw = sc.next();
+		
+		// 객체에 이름과 비밀번호를 저장하고
+		ATM atm = new ATM(name, pw);
+		
+		int index = list.indexOf(atm);
+		if(index == -1) {
+			System.out.println("일치하는 계좌가 없습니다.");
+		}
+		
+		printBar();
+		System.out.print("출금할 금액 : ");
+		int money = nextInt();
+		printBar();
+		if(!list.get(index).withdraw(money)) {
+			System.out.println("잔액이 부족합니다.");
+			printBar();
+			return;
+		}
+		System.out.println("출금이 완료되었습니다.");
+		System.out.println("현재 잔액 : " + list.get(index).getMoney());
+		printBar();
+		
+	}
+
+
+	private void deposit() {
+		// 이름과 계좌번호를 입력받고
+		System.out.print("이름 : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		ATM tmp = new ATM(name);
+		printBar();
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).getName().equals(tmp.getName())) {
+				System.out.println(i + 1 + ". " + list.get(i));
+			}
+		}
+		printBar();
+		System.out.print("입금할 번호 : ");
+		int index = sc.nextInt() - 1;
+		printBar();
+		System.out.print("입금할 금액 : ");
+		int money = sc.nextInt();
+		list.get(index).deposit(money);
+		printBar();
+		System.out.println("입금이 완료되었습니다.");
+		System.out.println("현재 잔액 : " + list.get(index).getMoney());
+		printBar();
+	}
+
+
 	private void registration() throws Exception {
 		// 이름과 비밀번호를 입력받고
 		System.out.print("이름 : ");
