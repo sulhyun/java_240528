@@ -1,10 +1,13 @@
 package teamproject;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class ATM {
+public class ATM implements Serializable{
 
+	private static final long serialVersionUID = 566239752834975356L;
+	
 	private String name;		// 예금주
 	private String accountNum;	// 계좌번호
 	private String pw;			// 비밀번호
@@ -49,7 +52,6 @@ public class ATM {
 	// 출금
 	public boolean withdraw(int money) {
 		if(this.money - money < 0) {
-			System.out.println("잔액이 부족합니다.");
 			return false;
 		}
 		this.money -= money;

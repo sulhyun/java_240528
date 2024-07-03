@@ -1,5 +1,10 @@
 package teamproject;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.InputMismatchException;
@@ -14,6 +19,7 @@ public class ATMManager implements Program {
 	Scanner sc = new Scanner(System.in);
 	List<ATM> list = new ArrayList<ATM>();
 	Set<String> set = new HashSet<String>(); // 계좌번호 중복 확인을 위한 Set
+	String fileName = "src/teamproject/atm.txt";
 	
 	@Override
 	public void printMenu() {
@@ -26,10 +32,32 @@ public class ATMManager implements Program {
 		System.out.print("메뉴 입력 : ");
 	}
 
-
+	@SuppressWarnings("unchecked")
+	@Override 
+	public void load(String fileName) {
+		try(FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(fis)) {
+			list = (List<ATM>)ois.readObject();
+		} catch (Exception e) {
+			System.out.println("파일 불러오기에 실패하였습니다.");
+		} 
+	}
+	
+	@Override
+	public void save(String fileName) {
+		try(FileOutputStream fos = new FileOutputStream(fileName);
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+				oos.writeObject(list);
+		} catch (Exception e) {
+			System.out.println("파일 저장에 실패하였습니다.");
+		}
+	}
+	
+	
 	@Override
 	public void run() {
 		
+		load(fileName);
 		int menu = 0;
 		
 		do {
@@ -42,6 +70,7 @@ public class ATMManager implements Program {
 				System.out.println(e.getMessage());
 			}
 		} while(menu != 5);
+		save(fileName);
 	}
 	
 	@Override
