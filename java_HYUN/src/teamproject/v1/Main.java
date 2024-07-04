@@ -1,4 +1,4 @@
-package teamproject;
+package teamproject.v1;
 
 public class Main {
 	

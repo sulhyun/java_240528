@@ -1,4 +1,4 @@
-package teamproject;
+package teamproject.v1;
 
 import java.io.Serializable;
 import java.util.Objects;
