@@ -102,7 +102,19 @@ public class ATMManager implements Program {
 
 
 	private void accountList() {
-		
+		System.out.print("이름 입력 :");
+		sc.nextLine();
+		String name = sc.nextLine();
+		printBar();
+		for (ATM atm : list) {
+			if(atm.getName().contains(name)) {
+				System.out.println(list);
+			}
+		}
+		printBar();
+		System.out.print("메뉴로 돌아가고 싶으면 엔터를 누르세요 : ");
+		sc.nextLine();
+		printBar();
 	}
 
 
