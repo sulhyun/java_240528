@@ -81,7 +81,6 @@ public class PostManager implements Program {
 			ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 				oos.write(Post.getCount());
 				oos.writeObject(list);
-			
 		} catch (Exception e) {
 			System.out.println("저장에 실패했습니다...ㅠㅅㅠ");
 		}

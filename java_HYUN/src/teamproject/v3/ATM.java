@@ -1,7 +1,9 @@
 package teamproject.v3;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,7 @@ public class ATM implements Serializable{
 	private String password;	// 비밀번호
 	private String name;		// 이름
 	private int balance;		// 잔액
+	private List<String> list = new ArrayList<String>(); // 거래내역 저장할 리스트
 	
 	// 계좌번호를 생성하기 위한 초기화 블록(중복 x)
 	{
@@ -37,7 +40,7 @@ public class ATM implements Serializable{
 	
 	@Override
 	public String toString() {
-		return accountNum+"(예금주:"+name+") 잔고 : "+balance+"원";
+		return accountNum + "(예금주:" + name + ") 잔고 : " + balance + "원";
 	}
 	
 	// 이름과 비밀번호가 동일하다면 계좌개설이 안되게 하기 위함
@@ -76,6 +79,16 @@ public class ATM implements Serializable{
 		}
 		this.balance -= balance;
 		return true;
+	}
+	
+	public void setList(String str) {
+		list.add(str);
+	}
+	
+	public void printList() {
+		for (String string : list) {
+			System.out.println(string);
+		}
 	}
 
 }

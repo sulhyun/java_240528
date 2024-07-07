@@ -4,7 +4,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +19,8 @@ public class ATMMannager implements Program{
 	private Scanner sc = new Scanner(System.in);
 	private List<ATM> list = new ArrayList<ATM>();
 	private String fileName = "src/teamproject/v3/ATM.txt";
+	private Date date = new Date();
+	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Override
 	public void printMenu() {
@@ -123,6 +127,9 @@ public class ATMMannager implements Program{
 		list.add(atm);
 		System.out.println("계좌번호 : " + atm.getAccountNum());
 		System.out.println("계좌를 개설하였습니다.");
+		String dateStr = format.format(date);
+		int index = list.indexOf(atm);
+		list.get(index).setList(dateStr + " | 계좌개설 | 잔고 : 0원");
 		System.out.println(list);
 		printBar();
 	}
@@ -334,6 +341,8 @@ public class ATMMannager implements Program{
 		list.get(index).deposit(balance);
 		System.out.println(balance + "원을 입금하였습니다.");
 		System.out.println(list);
+		String dateStr = format.format(date);
+		list.get(index).setList(dateStr + " | 입금 "+ balance +"원 | 잔고 : " + list.get(index).getBalance()+"원");
 		printBar();
 	}
 
@@ -401,6 +410,8 @@ public class ATMMannager implements Program{
 			return;
 		}
 		System.out.println(balance + "원을 출금하였습니다.");
+		String dateStr = format.format(date);
+		list.get(index).setList(dateStr + " | 출금 " + balance + "원 | 잔고 : "+list.get(index).getBalance()+"원");
 		printBar();
 	}
 
@@ -506,12 +517,72 @@ public class ATMMannager implements Program{
 		}
 		list.get(newIndex).deposit(balance);
 		System.out.println(balance + "원을 송금하였습니다.");
+		String dateStr = format.format(date);
+		list.get(index).setList(dateStr + " | 송금 " + balance + "원 | 잔고 : "+list.get(index).getBalance()+"원");
+		dateStr = format.format(date);
+		list.get(newIndex).setList(dateStr + " | "+list.get(index).getName() + " " + balance + "원 | 잔고 : " + list.get(newIndex).getBalance() + "원");
 		printBar();
 	}
 
 	private void check() {
-		// TODO Auto-generated method stub
+		// 이름을 입력 받고
+		System.out.print("예금주 명 : ");
+		sc.nextLine();
+		String name = sc.nextLine();
+		printBar();
 		
+		// 리스트에 같은 이름을 가진 객체가 있는지 확인
+		int count = 0;
+		int i = 1;
+		for (ATM atm : list) {
+			
+			// 있으면 번호와 함께 출력
+			if(atm.getName().equals(name)) {
+				System.out.println(i + ". 예금주 명 : " + atm.getName() 
+				+ " / 계좌번호 : " + atm.getAccountNum());
+				count++;
+			}
+			i++;
+		}
+		
+		// 없으면 안내문구 출력후 종료
+		if(count == 0) {
+			System.out.println("없는 계좌입니다.");
+			printBar();
+			return;
+		}
+		
+		// 번호를 입력받고
+		// 잘못된 번호이면 안내문구 출력후 다시 입력받는다.
+		printBar();
+		int index = 0;
+		do{
+			System.out.print("통장내역 확인하실 계좌를 선택하세요 : ");
+			index = sc.nextInt() - 1;
+			if(!checkAccount(index, name)) {
+				sc.nextLine();
+				System.out.println("번호를 잘못 입력하셨습니다.");
+			}
+			printBar();
+		} while(!checkAccount(index, name));
+		
+		// 번호가 맞다면 비밀번호 입력
+		System.out.print("비밀번호 : ");
+		String password = sc.next();
+		printBar();
+		
+		// 비밀번호가 맞지 않다면 안내문구 출력 후 종료
+		if(!list.get(index).getPassword().equals(password)) {
+			System.out.println("비밀번호가 맞지 않습니다.");
+			return;
+		}
+		
+		System.out.println("============통장내역============");
+		list.get(index).printList();
+		System.out.println("==============================");
+		System.out.print("돌아가려면 엔터를 입력하세요.");
+		sc.nextLine();
+		sc.nextLine();
 	}
 
 	private void exit() {
