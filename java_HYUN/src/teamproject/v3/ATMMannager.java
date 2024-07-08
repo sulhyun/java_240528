@@ -88,6 +88,7 @@ public class ATMMannager implements Program{
 				menu = sc.nextInt();
 				printBar();
 				runMenu(menu);
+				save(fileName);
 			} catch (InputMismatchException e) {
 				System.out.println("잘못된 메뉴입니다.");
 				sc.nextLine();
