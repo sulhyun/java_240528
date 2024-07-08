@@ -7,4 +7,5 @@ public class Main {
 		ATMMannager am = new ATMMannager();
 		am.run();
 	}
+	
 }

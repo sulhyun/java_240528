@@ -599,5 +599,4 @@ public class ATMMannager implements Program{
 		System.out.println("-----------------------------------");
 	}
 
-
 }

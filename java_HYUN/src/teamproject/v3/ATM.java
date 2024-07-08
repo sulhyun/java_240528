@@ -61,6 +61,7 @@ public class ATM implements Serializable{
 		return Objects.hash(name, password);
 	}
 	
+	// 비밀번호 양식
 	public void setPassword(String password) throws Exception {
 		String regex = "^\\d{4}$";
 		if(!Pattern.matches(regex, password)) {
@@ -69,10 +70,12 @@ public class ATM implements Serializable{
 		this.password = password;
 	}
 	
+	// 입금
 	public void deposit(int balance) {
 		this.balance += balance;
 	}
 	
+	// 출금
 	public boolean withdraw(int balance) {
 		if(this.balance < balance) {
 			return false;
@@ -81,14 +84,15 @@ public class ATM implements Serializable{
 		return true;
 	}
 	
+	// 문자열을 거래 내역에 저장하기위한 메소드
 	public void setList(String str) {
 		list.add(str);
 	}
 	
+	// 거래내역 출력문구
 	public void printList() {
 		for (String string : list) {
 			System.out.println(string);
 		}
 	}
-
 }
