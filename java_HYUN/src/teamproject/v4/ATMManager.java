@@ -1,4 +1,4 @@
-package teamproject.v3;
+package teamproject.v4;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,11 +13,11 @@ import java.util.regex.Pattern;
 
 import program.Program;
 
-public class ATMMannager implements Program{
+public class ATMManager implements Program{
 
 	private Scanner sc = new Scanner(System.in);
 	private List<ATM> list = new ArrayList<ATM>();
-	private String fileName = "src/teamproject/v3/ATM.txt";
+	private String fileName = "src/teamproject/v4/ATM.txt";
 	private Date date = new Date();
 	private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	private String ip = "192.168.30.211";
