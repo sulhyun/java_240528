@@ -236,8 +236,9 @@ public class ScheduleMain {
 	 * */
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		ScheduleManager sm = new ScheduleManager();
+		sm.run();
 	}
 
 }
