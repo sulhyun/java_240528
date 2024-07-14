@@ -5,3 +5,12 @@ table, th, td {
 th, td { 
   padding:10px 20px; 
 }
+
+div {
+  border: 1px solid black;
+}
+
+#container {
+  width: 600px;
+  border: none;
+}

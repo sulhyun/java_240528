@@ -17,7 +17,26 @@
 	</style>
 </head>
 <body>
-	<h1>예약 정보</h1>
-  /* 05\sol-1.html 소스를 참고하세요. */
+	<form>
+		<h1>예약 정보</h1>
+		<ul>
+			<li>
+				<label for="r-name">이 름</label>
+				<input type="text" id="r-name" required placeholder="이름을 입력하세요" autofocus>
+			</li>
+			<li>
+				<label for="r-phone">전 화</label>
+				<input type="tel" id="r-phone" required placeholder="전화 번호를 입력하세요">
+			</li>
+			<li>
+				<label for="r-email">이메일</label>
+				<input type="email" id="r-email" required placeholder="이메일을 입력하세요">
+			</li>
+			<li>
+				<input type="submit" value="예약하기">
+			</li>
+		</ul>
+	</form>
+
 </body>
 </html>
