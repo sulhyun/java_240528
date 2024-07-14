@@ -136,11 +136,9 @@ public class ScheduleManager implements Program {
 		System.out.println(list);
 		System.out.println("회원이 추가됐습니다.");
 		printBar();
-		
 	}
 
 	private void updateMember() {
-		// TODO Auto-generated method stub
 		
 	}
 
