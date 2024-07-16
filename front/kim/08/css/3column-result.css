@@ -27,7 +27,7 @@
 #right-sidebar {
   width: 150px;   /* 사이드바의 너비 */
   height:600px;  /* 사이드바의 높이 */
-  float: left;  /* 왼쪽으로 플로팅 */
+  float: right;  /* 왼쪽으로 플로팅 */
   background-color:#e9e9e9;
 }
 #footer {

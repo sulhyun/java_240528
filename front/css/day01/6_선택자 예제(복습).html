@@ -6,11 +6,11 @@
 	<title>선택자 예제</title>
 	<style>
 		/* 모든 메뉴에 글자색이 빨간색이 되도록 선택자를 선택해서 적용 */
-		.menu-list {
+		.menu-link {
 			/* color: red; */
 		}
 		/* nav태그에 있는 메뉴들만 글자색이 빨간색이 되도록 선택자를 선택해서 적용 */
-		nav {
+		nav .menu-link {
 			/* color: red; */
 		}
 		/* 메뉴1들만 글자색이 빨간색이 되도록 코드를 수정하고 선택자를 선택해서 적용 */
@@ -18,7 +18,7 @@
 			/* color: red; */
 		}
 		/* div 태그에 있는 메뉴2와 메뉴3에 글자색이 빨간색이 되도록 선택자를 선택해서 적용 */
-		div .menu-item + .menu-item > .menu-link {
+		div .menu-item+.menu-item{
 			color: red;
 		}
 	</style>
