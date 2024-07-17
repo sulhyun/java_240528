@@ -35,19 +35,19 @@
 				- 옵션값에 따라 부드럽게 이동 가능
 			*/
 			var childWindow;
-			function childOpen(){
+			function childOpen() {
 				childWindow = window.open('17_window 객체_새창.html','_blank', 'width=400, height=400, top=100, left=100');
 			}
-			function childClose(){
+			function childClose() {
 				if(childWindow){
 					childWindow.close();
 				}
 			}
-			function moveTop(){
-				window.scrollTo({
+			function moveTop() {
+				window.scrollTo( {
 					top : 0,
 					behavior : 'smooth'
-				})
+				});
 			}
 			/* 
 			setTimeOut(콜백함수, 시간)
