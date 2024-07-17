@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>선택자 예제</title>
+	<title>선택자 예제(복습)</title>
 	<style>
 		/* 모든 메뉴에 글자색이 빨간색이 되도록 선택자를 선택해서 적용 */
 		.menu-link {
@@ -18,8 +18,8 @@
 			/* color: red; */
 		}
 		/* div 태그에 있는 메뉴2와 메뉴3에 글자색이 빨간색이 되도록 선택자를 선택해서 적용 */
-		div .menu-item+.menu-item{
-			color: red;
+		div .menu-item~.menu-item>.menu-link{
+			/* color: red; */
 		}
 	</style>
 </head>

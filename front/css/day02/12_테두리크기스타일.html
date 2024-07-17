@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,73 +33,81 @@
 		  border-bottom-right,border-botton-left 합친 단축 속성
 		*/
 		.style1{
-			height: 50px; border-width: 5px;
+			width: 50%; height: 50px; border-width: 5px;
 			border-color: red;
-			border-top-style: solid;
+			/* border-top-style: solid;
 			border-right-style: dashed;
 			border-bottom-style: dotted;
-			border-left-style: double;
+			border-left-style: double; */
 			border-style: solid dashed dotted double;
 		}
 		.style2{
-			height: 50px; border-width: 5px;
-			border-color: red;
+			width: 50%; height: 50px; border-width: 5px;
+			border-color: orange;
 			border-style: solid;
+			margin-top: 20px;
 		}
 		.width1{
-			height: 50px; border-color: blue;
+			width: 50%; height: 50px; border-color: yellow;
 			border-style: solid;
 			border-top-width: 5px;
 			border-right-width: 10px;
 			border-bottom-width: 15px;
 			border-left-width: 20px;
+			margin-top: 20px;
 		}
 		.width2{
-			height: 50px; border-color: gray;
+			width: 50%; height: 50px; border-color: green;
 			border-style: solid;
 			border-width: 5px;
+			margin-top: 20px;
 		}
 		.color{
+			width: 50%; height: 50px;  
 			border-width: 5px; border-style: solid;
-			height: 50px; 
 			border-color: red blue green black;
+			margin-top: 20px;
 		}
 		.border{
 			border: 5px solid tomato;
-			height: 50px;
+			width: 50%; height: 50px;
+			margin-top: 20px;
 		}
 		.radius1{
-			height: 50px; border: 5px solid black;
+			width: 50%; height: 50px; border: 5px solid black;
 			border-radius: 10px;
+			margin-top: 20px;
 		}
 		.radius2{
-			height: 50px; border: 5px solid black;
-			width: 50px;
+			width: 50px; height: 50px; border: 5px solid black;
 			border-radius: 50%;
+			margin-top: 20px;
+			text-align: center;
 		}
 		.box{
-			height: 50px;
+			width: 50%; height: 50px;
 			border: 5px solid red;
 			/* border-bottom-style: none; */
 			/* border-bottom-width: 0; */
 			/* border-bottom: none; */
 			border-bottom: 0;
+			margin-top: 20px;
 		}
 	</style>
 </head>
 <body>
-	<div class="style1"></div>
-	<div class="style2"></div>
-	<div class="width1"></div>
-	<div class="width2"></div>
-	<div class="color"></div>
-	<div class="border"></div>
-	<div class="radius1"></div>
-	<div class="radius2"></div>
+	<div class="style1">1번</div>
+	<div class="style2">2번</div>
+	<div class="width1">3번</div>
+	<div class="width2">4번</div>
+	<div class="color">5번</div>
+	<div class="border">6번</div>
+	<div class="radius1">7번</div>
+	<div class="radius2">8번</div>
 	<!-- 
 	위, 좌, 우 테두리는 5px, 빨간색, 실선으로 하고
 	아래 테두리는 없도록 박스를 생성하세요.
 	-->
-	<div class="box"></div>
+	<div class="box">box</div>
 </body>
 </html>
