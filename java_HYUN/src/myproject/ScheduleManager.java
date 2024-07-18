@@ -27,7 +27,7 @@ public class ScheduleManager implements Program {
 	public void printBar() {
 		System.out.println("--------------");
 	}
-
+	
 	@Override
 	public void printMenu() {
 		System.out.print(
