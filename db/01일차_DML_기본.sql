@@ -55,17 +55,16 @@ delete from student.student;
 # 1학년 1반 1번 홍길동 학생을 추가
 insert into student.student(grade, class, num, name) value(1, 1, 1, '홍길동');
 # 1학년 1학기 국어 과목을 추가
-
+insert into student.subject(grade, semester, name) value(1, 1, '국어');
 # 1학년 1반 1번 홍길동 학생의 1학년 1학기 국어 성적을 중간 100, 기말 90, 수행 90으로
 # 성적을 추가
-
-
-
-
-
-
-
-
-
-
-
+insert into student.score(midTerm, finalTerm, performance, studentNum, subjectNum)
+	value(100, 90, 90, 1, 1);
+delete from score;
+insert into student.score(midTerm, finalTerm, performance, studentNum, subjectNum)
+	value(100, 90, 90, 1, 1);
+# 위 쿼리가 실행되면 기본키가 2(이전 기본키가 1이었다고 가정)인 데이터가 추가 됨
+truncate table score;
+insert into student.score(midTerm, finalTerm, performance, studentNum, subjectNum)
+	value(100, 90, 90, 1, 1);
+# 위 쿼리가 실행되면 기본키가 1인 데이터가 추가 됨
