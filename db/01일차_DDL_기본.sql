@@ -58,7 +58,8 @@ CREATE TABLE if not exists `student`.`subject` (
   `grade` INT NOT NULL DEFAULT 1,
   `semester` INT NOT NULL DEFAULT 1,
   `name` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`num`));
+  PRIMARY KEY (`num`)
+);
 drop table if exists student.score;
 create table if not exists student.score(
 	num int primary key auto_increment,
@@ -79,6 +80,7 @@ drop table if exists score2;
 # 테이블 수정 - 컬럼 추가
 # alter table 테이블명 add 컬럼명 타입 [zerofill] [unique] ... ;
 alter table student.score add test int not null;
+
 # 테이블 수정 - 컬럼 수정
 # alter table 테이블명 change 기존컬럼명 새컬럼명 타입 [zerofill] [unique] ... ;
 alter table student.score change test totalScore int not null default 0;
@@ -94,5 +96,3 @@ alter table student.score add constraint aa check(midTerm >= 0 and midTerm <= 10
 # 테이블 수정 - 제약조건 삭제
 # alter table 테이블명 drop 제약조건명;
 alter table student.score drop constraint aa;
-
-

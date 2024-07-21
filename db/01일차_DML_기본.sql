@@ -26,7 +26,7 @@ insert into student.student value(null, 1, 1, 4, '둘리');
 # and : ~하고, or : ~이거나
 # and와 or의 우선순위가 다름. and가 높음.
 # 날짜는 'yyyy-MM-dd hh:ss:mm'형태의 문자열과 비교 가능. =, >=, <=, !=를 활용할 수 있다
-update student set name = '또치' where student.studentNum = 2;
+update student.student set name = '또치' where student.studentNum = 2;
 
 # 워크 벤치에서는 안전하게 수정/삭제할 수 있게 하기 위해 기본키가 아닌 조건으로
 # 수정/삭제하려고 하면 수정/삭제를 하지 못하도록 막음
