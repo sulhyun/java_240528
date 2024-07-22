@@ -70,7 +70,7 @@ create table if not exists student.score(
     subjectNum int not null,
     foreign key(studentNum) references student(studentNum)
 		on delete cascade on update cascade,
-    foreign key(subjectNum) references subject(Num) on delete cascade
+    foreign key(subjectNum) references subject(num) on delete cascade
 );
 
 # 테이블 삭제
