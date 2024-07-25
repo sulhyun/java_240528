@@ -1,4 +1,3 @@
-
 USE UNIVERSITY;
 
 # 학과 코드, 이름, 전공이 주어졌을 때 신입생을 등록하는 프로시저
@@ -26,8 +25,11 @@ END //
 DELIMITER ;
 
 # 프로시저 호출
+CALL INSERT_FRESHMAN('160', '컴퓨터공학', '이순신');
 CALL INSERT_FRESHMAN('160', '컴퓨터공학', '주몽');
+CALL INSERT_FRESHMAN('160', '컴퓨터공학', '박혁거세');
 CALL INSERT_FRESHMAN('160', '컴퓨터공학', '논개');
+
 # 결과 확인
 SELECT * FROM STUDENT;
 
@@ -41,7 +43,6 @@ CREATE PROCEDURE UPDATE_POINT(
     IN _FINAL INT,			# 기말 : 40%
     IN _HOMEWORK INT,		# 과제 : 10%
     IN _ATTENDANCE INT		# 출석 : 10%
-    
 )
 BEGIN
 	# 최종 성적이 95점 이상 A+, 90점이상 A 85점이상 B+, ..., 60점미만 F
