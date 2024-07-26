@@ -30,7 +30,6 @@ public class ATM implements Serializable{
 		}while(!set.add(accountNum));
 		
 		accountNum = String.format("%s-%s", accountNum.substring(0, 3), accountNum.substring(3));
-	
 	}
 	
 	public ATM(String name, String password) throws Exception {
