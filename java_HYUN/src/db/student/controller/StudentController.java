@@ -14,7 +14,6 @@ public class StudentController {
 		this.scan = scan;
 	}
 
-
 	public void insertStudent() {
 		//입력한 정보를 이용하여 객체를 생성
 		StudentVO std = inputStudentExpand();
@@ -26,7 +25,6 @@ public class StudentController {
 		else {
 			System.out.println("이미 등록된 학생 정보이어서 추가하지 못했습니다.");
 		}
-		
 	}
 
 	public StudentVO inputStudent() {

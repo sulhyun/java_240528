@@ -14,4 +14,9 @@ public class ScoreVO {
 	private int sc_st_key;
 	private int sc_su_key;
 	
+	public ScoreVO(int midterm, int finals, int performance) {
+		this.sc_midTerm = midterm;
+		this.sc_finalTerm = finals;
+		this.sc_performance = performance;
+	}
 }
