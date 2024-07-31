@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="db.community.dao.MemberDAO">
+	<select id="selectMember" resultType="MemberVO">
+		<!-- 
+		CDATA는 문자 데이테에서 <, >, &와 같이 기능이 있는 문자가 문자로 인식
+		되는게 아니라 기능으로 인식되는걸 막아주는 역할
+		 -->
+		<![CDATA[
+		SELECT *
+		FROM 
+			MEMBER
+		WHERE 
+			ME_ID = #{id} AND ME_FAIL < 5
+		]]>
+	</select>
+	<update id="updateFail">
+		UPDATE MEMBER
+		SET
+		<if test="add == 0">
+			ME_FAIL = 0
+		</if>
+		<if test="add != 0">
+			ME_FAIL = ME_FAIL + 1
+		</if>
+		WHERE
+			ME_ID = #{id}
+	</update>
+	<insert id="insetMember">
+		INSERT INTO MEMBER(ME_ID, ME_PW, ME_EMAIL, ME_MS_NAME) VALUES
+		(#{id}, #{pw}, #{email}, '사용')
+	</insert>
+</mapper>
