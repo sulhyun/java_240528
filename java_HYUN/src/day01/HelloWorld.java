@@ -12,7 +12,6 @@ public class HelloWorld {
 	public static void main(String[] args) {
 		//System.out.println : 콘솔에 원하는 문구를 출력하는 기능
 		System.out.println("Hello World!");
-		
 		System.out.println("" + "안녕");
 	}
 	
