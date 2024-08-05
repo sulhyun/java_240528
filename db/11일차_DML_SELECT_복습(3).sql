@@ -1,0 +1,18 @@
+USE UNIVERSITY;
+
+# 등록된 강의를 조회하는 쿼리
+SELECT * FROM LECTURE;
+
+# 교수 번호가 2024123001인 교수님이 강의하는 강의를 조회하는 쿼리
+SELECT * 
+FROM 
+	LECTURE
+JOIN 
+	PROFESSOR ON LE_PR_NUM = PR_NUM
+WHERE PR_NUM = '2024123001'; 
+
+# 학번이 2024123001인 학생이 수강하는 강의를 조회하는 쿼리
+SELECT *
+FROM
+	STUDENT
+WHERE ST_NUM = '2024123001';
