@@ -185,9 +185,7 @@ SELECT
 FROM
     score
 JOIN
-    subject 
-    ON 
-		subject.num = subjectNum
+    subject ON subject.num = subjectNum
 JOIN
 	student using(studentNum)
 WHERE
