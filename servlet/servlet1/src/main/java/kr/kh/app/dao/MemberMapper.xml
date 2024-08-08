@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.app.dao.MemberDAO">
+	<insert id="insertMember">
+		INSERT INTO MEMBER(ME_ID, ME_PW, ME_EMAIL, ME_MS_NAME) VALUES
+		(#{me.id}, #{me.pw}, #{me.email}, '사용')
+	</insert>
+	<select id="selectMember" resultType="memberVO">
+	SELECT *
+	FROM
+		MEMBER
+	WHERE 
+		ME_ID = #{id}
+	</select>
+</mapper>

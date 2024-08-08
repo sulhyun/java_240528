@@ -1,4 +1,4 @@
-package servlet1.filter;
+package kr.kh.app.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -13,6 +13,8 @@ import javax.servlet.http.HttpFilter;
 @WebFilter("/")
 public class EncodingFilter extends HttpFilter implements Filter {
        
+	private static final long serialVersionUID = 1L;
+
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// 화면에서 서버로 전송할 때
 		request.setCharacterEncoding("UTF-8");
