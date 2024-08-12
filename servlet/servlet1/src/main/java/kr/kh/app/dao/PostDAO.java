@@ -18,5 +18,14 @@ public interface PostDAO {
 
 	int selectPostTotalCount(@Param("cri")Criteria cri);
 
+	boolean insertPost(@Param("post")PostVO post);
+
+	PostVO selectPost(@Param("po_num")int num);
+
+	void updatePostView(@Param("po_num")int num);
+
+	boolean updatePost(@Param("post")PostVO post);
+
+	boolean deletePost(@Param("po_num")int poNum);
 
 }

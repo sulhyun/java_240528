@@ -34,6 +34,10 @@ public class PostList extends HttpServlet {
 			if(pageStr != null && pageStr.length() != 0) {
 				page = Integer.parseInt(pageStr);
 			}
+			
+			String type = request.getParameter("type");
+			String search = request.getParameter("search");
+			
 			// 가져온 커뮤니티 번호를 콘솔에 출력(제대로 가져왔는지 확인하기 위함)
 			System.out.println(coNum);
 			// 서비스에게 커뮤니티 번호를 주면서 커뮤니티 정보를 가져오라고 시킴
@@ -42,7 +46,7 @@ public class PostList extends HttpServlet {
 			if(community == null) {
 				throw new Exception();
 			}
-			Criteria cri = new PostCriteria(page, 2, "", coNum);
+			Criteria cri = new PostCriteria(page, 2, search, coNum, type);
 			PageMaker pm = postService.getPageMaker(cri, 2);
 			// 서비스에게 커뮤니티 번호를 주면서 게시글 리스트를 가져오라고 시킴
 			List<PostVO> list = postService.getPostList(cri);
