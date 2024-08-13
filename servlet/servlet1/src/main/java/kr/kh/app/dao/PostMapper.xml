@@ -16,9 +16,13 @@
 		WHERE CO_NUM = #{co_num}
 	</select>
 	<select id="selectPostList" resultType="PostVO">
-		SELECT *
+		SELECT POST.*,
+			COUNT(IF(RE_STATE=1, RE_STATE, NULL)) PO_UP,
+			COUNT(IF(RE_STATE=-1, RE_STATE, NULL)) PO_DOWN
 		FROM
 			POST
+		LEFT JOIN
+			RECOMMEND ON PO_NUM = RE_PO_NUM
 		WHERE PO_CO_NUM = #{cri.co_num}
 		<if test="cri.type == 'all'">
 		AND (PO_TITLE LIKE CONCAT('%', #{cri.search}, '%') OR PO_ME_ID = #{cri.search})
@@ -29,6 +33,7 @@
 		<if test="cri.type == 'id'">
 		AND PO_ME_ID = #{cri.search}
 		</if>
+		GROUP BY PO_NUM
 		ORDER BY PO_NUM DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
@@ -92,4 +97,18 @@
 		INSERT INTO RECOMMEND(RE_ME_ID, RE_PO_NUM, RE_STATE) VALUES
 		(#{re.re_me_id}, #{re.re_po_num}, #{re.re_state})
 	</insert>
+	<select id="selectCommentList" resultType="CommentVO">
+		SELECT *
+		FROM
+			COMMENT
+		WHERE CM_PO_NUM = #{cri.po_num}
+		ORDER BY CM_ORI_NUM DESC, CM_NUM ASC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectCommentTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+			COMMENT
+		WHERE CM_PO_NUM = #{cri.po_num}
+	</select>
 </mapper>

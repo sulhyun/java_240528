@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
+<title>커뮤니티 목록</title>
 <jsp:include page="/WEB-INF/views/common/head.jsp"/>
 <style type="text/css">
 .list-community{

@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 // 현재 페이지 정보를 나타내는 클래스
 public class Criteria {
 
-	private int page = 1;
-	private int perPageNum = 5; // 현재 페이지의 최대 컨텐츠 수
+	protected int page = 1;
+	protected int perPageNum = 5; // 현재 페이지의 최대 컨텐츠 수
 	
-	private String search = "";
+	protected String search = "";
 	
 	public Criteria(int page, int perPageNum, String search) {
 		this.page = page;
