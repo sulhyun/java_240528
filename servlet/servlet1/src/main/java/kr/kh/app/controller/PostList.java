@@ -34,12 +34,8 @@ public class PostList extends HttpServlet {
 			if(pageStr != null && pageStr.length() != 0) {
 				page = Integer.parseInt(pageStr);
 			}
-			
 			String type = request.getParameter("type");
 			String search = request.getParameter("search");
-			
-			// 가져온 커뮤니티 번호를 콘솔에 출력(제대로 가져왔는지 확인하기 위함)
-			System.out.println(coNum);
 			// 서비스에게 커뮤니티 번호를 주면서 커뮤니티 정보를 가져오라고 시킴
 			CommunityVO community = postService.getCommunity(coNum);
 			// 커뮤니티 정보가 없으면 예외를 발생시킴
