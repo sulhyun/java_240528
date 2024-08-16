@@ -8,7 +8,7 @@ public class Exam04 {
 		
 		/*
 		Exam01 ~ 03 기능을 하나로 합쳐서 기능을 구현하세요
-			메뉴
+		메뉴
 		1. 추가
 		2. 검색
 		3. 종료
@@ -51,7 +51,6 @@ public class Exam04 {
 		메뉴 선택 : 3
 		------------
 		프로그램을 종료합니다.
-		
 		 */
 		
 		Scanner sc = new Scanner(System.in);

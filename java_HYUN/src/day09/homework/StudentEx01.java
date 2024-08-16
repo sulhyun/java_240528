@@ -29,7 +29,7 @@ public class StudentEx01 {
 		 * - 기본 생성자와 학년, 반, 번호, 이름을 이용한 생성자를 추가
 		 * - 국어, 영어, 수학 성적을 변경하는 기능을 추가 */
 		
-		/* 학생 등록 기능을 구현사세요.
+		/* 학생 등록 기능을 구현하세요.
 		 * 학년, 반, 번호, 이름을 입력받아 학생을 추가하세요.
 		 * */
 		
@@ -141,8 +141,7 @@ public class StudentEx01 {
 		}
 		// 입력받은 정보를 이용하여 학생 객체를 생성
 		// 배열이 꽉 차지 않으면 생성한 학생 객체를 배열에 저장하고
-		list[studentCount] = tmp;
-			
+		list[studentCount] = tmp;	
 		// 저장된 학생수를 1증가
 		return studentCount + 1;
 	}
@@ -164,7 +163,6 @@ public class StudentEx01 {
 		}
 		// 있다면 국어, 영어, 수학 성적을 입력받아 학생 성적을 수정
 		// else 생략 가능
-	
 		System.out.print("국어 성적 : ");
 		int kor = scan.nextInt();
 		System.out.print("영어 성적 : ");
@@ -191,8 +189,7 @@ public class StudentEx01 {
 			return;
 		}
 		// 있다면 해당 학생의 성적을 출력
-		list[index].print();
-	    
+		list[index].print();   
 	}
 }
 

@@ -111,4 +111,38 @@
 			COMMENT
 		WHERE CM_PO_NUM = #{cri.po_num}
 	</select>
+	<insert id="insertComment">
+		INSERT INTO COMMENT(CM_NUM, CM_CONTENT, CM_PO_NUM, CM_ORI_NUM, CM_ME_ID)
+		SELECT
+			IFNULL(MAX(CM_NUM), 0) + 1,
+			#{cm.cm_content},
+			#{cm.cm_po_num},
+		<choose>
+			<when test="cm.cm_ori_num == 0">
+				IFNULL(MAX(CM_NUM), 0) + 1,
+			</when>
+			<otherwise>
+				#{cm.cm_ori_num}
+			</otherwise>
+		</choose>
+			#{cm.cm_me_id}
+		FROM COMMENT
+	</insert>
+		<select id="selectComment" resultType="CommentVO">
+		SELECT * 
+		FROM 
+			COMMENT
+		WHERE CM_NUM = #{cm_num}
+	</select>
+	<delete id="deleteComment">
+		DELETE FROM COMMENT WHERE CM_NUM = #{cm_num}
+	</delete>
+	<update id="updateComment">
+		UPDATE 
+			COMMENT 
+		SET 
+			CM_CONTENT = #{cm.cm_content}
+		WHERE 
+			CM_NUM = #{cm.cm_num}
+	</update>
 </mapper>
