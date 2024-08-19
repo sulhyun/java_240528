@@ -42,14 +42,27 @@
 	</div>
 	<div class="text-center">
 		
-		<a  href="#" data-state="1"
+		<a href="#" data-state="1"
 			class="btn-up btn btn<c:if test="${re.re_state ne 1}">-outline</c:if>-danger">추천(<span>${post.po_up }</span>)</a>
-		<a  href="#" data-state="-1"
+		<a href="#" data-state="-1"
 			class="btn-down btn btn<c:if test="${re.re_state ne -1}">-outline</c:if>-danger">비추천(<span>${post.po_down }</span>)</a>
 	</div>
 	<div class="form-group">
 		<label for="content">내용:</label>
-		<div class="form-control" style="min-height: 400px">${post.po_content }</div>
+		<div class="form-control" style="min-height: 400px">${post.po_content}</div>
+	</div>
+	<div class="form-group">
+		<label for="content">첨부파일:</label>
+		<c:if test="${fileList.size() == 0}">
+			<div class="form-control">첨부파일 없음</div>
+		</c:if>
+		<c:if test="${fileList.size() != 0}">
+			<c:forEach items="${fileList}" var="file">
+				<a class="form-control" 
+					href="<c:url value="/download?fileName=${file.fi_name}"/>"
+					download="${file.fi_ori_name}">${file.fi_ori_name}</a>
+			</c:forEach>
+		</c:if>
 	</div>
 	<hr>
 	<div>
