@@ -9,14 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<script type="text/javascript">
-		var msg = '${msg}';
-		var url = '${url}';
-		if(msg != ''){
-			alert(msg);
-			location.href = '<%=request.getContextPath()%>' + url;
-		}
-	</script>
+<script type="text/javascript">
+var msg = '${msg}';
+var url = '${url}';
+if(msg != ''){
+	alert(msg);
+	location.href = '<%=request.getContextPath()%>' + url;
+}
+</script>
 </body>
 </html>

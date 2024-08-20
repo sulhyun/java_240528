@@ -168,4 +168,10 @@
 		INSERT INTO COMMUNITY(co_name) values
 		(#{co_name})
 	</insert>
+	<delete id="deleteCommunity">
+		DELETE FROM COMMUNITY WHERE CO_NUM = #{co_num}
+	</delete>
+	<update id="updateCommunity">
+		UPDATE COMMUNITY SET CO_NAME = #{co_name} WHERE CO_NUM = #{co_num}
+	</update>
 </mapper>
