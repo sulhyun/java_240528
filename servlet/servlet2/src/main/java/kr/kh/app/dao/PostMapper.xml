@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.app.dao.PostDAO">
+	<select id="selectCommunityList" resultType="CommunityVO">
+		SELECT *
+		FROM
+			COMMUNITY
+	</select>
+	<select id="selectCommunity" resultType="CommunityVO">
+		SELECT *
+		FROM
+			COMMUNITY
+		WHERE CO_NUM = #{co_num}
+	</select>
+	<select id="selectPostList" resultType="PostVO">
+		SELECT *
+		FROM
+			POST
+		WHERE PO_CO_NUM = #{cri.co_num}
+		ORDER BY PO_NUM DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="selectPostTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+			POST
+		WHERE PO_CO_NUM = #{cri.co_num}
+	</select>
+</mapper>

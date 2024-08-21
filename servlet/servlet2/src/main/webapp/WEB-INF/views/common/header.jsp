@@ -8,28 +8,51 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	<!-- Brand -->
 	<a class="navbar-brand" href="<c:url value="/"/>">Home</a>
-	
-	<!-- Links -->
 	<ul class="navbar-nav">
 		<li class="nav-item">
-			<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
+			<a class="nav-link" href="<c:url value="/community"/>">커뮤니티</a>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-		</li>
-		
-		<!-- Dropdown -->
 		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Dropdown link</a>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">Link 1</a> 
-				<a class="dropdown-item" href="#">Link 2</a> 
-				<a class="dropdown-item" href="#">Link 3</a>
-			</div>
+			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">커뮤니티</a>
+			<div class="dropdown-menu" id="community-list"></div>
 		</li>
+		<c:choose>
+			<c:when test="${user == null}">
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+				</li>
+			</c:otherwise>
+		</c:choose>
 	</ul>
 </nav>
+<script type="text/javascript">
+	$.ajax({
+		url : '<c:url value="/community"/>',
+		method : 'post',
+		success : function(data){
+			var str = '';
+			var list = data.list;
+			for(co of list){
+				str += 
+				`<a class="dropdown-item" href="<c:url value="/post/list?co_num=\${co.co_num}"/>">
+				\${co.co_name}
+				</a>`;
+			}
+			$("#community-list").html(str);
+		},
+		error : function(xhr){
+			console.log(xhr);
+		}
+	});
+</script>
 </body>
 </html>
