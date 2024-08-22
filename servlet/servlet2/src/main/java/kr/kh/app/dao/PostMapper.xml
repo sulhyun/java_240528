@@ -19,6 +19,18 @@
 		FROM
 			POST
 		WHERE PO_CO_NUM = #{cri.co_num}
+		<choose>
+			<when test="cri.type == 'title'">
+				AND PO_TITLE LIKE CONCAT('%', #{cri.search}, '%')
+			</when>
+			<when test="cri.type == 'writer'">
+				AND PO_ME_ID = #{cri.search}
+			</when>
+			<otherwise>
+				AND (PO_TITLE LIKE CONCAT('%', #{cri.search}, '%')
+				OR PO_ME_ID = #{cri.search})
+			</otherwise>
+		</choose>
 		ORDER BY PO_NUM DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
@@ -27,5 +39,38 @@
 		FROM
 			POST
 		WHERE PO_CO_NUM = #{cri.co_num}
+		<choose>
+			<when test="cri.type == 'title'">
+				AND PO_TITLE LIKE CONCAT('%', #{cri.search}, '%')
+			</when>
+			<when test="cri.type == 'writer'">
+				AND PO_ME_ID = #{cri.search}
+			</when>
+			<otherwise>
+				AND (PO_TITLE LIKE CONCAT('%', #{cri.search}, '%')
+				OR PO_ME_ID = #{cri.search})
+			</otherwise>
+		</choose>
 	</select>
+	<select id="selectPost" resultType="PostVO">
+		SELECT *
+		FROM
+			POST
+		WHERE PO_NUM = #{po_num}
+	</select>
+	<update id="updatePostView">
+		UPDATE POST SET PO_VIEW = PO_VIEW + 1 WHERE PO_NUM = #{po_num}
+	</update>
+	<insert id="insertPost">
+		INSERT INTO POST(PO_CO_NUM, PO_TITLE, PO_CONTENT, PO_ME_ID) VALUES
+		(#{post.po_co_num}, #{post.po_title}, #{post.po_content}, #{post.po_me_id})
+	</insert>
+	<update id="updatePost">
+		UPDATE POST
+		SET
+			PO_TITLE = #{post.po_title},
+			PO_CONTENT = #{post.po_content}
+		WHERE
+			PO_NUM = #{post.po_num}
+	</update>
 </mapper>
