@@ -13,4 +13,19 @@
 			MEMBER
 		WHERE ME_ID = #{me_id}
 	</select>
+	<update id="updateMemberCookie">
+		UPDATE MEMBER
+		SET
+			ME_COOKIE = #{user.me_cookie},
+			ME_LIMIT = #{user.me_limit}
+		WHERE
+			ME_ID = #{user.me_id}
+	</update>
+	<select id="selectMemberBySid" resultType="MemberVO">
+		SELECT *
+		FROM
+			MEMBER
+		WHERE
+			ME_COOKIE = #{sid} AND ME_LIMIT > NOW()
+	</select>
 </mapper>
