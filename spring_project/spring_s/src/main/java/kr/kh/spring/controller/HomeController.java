@@ -22,8 +22,8 @@ public class HomeController {
 	// @RequestMapping(value = "/", method = RequestMethod.GET)
 	@GetMapping("/")
 	// 화면에서 보낸 정보를 객체로 받는 경우 실행 과정
-	// 1. 해당 클래스의 기본 생성자가 호출
-	// 2. 화면에서 보낸 name과 같은 멤버변수들의 setter를 호출해서 값을 변경
+	// 1. 해당 클래스의 기본 생성자가 호출 
+	// 2. 화면에서 보낸 name과 같은 멤버변수들의 setter 호출해서 값을 변경
 	public String home(Model model, PersonDTO person) {
 		System.out.println(person);
 		model.addAttribute("name", "홍길동");
@@ -58,7 +58,7 @@ public class HomeController {
 	public String loginPost(Model model, MemberVO member, HttpSession session) {
 		MemberVO user = memberService.login(member);
 		if(user != null) {
-			model.addAttribute("msg", "로그인 완료!!");
+			model.addAttribute("msg", "로그인 성공!!");
 			model.addAttribute("url", "/");
 		}else {
 			model.addAttribute("msg", "로그인 실패!!");
