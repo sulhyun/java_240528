@@ -41,4 +41,20 @@ public class HomeController {
 		return "/main/message";
 	}
 	
+	@GetMapping("/login")
+	public String login() {
+		return "/member/login";
+	}
+	
+	@PostMapping("/login")
+	public String loginPost(Model model, MemberVO member) {
+		if(memberService.login(member)) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "로그인 성공!!");
+		}else {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 실패!!");
+		}
+		return "/main/message";
+	}
 }
