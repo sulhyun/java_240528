@@ -6,6 +6,6 @@ import kr.kh.spring.model.vo.MemberVO;
 
 public interface MemberDAO {
 
-	void insertMember(@Param("m")MemberVO member);
+	boolean insertMember(@Param("m")MemberVO member);
 
 }

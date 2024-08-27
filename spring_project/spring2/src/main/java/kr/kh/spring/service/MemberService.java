@@ -1,5 +1,7 @@
 package kr.kh.spring.service;
 
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,14 +22,26 @@ public class MemberService {
 		if(member == null) {
 			return false;
 		}
+		if(!checkRegex(member.getMe_id(), "^\\w{6,13}$")) {
+			return false;
+		}
+		if(!checkRegex(member.getMe_pw(), "^^[a-zA-Z0-9!@#$]{6,15}$")) {
+			return false;
+		}
 		String encPw = passwordEncoder.encode(member.getMe_pw());
 		member.setMe_pw(encPw);
 		try {
-			memberDao.insertMember(member);
+			return memberDao.insertMember(member);
 		}catch (Exception e) {
 			return false;
 		}
-		return true;
+	}
+	
+	private boolean checkRegex(String str, String regex) {
+		if(str != null && Pattern.matches(regex, str)) {
+			return true;
+		}
+		return false;
 	}
 
 }
