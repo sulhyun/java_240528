@@ -2,6 +2,8 @@ package kr.kh.spring.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,8 +49,10 @@ public class HomeController {
 	}
 	
 	@PostMapping("/login")
-	public String loginPost(Model model, MemberVO member) {
-		if(memberService.login(member)) {
+	public String loginPost(Model model, MemberVO member, HttpSession session) {
+		MemberVO user = memberService.login(member);
+		session.setAttribute("user", user);
+		if(user != null) {
 			model.addAttribute("url", "/");
 			model.addAttribute("msg", "로그인 성공!!");
 		}else {

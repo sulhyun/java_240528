@@ -10,12 +10,14 @@
 	<a class="navbar-brand" href="<c:url value="/"/>">HOME</a>
 	
 	<ul class="navbar-nav">
-		<li class="nav-item">
-			<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
-		</li>
+		<c:if test="${user eq null}">
+			<li class="nav-item">
+				<a class="nav-link" href="<c:url value="/signup"/>">회원가입</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
+			</li>
+		</c:if>
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Dropdown link</a>
 			<div class="dropdown-menu">
