@@ -36,7 +36,7 @@
 			<label for="email">이메일:</label>
 			<input type="text" class="form-control" id="email" name="me_email">
 		</div>
-		<button type="submit" class="btn btn-outline-success col-12">회원가입</button>
+		<button type="submit" class="btn btn-outline-dark col-12">회원가입</button>
 	</form>
 <script type="text/javascript">
 	var flag = false;

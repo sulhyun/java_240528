@@ -17,7 +17,7 @@
 			<label for="pw">비번:</label>
 			<input type="password" class="form-control" id="pw" name="me_pw">
 		</div>
-		<button type="submit" class="btn btn-outline-success col-12">로그인</button>
+		<button type="submit" class="btn btn-outline-dark col-12">로그인</button>
 	</form>
 </body>
 </html>
