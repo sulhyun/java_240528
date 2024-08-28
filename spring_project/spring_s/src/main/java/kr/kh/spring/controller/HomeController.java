@@ -28,7 +28,6 @@ public class HomeController {
 	// 1. 해당 클래스의 기본 생성자가 호출 
 	// 2. 화면에서 보낸 name과 같은 멤버변수들의 setter 호출해서 값을 변경
 	public String home(Model model, PersonDTO person) {
-		System.out.println(person);
 		model.addAttribute("name", "홍길동");
 		return "/main/home";
 	}
