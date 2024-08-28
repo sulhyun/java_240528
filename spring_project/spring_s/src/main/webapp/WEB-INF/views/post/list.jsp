@@ -110,7 +110,7 @@
 		<input type="hidden" name="co_num" value="${pm.cri.co_num}">
 		<div class="input-group mb-3">
 			<select class="form-control" name="type">
-				<option value="all" 	<c:if test="${pm.cri.type eq 'all'}">selected</c:if>>전체</option>
+				<option value="all"		<c:if test="${pm.cri.type eq 'all'}">selected</c:if>>전체</option>
 				<option value="title"	<c:if test="${pm.cri.type eq 'title'}">selected</c:if>>제목</option>
 				<option value="id" 		<c:if test="${pm.cri.type eq 'id'}">selected</c:if>>작성자</option>
 			</select>
@@ -120,5 +120,6 @@
 			</div>
 		</div>
 	</form>
+	<a href="<c:url value="/post/insert?co_num=${pm.cri.co_num}"/>" class="btn btn-outline-dark">글등록</a>
 </body>
 </html>
