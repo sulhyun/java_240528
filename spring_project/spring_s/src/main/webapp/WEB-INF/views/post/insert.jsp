@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>게시글 등록</h1>
-	<form action="<c:url value="/post/insert?co_num=${po_co_num}"/>" method="post" enctype="multipart/form-data">
+	<form action="<c:url value="/post/insert"/>" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="title">제목:</label>
 			<input type="text" class="form-control" id="title" name="po_title">
@@ -26,5 +26,7 @@
 		<button class="btn btn-outline-dark col-12 mb-3">게시글 등록</button>
 		<input type="hidden" name="po_co_num" value="${co_num}">
 	</form>
+	
+	
 </body>
 </html>
