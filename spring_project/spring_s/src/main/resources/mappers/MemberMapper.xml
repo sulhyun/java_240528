@@ -7,7 +7,7 @@
 		INSERT INTO MEMBER(ME_ID, ME_PW, ME_EMAIL, ME_MS_NAME) VALUES
 		(#{m.me_id}, #{m.me_pw}, #{m.me_email}, '사용')
 	</insert>
-	<select id="selectMember" resultType="kr.kh.spring.model.vo.MemberVO">
+	<select id="selectMember" resultType="MemberVO">
 		SELECT *
 		FROM
 			MEMBER
