@@ -50,4 +50,19 @@
 		INSERT INTO FILE(FI_NAME, FI_ORI_NAME, FI_PO_NUM) VALUES
 		(#{file.fi_name}, #{file.fi_ori_name}, #{file.fi_po_num})
 	</insert>
+	<update id="updateView">
+		UPDATE POST SET PO_VIEW = PO_VIEW + 1 WHERE PO_NUM = #{po_num}
+	</update>
+	<select id="selectPost" resultType="PostVO">
+		SELECT *
+		FROM
+			POST
+		WHERE PO_NUM = #{po_num}
+	</select>
+	<select id="selectFileList" resultType="FileVO">
+		SELECT *
+		FROM
+			FILE
+		WHERE FI_PO_NUM = #{po_num}
+	</select>
 </mapper>

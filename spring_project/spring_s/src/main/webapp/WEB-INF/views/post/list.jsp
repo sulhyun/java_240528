@@ -38,7 +38,14 @@
 					<tr>
 						<td>${post.po_num}</td>
 						<td>
-							<a href="#">${post.po_title}</a>
+							<c:url var="url" value="/post/detail">
+								<c:param name="co_num" value="${pm.cri.co_num}"/>
+								<c:param name="page" value="${pm.cri.page}"/>
+								<c:param name="type" value="${pm.cri.type}"/>
+								<c:param name="search" value="${pm.cri.search}"/>
+								<c:param name="po_num" value="${post.po_num}"/>
+							</c:url>
+							<a href="${url}">${post.po_title}</a>
 						</td>
 						<td>
 							<c:url var="url" value="/post/list">
@@ -55,7 +62,7 @@
 						<td>${post.po_view}</td>
 					</tr>
 				</c:forEach>
-				<c:if test="${postList.size() eq 0 }">
+				<c:if test="${postList.size() eq 0}">
 					<tr>
 						<th class="text-center" colspan="6">등록된 게시글이 없습니다.</th>
 					</tr>
