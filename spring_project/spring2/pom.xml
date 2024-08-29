@@ -184,7 +184,8 @@
 		    <artifactId>spring-security-web</artifactId>
 		    <version>${org.springframework-version}</version>
 		</dependency>
-		<!--스프링시큐리티 core 라이브러리--><dependency>
+		<!--스프링시큐리티 core 라이브러리-->
+		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
 		    <version>${org.springframework-version}</version>
@@ -232,6 +233,11 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.2</version>
+			</plugin>
         </plugins>
     </build>
 </project>
