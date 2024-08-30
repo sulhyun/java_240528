@@ -141,7 +141,7 @@ public class PostService {
 		if(post == null) {
 			return false;
 		}
-		return post.getPo_me_id().equals(me_id);
+		return post.getPo_me_id().equals(me_id); 
 	}
 
 	private void deleteFile(int fi_num) {
