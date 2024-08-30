@@ -97,4 +97,44 @@ public class PostService {
 	public List<FileVO> getFileList(Integer po_num) {
 		return postDao.selectFileList(po_num);
 	}
+
+	public boolean updatePost(PostVO post, int[] fi_nums, MultipartFile[] fileList) {
+		if(post == null) {
+			return false;
+		}
+		boolean res;
+		try {
+			res = postDao.updatePost(post);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		if(!res) {
+			return false;
+		}
+		// 첨부파일 삭제
+		if(fi_nums == null || fi_nums.length == 0) {
+			return true;
+		}
+		for(int fi_num : fi_nums) {
+			deleteFile(fi_num);
+		}
+		// 첨부파일 추가
+		if(fileList == null || fileList.length == 0) {
+			return true;
+		}
+		for(MultipartFile file : fileList) {
+			uploadFile(file, post.getPo_num());
+		}
+		return true;
+	}
+
+	private void deleteFile(int fi_num) {
+		// 첨부파일 정보를 가져옴
+		FileVO file = postDao.selectFile(fi_num);
+		// 첨부파일을 서버에서 삭제
+		UploadFileUtils.delteFile(uploadPath, file.getFi_name());
+		// 첨부파일 정보를 DB에서 삭제
+		postDao.deletePost(fi_num);
+	}
 }
