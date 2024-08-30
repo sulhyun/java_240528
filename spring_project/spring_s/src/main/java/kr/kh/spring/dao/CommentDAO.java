@@ -13,4 +13,6 @@ public interface CommentDAO {
 
 	List<CommentVO> selectCommentList(@Param("cri")Criteria cri);
 
+	int selectCommentTotalCount(@Param("cri")Criteria cri);
+
 }

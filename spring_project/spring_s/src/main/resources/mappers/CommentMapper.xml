@@ -25,4 +25,10 @@
 		ORDER BY CM_ORI_NUM DESC, CM_NUM ASC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
 	</select>
+	<select id="selectCommentTotalCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM 
+			COMMENT 
+		WHERE CM_PO_NUM = #{cri.search}
+	</select>
 </mapper>

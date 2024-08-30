@@ -92,9 +92,6 @@
 					<a class="page-link" href="javascript:void(0);">1</a>
 				</li>
 				<li class="page-item">
-					<a class="page-link" href="javascript:void(0);">2</a>
-				</li>
-				<li class="page-item">
 					<a class="page-link" href="javascript:void(0);">Next</a>
 				</li>
 			</ul>
@@ -138,6 +135,7 @@
 				// 댓글 목록을 화면에 출력
 				displayCommentList(data.list);
 				// 페이지네이션을 화면에 출력
+				displayPagination(data.pm);
 			}, 
 			error : function(jqXHR, textStatus, errorThrown){
 				console.log(jqXHR);
@@ -172,6 +170,35 @@
 			`;
 		}
 		$('.comment-list').html(str);
+	}
+	// 댓글에 페이지네이션을 화면에 출력하는 함수
+	function displayPagination(pm){
+		if(pm == null || pm.endPage == 0){
+			return;
+		}
+		var str = '';
+		if(pm.prev){
+			str += `
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);">이전</a>
+				</li>
+			`;
+		}
+		for(var i = pm.startPage; i <= pm.endPage; i++){
+			str += `
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);">\${i}</a>
+				</li>
+			`;			
+		}
+		if(pm.next){
+			str += `
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);">다음</a>
+				</li>
+			`;
+		}
+		$('.comment-pagination>.pagination').html(str);
 	}
 	getCommentList(cri);
 	// 댓글 등록을 클릭하면 댓글을 등록

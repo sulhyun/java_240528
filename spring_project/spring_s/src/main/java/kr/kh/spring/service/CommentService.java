@@ -9,6 +9,7 @@ import kr.kh.spring.dao.CommentDAO;
 import kr.kh.spring.model.vo.CommentVO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.pagination.Criteria;
+import kr.kh.spring.pagination.PageMaker;
 
 @Service
 public class CommentService {
@@ -29,5 +30,13 @@ public class CommentService {
 			return null;
 		}
 		return commentDao.selectCommentList(cri);
+	}
+
+	public PageMaker getCommentPageMaker(Criteria cri) {
+		if(cri == null) {
+			return null;
+		}
+		int totalCount = commentDao.selectCommentTotalCount(cri);
+		return new PageMaker(5, cri, totalCount);
 	}
 }
