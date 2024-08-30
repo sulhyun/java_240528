@@ -69,5 +69,91 @@
 		</c:url>
 		<a href="${url}" class="btn btn-outline-dark">삭제</a>
 	</c:if>
+	<hr>
+	<div class="comment-container">
+		<ul class="comment-list" style="list-style: none; padding:0">
+			<li class="comment-item">
+				<div class="clearfix">
+					<span class="float-left" style="line-height: 38px">아이디</span>
+					<div class="float-right">
+						<button class="btn btn-outline-dark">수정</button>
+						<button class="btn btn-outline-dark">삭제</button>
+					</div>
+				</div>
+				<div style="padding-left: 20px; line-height: 38px;">댓글내용</div>
+			</li>
+		</ul>
+		<div class="comment-pagination">
+			<ul class="pagination justify-content-center">
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);">Previous</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);">1</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);">2</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="javascript:void(0);">Next</a>
+				</li>
+			</ul>
+		</div>
+		<div class="comment-input-box">
+			<div class="input-group mb-3">
+				<textarea class="form-control" placeholder="댓글 입력" id="input-comment"></textarea>
+				<div class="input-group-append">
+					<span class="input-group-text btn-insert">등록</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	function checkLogin(){
+		return '${user.me_id}' != '';
+	}
+	function alertLogin(){
+		if(checkLogin()){
+			return false;
+		}
+		if(confirm("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?")){
+			location.href="<c:url value="/login"/>";
+		}
+		return true;
+	}
+	$('.btn-insert').click(function(){
+		// 로그인 확인
+		if(alertLogin()){
+			return;
+		}
+		// 댓글 내용, 게시글 번호
+		var cm_content = $('#input-comment').val();
+		var cm_po_num = '${post.po_num}';
+		var comment = {
+				cm_content : cm_content,
+				cm_po_num : cm_po_num
+		}
+		// 서버로 데이터를 전송해서 댓글을 등록하고 알림을 띄움
+		$.ajax({
+			async : true, //비동기 : true(비동기), false(동기)
+			url : '<c:url value="/comment/insert"/>', 
+			type : 'post', 
+			data : JSON.stringify(comment), 
+			contentType : "application/json; charset=utf-8",
+			success : function (data){
+				if(data){
+					alert('댓글 등록 완료!!');
+					$('#input-comment').val('');
+				}else{
+					alert('댓글 등록 실패!!');
+				}
+				// 댓글 목록을 다시 불러옴
+			}, 
+			error : function(jqXHR, textStatus, errorThrown){
+				console.log(jqXHR);
+			}
+		});
+	});
+	</script>
 </body>
 </html>
