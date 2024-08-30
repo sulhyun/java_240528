@@ -142,6 +142,21 @@
 			}
 		});
 	}
+	function getCommentList2(cri){
+		$.ajax({
+			async : true, //비동기 : true(비동기), false(동기)
+			url : '<c:url value="/comment/list2"/>', 
+			type : 'post',
+			data : JSON.stringify(cri), 
+			contentType : "application/json; charset=utf-8",
+			success : function (data){
+				$('.comment-container').html(data);
+			}, 
+			error : function(jqXHR, textStatus, errorThrown){
+				console.log(jqXHR);
+			}
+		});
+	}
 	// 댓글 목록이 주어지면 화면에 출력하는 함수
 	function displayCommentList(list){
 		if(list == null || list.length == 0){
@@ -179,28 +194,33 @@
 		var str = '';
 		if(pm.prev){
 			str += `
-				<li class="page-item">
+				<li class="page-item" data-page="\${pm.startPage-1}">
 					<a class="page-link" href="javascript:void(0);">이전</a>
 				</li>
 			`;
 		}
 		for(var i = pm.startPage; i <= pm.endPage; i++){
+			var active = pm.cri.page == i ? 'active' : '';
 			str += `
-				<li class="page-item">
+				<li class="page-item \${active}" data-page="\${i}">
 					<a class="page-link" href="javascript:void(0);">\${i}</a>
 				</li>
 			`;			
 		}
 		if(pm.next){
 			str += `
-				<li class="page-item">
+				<li class="page-item" data-page="\${pm.endPage+1}">
 					<a class="page-link" href="javascript:void(0);">다음</a>
 				</li>
 			`;
 		}
 		$('.comment-pagination>.pagination').html(str);
 	}
-	getCommentList(cri);
+	getCommentList2(cri);
+	$(document).on('click', '.comment-pagination .page-item', function(){
+		cri.page = $(this).data('page');
+		getCommentList2(cri);
+	});
 	// 댓글 등록을 클릭하면 댓글을 등록
 	$('.btn-insert').click(function(){
 		// 로그인 확인
@@ -229,6 +249,7 @@
 					alert('댓글 등록 실패!!');
 				}
 				// 댓글 목록을 다시 불러옴
+				getCommentList2(cri);
 			}, 
 			error : function(jqXHR, textStatus, errorThrown){
 				console.log(jqXHR);
