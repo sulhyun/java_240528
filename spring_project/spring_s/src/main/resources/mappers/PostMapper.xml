@@ -71,7 +71,7 @@
 			FILE
 		WHERE FI_NUM = #{fi_num}
 	</select>
-	<delete id="deletePost">
+	<delete id="deleteFile">
 		DELETE
 		FROM
 			FILE
@@ -85,4 +85,10 @@
 		WHERE
 			PO_NUM = #{post.po_num}
 	</update>
+	<delete id="deletePost">
+		DELETE
+		FROM
+			POST
+		WHERE PO_NUM = #{po_num}
+	</delete>
 </mapper>

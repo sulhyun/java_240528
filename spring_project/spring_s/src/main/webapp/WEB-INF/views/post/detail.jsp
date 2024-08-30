@@ -60,6 +60,14 @@
 	</c:url>
 	<c:if test="${post.po_me_id eq user.me_id}">
 		<a href="${url}" class="btn btn-outline-dark">수정</a>
+		<c:url var="url" value="/post/delete">
+			<c:param name="co_num" value="${cri.co_num}"/>
+			<c:param name="page" value="${cri.page}"/>
+			<c:param name="type" value="${cri.type}"/>
+			<c:param name="search" value="${cri.search}"/>
+			<c:param name="po_num" value="${post.po_num}"/>
+		</c:url>
+		<a href="${url}" class="btn btn-outline-dark">삭제</a>
 	</c:if>
 </body>
 </html>
