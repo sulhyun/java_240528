@@ -110,7 +110,7 @@ public class PostController {
 	public String delete(Model model, HttpSession session, int po_num, PostCriteria cri) {
 		MemberVO user = (MemberVO)session.getAttribute("user"); 
 		if(postService.deletePost(po_num, user)) {
-			model.addAttribute("url", "/post/list?po_num=" + "?" + cri);
+			model.addAttribute("url", "/post/list" + "?" + cri);
 			model.addAttribute("msg", "게시글 삭제 완료!!");
 		}else {
 			model.addAttribute("url", "/post/detail?po_num=" + po_num + "&" + cri);
