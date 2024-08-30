@@ -109,6 +109,9 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	let cri = {
+		page : 1
+	}
 	function checkLogin(){
 		return '${user.me_id}' != '';
 	}
@@ -121,6 +124,28 @@
 		}
 		return true;
 	}
+	// 댓글 목록을 가져와서 화면에 출력하는 함수
+	function getCommentList(cri){
+		$.ajax({
+			async : true, //비동기 : true(비동기), false(동기)
+			url : '<c:url value="/comment/list"/>', 
+			type : 'post',
+			data : JSON.stringify(cri), 
+			contentType : "application/json; charset=utf-8",
+			dataType : "json", 
+			success : function (data){
+				console.log(data);
+			}, 
+			error : function(jqXHR, textStatus, errorThrown){
+				console.log(jqXHR);
+			}
+		});
+	}
+	// 댓글 목록이 주어지면 화면에 출력하는 함수
+	function displayCommentList(list){
+		
+	}
+	// 댓글 등록을 클릭하면 댓글을 등록
 	$('.btn-insert').click(function(){
 		// 로그인 확인
 		if(alertLogin()){
