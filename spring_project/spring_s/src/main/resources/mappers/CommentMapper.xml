@@ -17,4 +17,12 @@
 		from
 			comment
 	</insert>
+	<select id="selectCommentList" resultType="CommentVO">
+		SELECT * 
+		FROM 
+			COMMENT 
+		WHERE CM_PO_NUM = #{cri.search}
+		ORDER BY CM_ORI_NUM DESC, CM_NUM ASC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
 </mapper>

@@ -110,7 +110,8 @@
 	</div>
 	<script type="text/javascript">
 	let cri = {
-		page : 1
+		page : 1,
+		search : '${post.po_num}'
 	}
 	function checkLogin(){
 		return '${user.me_id}' != '';
@@ -134,7 +135,9 @@
 			contentType : "application/json; charset=utf-8",
 			dataType : "json", 
 			success : function (data){
-				console.log(data);
+				// 댓글 목록을 화면에 출력
+				displayCommentList(data.list);
+				// 페이지네이션을 화면에 출력
 			}, 
 			error : function(jqXHR, textStatus, errorThrown){
 				console.log(jqXHR);
@@ -143,8 +146,34 @@
 	}
 	// 댓글 목록이 주어지면 화면에 출력하는 함수
 	function displayCommentList(list){
-		
+		if(list == null || list.length == 0){
+			$('.comment-list').html('<li class="comment-item display-4">등록된 댓글이 없습니다.</li>');
+			return;
+		}	
+		var str = '';
+		for(comment of list){
+			var btns = '';
+			if(comment.cm_me_id == '${user.me_id}'){
+				btns = `
+				<div class="float-right">
+					<button class="btn btn-outline-dark">수정</button>
+					<button class="btn btn-outline-dark">삭제</button>
+				</div>
+				`;
+			}
+			str += `
+				<li class="comment-item">
+					<div class="clearfix">
+						<span class="float-left" style="line-height: 38px">\${comment.cm_me_id}</span>
+						\${btns}
+					</div>
+					<div style="padding-left: 20px; line-height: 38px;">\${comment.cm_content}</div>
+				</li>
+			`;
+		}
+		$('.comment-list').html(str);
 	}
+	getCommentList(cri);
 	// 댓글 등록을 클릭하면 댓글을 등록
 	$('.btn-insert').click(function(){
 		// 로그인 확인

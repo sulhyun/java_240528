@@ -1,6 +1,7 @@
 package kr.kh.spring.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -31,11 +32,13 @@ public class CommentController{
 	
 	@PostMapping("/list")
 	public Map<String, Object> list(@RequestBody Criteria cri) {
+		cri.setPerPageNum(5);
 		Map<String, Object> map = new HashMap<String, Object>();
 		// 댓글 리스트
-		
+		List<CommentVO> list = commentService.getCommentList(cri);
 		// 댓글 페이지메이커
 		
+		map.put("list", list);
 		return map;
 	}
 }
