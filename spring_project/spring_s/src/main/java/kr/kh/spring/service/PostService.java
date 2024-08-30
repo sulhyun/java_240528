@@ -98,8 +98,15 @@ public class PostService {
 		return postDao.selectFileList(po_num);
 	}
 
-	public boolean updatePost(PostVO post, int[] fi_nums, MultipartFile[] fileList) {
+	public boolean updatePost(PostVO post, int[] fi_nums, MultipartFile[] fileList, MemberVO user) {
 		if(post == null) {
+			return false;
+		}
+		if(user == null) {
+			return false;
+		}
+		// 작성자인지 확인
+		if(!checkWriter(post.getPo_num(), user.getMe_id())) {
 			return false;
 		}
 		boolean res;
@@ -127,6 +134,14 @@ public class PostService {
 			uploadFile(file, post.getPo_num());
 		}
 		return true;
+	}
+
+	private boolean checkWriter(int po_num, String me_id) {
+		PostVO post = postDao.selectPost(po_num);
+		if(post == null) {
+			return false;
+		}
+		return post.getPo_me_id().equals(me_id);
 	}
 
 	private void deleteFile(int fi_num) {

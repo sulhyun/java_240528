@@ -94,8 +94,9 @@ public class PostController {
 	}
 	
 	@PostMapping("/update")
-	public String updatePost(Model model, PostVO post, int[] fi_nums, MultipartFile[] fileList, PostCriteria cri) {
-		if(postService.updatePost(post, fi_nums, fileList)) {
+	public String updatePost(Model model, PostVO post, int[] fi_nums, MultipartFile[] fileList, PostCriteria cri, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(postService.updatePost(post, fi_nums, fileList, user)) {
 			model.addAttribute("url", "/post/detail?po_num=" + post.getPo_num() + "&" + cri);
 			model.addAttribute("msg", "게시글 수정 완료!!");
 		}else {
