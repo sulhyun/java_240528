@@ -20,7 +20,9 @@
 		</div>
 		<div class="form-group">
 			<label>작성일:</label>
-			<div class="form-control">${post.po_date}</div>
+			<div class="form-control">
+				<fmt:formatDate value="${post.po_date}" pattern="yyyy.MM.dd HH:mm:ss"/>
+			</div>
 		</div>
 		<div class="form-group">
 			<label>조회수:</label>
@@ -28,7 +30,7 @@
 		</div>
 		<div class="form-group">
 			<label for="content">내용:</label>
-			<div class="form-control" style="min-height: 400px; height: auto;">${post.po_title}</div>
+			<div class="form-control" style="min-height: 400px; height: auto;">${post.po_content}</div>
 		</div>
 		<c:if test="${list.size() != 0}">
 			<div class="form-group">
