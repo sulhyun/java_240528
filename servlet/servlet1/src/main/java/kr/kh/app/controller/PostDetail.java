@@ -16,7 +16,6 @@ import kr.kh.app.model.vo.RecommendVO;
 import kr.kh.app.service.PostService;
 import kr.kh.app.service.PostServiceImp;
 
-
 @WebServlet("/post/detail")
 public class PostDetail extends HttpServlet {
 	
