@@ -45,7 +45,7 @@
 	<div class="input-group mb-3">
 		<textarea class="form-control" placeholder="댓글 입력" id="input-comment"></textarea>
 		<div class="input-group-append">
-			<span class="input-group-text btn-insert">등록</span>
+			<span class="input-group-text btn-insert" style="cursor:pointer;">등록</span>
 		</div>
 	</div>
 </div>
@@ -153,6 +153,7 @@ $('.btn-comment-update').click(function(){
 	$('.comment-input-box').after(str);
 });
 
+$(document).off('click', '.btn-update');
 $(document).on('click', '.btn-update', function(){
 	// 댓글 번호와 내용을 가져옴
 	var cm_num = $('.comment-update-box').find('[name=cm_num]').val();
@@ -161,6 +162,11 @@ $(document).on('click', '.btn-update', function(){
 		cm_num : cm_num,
 		cm_content : cm_content
 	};
+	if(cm_content.length == 0){
+		alert('댓글을 입력하세요');
+		$('#input-update-comment').focus();
+		return;
+	}
 	// ajax로 통신 : json => object
 	$.ajax({
 		async : true,
