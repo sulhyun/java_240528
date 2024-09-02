@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring.model.vo.CommunityVO;
@@ -117,5 +118,11 @@ public class PostController {
 			model.addAttribute("msg", "게시글 삭제 실패!!");
 		}
 		return "/main/message";
+	}
+	
+	@ResponseBody
+	@PostMapping("/community/list")
+	public List<CommunityVO> communityList(){
+		return postService.getCommunityList();
 	}
 }

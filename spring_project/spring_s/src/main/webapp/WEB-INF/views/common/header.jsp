@@ -38,5 +38,24 @@
 	    </c:if>
 	</ul>
 </nav>
+<script type="text/javascript">
+	$.ajax({
+	async : true,
+	url : '<c:url value="/post/community/list"/>', 
+	type : 'post', 
+	success : function(data){
+		var str = '';
+		for(community of data){
+			str += `
+				<a class="dropdown-item" href="<c:url value="/post/list?co_num="/>\${community.co_num}">\${community.co_name}</a>	
+			`;
+		};
+		$('#community-list').html(str);
+	}, 
+	error : function(jqXHR, textStatus, errorThrown){
+
+	}
+});
+</script>
 </body>
 </html>

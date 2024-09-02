@@ -243,6 +243,11 @@
 				cm_content : cm_content,
 				cm_po_num : cm_po_num
 		}
+		if(cm_content.length == 0){
+			alert('댓글을 입력하세요');
+			$('#input-comment').focus();
+			return;
+		}
 		// 서버로 데이터를 전송해서 댓글을 등록하고 알림을 띄움
 		$.ajax({
 			async : true, //비동기 : true(비동기), false(동기)
