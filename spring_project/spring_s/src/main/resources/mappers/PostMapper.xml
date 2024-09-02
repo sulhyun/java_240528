@@ -4,7 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.PostDAO">
 	<select id="selectCommunityList" resultType="CommunityVO">
-		SELECT * FROM COMMUNITY ORDER BY CO_NUM
+		SELECT COMMUNITY.*, COUNT(PO_CO_NUM) AS CO_COUNT 
+		FROM 
+			COMMUNITY
+		LEFT JOIN
+			POST ON CO_NUM = PO_CO_NUM
+		GROUP BY CO_NUM
+		ORDER BY CO_NUM
 	</select>
 	<select id="selectPostList" resultType="PostVO">
 		SELECT * 
@@ -91,4 +97,8 @@
 			POST
 		WHERE PO_NUM = #{po_num}
 	</delete>
+	<insert id="insertCommunity">
+		INSERT INTO COMMUNITY(CO_NAME) VALUES
+		(#{co_name})
+	</insert>
 </mapper>

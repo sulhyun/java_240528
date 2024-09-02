@@ -9,4 +9,5 @@ public class CommunityVO {
 
 	int co_num;
 	String co_name;
+	int co_count;
 }

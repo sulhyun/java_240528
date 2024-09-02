@@ -21,6 +21,11 @@
 			<div class="dropdown-menu" id="community-list">
 			</div>
 		</li>
+		<c:if test="${user ne null && user.me_authority eq 'ADMIN'}"></c:if>
+			<li class="nav-item">
+				<a class="nav-link" href="<c:url value="/admin/community"/>">커뮤니티 관리</a>
+			</li>
+		
 	</ul>
 	<ul class="navbar-nav">
 		<c:if test="${user == null}">
@@ -31,7 +36,7 @@
 				<a class="nav-link" href="<c:url value="/login"/>">로그인</a>
 		    </li>
 		</c:if>
-	    <c:if test="${user != null }">
+	    <c:if test="${user != null}">
 	    	<li class="nav-item">
 				<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
 		    </li>

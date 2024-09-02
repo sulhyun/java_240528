@@ -174,4 +174,16 @@ public class PostService {
 		// DB에서 첨부파일 삭제(구현할 필요가 없음. 왜? 게시글 삭제 시 DB에서 해당 첨부파일을 삭제하기로 했기 때문에)
 		return postDao.deletePost(po_num);
 	}
+
+	public boolean insertCommunity(String name) {
+		if(name == null || name.trim().length() == 0) {
+			return false;
+		}
+		try {
+			return postDao.insertCommunity(name); 
+		}catch(Exception e) {
+			return false;
+		}
+	}
+
 }
