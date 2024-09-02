@@ -34,4 +34,14 @@
 	<delete id="deleteComment">
 		DELETE FROM COMMENT WHERE CM_NUM = #{cm_num}
 	</delete>
+	<select id="selectComment" resultType="CommentVO">
+		SELECT *
+		FROM
+			COMMENT
+		WHERE
+			CM_NUM = #{cm_num}
+	</select>
+	<update id="updateComment">
+		UPDATE COMMENT SET CM_CONTENT = #{comment.cm_content} WHERE CM_NUM = #{comment.cm_num}
+	</update>
 </mapper>
