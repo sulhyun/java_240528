@@ -31,4 +31,7 @@
 			COMMENT 
 		WHERE CM_PO_NUM = #{cri.search}
 	</select>
+	<delete id="deleteComment">
+		DELETE FROM COMMENT WHERE CM_NUM = #{cm_num}
+	</delete>
 </mapper>

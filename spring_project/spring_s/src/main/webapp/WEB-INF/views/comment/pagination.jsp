@@ -10,7 +10,7 @@
 				<c:if test="${comment.cm_me_id eq user.me_id}">
 					<div class="float-right">
 						<button class="btn btn-outline-dark">수정</button>
-						<button class="btn btn-outline-dark">삭제</button>
+						<button class="btn-comment-del btn btn-outline-dark" data-num="${comment.cm_num}">삭제</button>
 					</div>
 				</c:if>
 			</div>
@@ -49,3 +49,86 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+$('.btn-comment-del').click(function(){
+	var cm_num = $(this).data('num');
+	commentDel3(cm_num);
+});
+
+// 댓글 삭제 방법 1
+function commentDel1(cm_num){
+	// json으로 화면에서 서버로 전송 => 서버에서 화면으로 json으로 전송
+	let comment = {
+		cm_num : cm_num
+	}
+	$.ajax({
+		async : true,
+		url : '<c:url value="/comment/delete1"/>', 
+		type : 'post', 
+		data : JSON.stringify(comment), 
+		contentType : "application/json; charset=utf-8",
+		dataType : "json", 
+		success : function(data){
+			if(data.res){
+				alert('댓글 삭제 성공!!');
+			}else{
+				alert('댓글 삭제 실패!!');
+			}
+			getCommentList2(cri);
+		}, 
+		error : function(jqXHR, textStatus, errorThrown){
+
+		}
+	});
+}
+
+// 댓글 삭제 방법 2
+function commentDel2(cm_num){
+	let comment = {
+		cm_num : cm_num
+	}
+	$.ajax({
+		async : true,
+		url : '<c:url value="/comment/delete2"/>',  
+		type : 'post', 
+		data : comment, 
+		dataType : "json", 
+		success : function(data){
+			if(data.res){
+				alert('댓글 삭제 성공!!');
+			}else{
+				alert('댓글 삭제 실패!!');
+			}
+			getCommentList2(cri);
+		}, 
+		error : function(jqXHR, textStatus, errorThrown){
+
+		}
+	});
+}
+
+// 댓글 삭제 방법 3
+function commentDel3(cm_num){
+	let comment = {
+		cm_num : cm_num
+	}
+	$.ajax({
+		async : true,
+		url : '<c:url value="/comment/delete3"/>', 
+		type : 'post', 
+		data : comment, 
+		success : function (data){
+			if(data){
+				alert('댓글 삭제 성공!!');
+			}else{
+				alert('댓글 삭제 실패!!');
+			}
+			getCommentList2(cri);
+		}, 
+		error : function(jqXHR, textStatus, errorThrown){
+
+		}
+	});
+}
+</script>

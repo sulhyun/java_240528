@@ -110,9 +110,11 @@
 		page : 1,
 		search : '${post.po_num}'
 	}
+	
 	function checkLogin(){
 		return '${user.me_id}' != '';
 	}
+	
 	function alertLogin(){
 		if(checkLogin()){
 			return false;
@@ -122,6 +124,7 @@
 		}
 		return true;
 	}
+	
 	// 댓글 목록을 가져와서 화면에 출력하는 함수
 	function getCommentList(cri){
 		$.ajax({
@@ -142,6 +145,7 @@
 			}
 		});
 	}
+	
 	function getCommentList2(cri){
 		$.ajax({
 			async : true, //비동기 : true(비동기), false(동기)
@@ -157,6 +161,7 @@
 			}
 		});
 	}
+	
 	// 댓글 목록이 주어지면 화면에 출력하는 함수
 	function displayCommentList(list){
 		if(list == null || list.length == 0){
@@ -186,6 +191,7 @@
 		}
 		$('.comment-list').html(str);
 	}
+	
 	// 댓글에 페이지네이션을 화면에 출력하는 함수
 	function displayPagination(pm){
 		if(pm == null || pm.endPage == 0){
@@ -216,11 +222,14 @@
 		}
 		$('.comment-pagination>.pagination').html(str);
 	}
+	
 	getCommentList2(cri);
+	
 	$(document).on('click', '.comment-pagination .page-item', function(){
 		cri.page = $(this).data('page');
 		getCommentList2(cri);
 	});
+	
 	// 댓글 등록을 클릭하면 댓글을 등록
 	$(document).on('click', '.btn-insert', function(){
 		// 로그인 확인
@@ -256,6 +265,37 @@
 			}
 		});
 	});
+	
+	/*
+	댓글 삭제
+	
+	pagination.jsp
+	1. 댓글 번호를 알아야 삭제할 수 있음
+	- 삭제 버튼을 눌렀을 때 댓글 번호를 알아야 함
+	 => 삭제 버튼에 댓글 번호를 추가
+	 => data-xxx="댓글번호"
+	2. 삭제 버튼을 클릭 했을 때 댓글 번호를 서버(컨트롤러)에 주면서 삭제하고 삭제 여부를 알려달라고 요청
+	 => 삭제할 댓글 번호를 가져옴. $('삭제버튼선택자').data('xxx')
+	 => ajax로 댓글 번호를 전송
+	 => ajax 성공시 성공 여부에 따라 알림을 출력하고 댓글을 새로고침
+	
+	컨트롤러
+	1. 댓글 삭제를 위한 메소드를 추가
+	 => @Request or @GetMapping or @PostMapping 중 하나를 선택해서 메소드 위에 추가
+	 => @ResponseBody를 추가
+	2. 메소드에서 기능을 구현
+	 => 화면에서 보낸 정보를 가져옴(댓글 번호)
+	 => 서비스에게 삭제할 댓글 번호와 로그인한 사용자 정보를 주면서 삭제하라고 요청하고 결과를 저장
+	 => 삭제 성공 여부를 화면에 전달
+	
+	서비스
+	1. 사용자가 없으면 false를 반환
+	2. 댓글을 삭제후 결과를 반환
+	
+	다오/매퍼
+	1. 댓글을 삭제하는 쿼리를 구현
+	*/
+	
 	</script>
 </body>
 </html>
