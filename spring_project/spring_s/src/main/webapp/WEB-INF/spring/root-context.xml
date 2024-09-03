@@ -10,7 +10,8 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
-		
+	
+	<context:property-placeholder location="/WEB-INF/spring/config.properties"/>
 	
 	
 	<bean id="dataSource"
@@ -18,8 +19,8 @@
 	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 	    <property name="url"
 	              value="jdbc:mysql://localhost:3306/community?useSSL=false&amp;serverTimezone=Asia/Seoul"/>
-	    <property name="username" value="root"></property>
-	    <property name="password" value="root"></property>
+	    <property name="username" value="${db.username}"></property>
+	    <property name="password" value="${db.password}"></property>
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	    <property name="dataSource" ref="dataSource" />
@@ -32,8 +33,8 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	    <property name="host" value="smtp.gmail.com" />
 	    <property name="port" value="587" />
-	    <property name="username" value="sulhyun4788@gmail.com" />
-	    <property name="password" value="seopckwqcynkvwop" />
+	    <property name="username" value="${email.username}" />
+	    <property name="password" value="${email.password}" />
 	    <property name="javaMailProperties">
 	        <props>
 	            <prop key="mail.transport.protocol">smtp</prop>

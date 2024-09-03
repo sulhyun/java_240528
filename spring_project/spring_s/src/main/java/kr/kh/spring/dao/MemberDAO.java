@@ -14,4 +14,6 @@ public interface MemberDAO {
 
 	MemberVO selectMemberByCookie(@Param("me_cookie")String sid);
 
+	boolean updateMember(@Param("user")MemberVO user);
+
 }

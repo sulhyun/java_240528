@@ -93,7 +93,9 @@ public class MemberServiceImp implements MemberService {
 				"새 임시 비밀번호입니다.", 
 				"새 임시 비밀번호는 <b>" + newPw + "</b>입니다.");
 		// 성공하면 DB에 새 비번을 암호화해서 수정
-		return true;
+		String encPw = passwordEncoder.encode(newPw);
+		user.setMe_pw(encPw);
+		return memberDao.updateMember(user);
 	}
 
 	private String randomPassword(int size) {
@@ -125,10 +127,10 @@ public class MemberServiceImp implements MemberService {
 		     MimeMessageHelper messageHelper
 		         = new MimeMessageHelper(message, true, "UTF-8");
 		
-		     messageHelper.setFrom(setfrom); // 보내는사람 생략하거나 하면 정상작동을 안함
-		     messageHelper.setTo(to); // 받는사람 이메일
-		     messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-		     messageHelper.setText(content, true); // 메일 내용
+		     messageHelper.setFrom(setfrom); 		// 보내는사람 생략하거나 하면 정상작동을 안함
+		     messageHelper.setTo(to); 				// 받는사람 이메일
+		     messageHelper.setSubject(title); 		// 메일제목은 생략이 가능하다
+		     messageHelper.setText(content, true); 	// 메일 내용
 		
 		     mailSender.send(message);
 		     return true;

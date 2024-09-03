@@ -7,7 +7,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 public class MailSenderUtils {
-	
+	/*
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -31,4 +31,5 @@ public class MailSenderUtils {
 			return false;
 		}
 	}
+	*/
 }

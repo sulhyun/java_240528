@@ -25,4 +25,11 @@
 		WHERE
 			ME_COOKIE = #{me_cookie} AND ME_LIMIT > NOW()
 	</select>
+	<update id="updateMember">
+		UPDATE MEMBER
+		SET
+			ME_PW = #{user.me_pw}
+		WHERE
+			ME_ID = #{user.me_id}
+	</update>
 </mapper>
