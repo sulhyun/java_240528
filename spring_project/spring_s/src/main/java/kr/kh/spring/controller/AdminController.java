@@ -37,4 +37,28 @@ public class AdminController {
 		model.addAttribute("url", "/admin/community");
 		return "/main/message";
 	}
+	
+	@GetMapping("/community/delete")
+	public String communityDelete(Model model, int co_num) {
+		boolean res = postService.deleteCommunity(co_num);
+		if(res) {
+			model.addAttribute("msg", "커뮤니티 삭제 완료!!");
+		}else {
+			model.addAttribute("msg", "커뮤니티 삭제 실패!!");
+		}
+		model.addAttribute("url", "/admin/community");
+		return "/main/message";
+	}
+	
+	@PostMapping("/community/update")
+	public String communityUpdate(Model model, CommunityVO community) {
+		boolean res = postService.updateCommunity(community);
+		if(res) {
+			model.addAttribute("msg", "커뮤니티 수정 완료!!");
+		}else {
+			model.addAttribute("msg", "커뮤니티 수정 실패!!");
+		}
+		model.addAttribute("url", "/admin/community");
+		return "/main/message";
+	}
 }

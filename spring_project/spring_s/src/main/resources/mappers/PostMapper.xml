@@ -101,4 +101,10 @@
 		INSERT INTO COMMUNITY(CO_NAME) VALUES
 		(#{co_name})
 	</insert>
+	<delete id="deleteCommunity">
+		DELETE FROM COMMUNITY WHERE CO_NUM = #{co_num}
+	</delete>
+	<update id="updateCommunity">
+		UPDATE COMMUNITY SET CO_NAME = #{community.co_name} WHERE CO_NUM = #{community.co_num}
+	</update>
 </mapper>
