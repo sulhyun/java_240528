@@ -154,6 +154,10 @@ public class MemberServiceImp implements MemberService {
 			String encPw = passwordEncoder.encode(member.getMe_pw());
 			member.setMe_pw(encPw);
 		}
-		return memberDao.updateMember(member);
+		try {
+			return memberDao.updateMember(member);
+		}catch (Exception e) {
+			return false;
+		}
 	}
 }
