@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.kh.spring.model.dto.PersonDTO;
 import kr.kh.spring.model.vo.MemberVO;
 import kr.kh.spring.service.MemberService;
+import lombok.extern.log4j.Log4j;
 
+@Log4j
 @Controller
 public class HomeController {
 	
@@ -30,7 +31,7 @@ public class HomeController {
 	// 2. 화면에서 보낸 name과 같은 멤버변수들의 setter 호출해서 값을 변경
 	public String home(Model model, PersonDTO person) {
 		model.addAttribute("name", "홍길동");
-		System.out.println(person);
+		log.info(person);
 		return "/main/home";
 	}
 	
