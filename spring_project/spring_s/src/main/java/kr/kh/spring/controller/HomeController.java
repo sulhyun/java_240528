@@ -111,4 +111,22 @@ public class HomeController {
 		boolean res = memberService.findPw(id);
 		return res;
 	}
+	
+	@GetMapping("/mypage")
+	public String mypage() {
+		return "/member/mypage";
+	}
+	
+	@PostMapping("/mypage")
+	public String mypagePost(Model model, HttpSession session, MemberVO member) {
+		MemberVO user =(MemberVO)session.getAttribute("user");
+		boolean res = memberService.updateMember(user, member);
+		if(res) {
+			model.addAttribute("msg","회원 정보 수정 완료!!");
+		}else {
+			model.addAttribute("msg","회원 정보 수정 실패!!");
+		}
+		model.addAttribute("url","/mypage");
+		return "/main/message";
+	}
 }

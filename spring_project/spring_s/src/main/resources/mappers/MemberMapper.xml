@@ -28,7 +28,8 @@
 	<update id="updateMember">
 		UPDATE MEMBER
 		SET
-			ME_PW = #{user.me_pw}
+			ME_PW = #{user.me_pw},
+			ME_EMAIL = #{user.me_email}
 		WHERE
 			ME_ID = #{user.me_id}
 	</update>
