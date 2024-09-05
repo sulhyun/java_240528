@@ -23,9 +23,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	    ModelAndView modelAndView)
 	    throws Exception {
 		HttpSession session = request.getSession();
-		if(!request.getRequestURI().contains("/guest/login")) {
-			
-		}
 		// 회원 정보를 가져옴
 		MemberVO user = (MemberVO)modelAndView.getModel().get("user");
 		log.info(user);

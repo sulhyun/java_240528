@@ -20,25 +20,25 @@
 	</form>
 	<script type="text/javascript">
 		// 아이디가 없으면 아이디창 활성화하고 아이디가 있으면 비번창을 활성화
-		var id = $('#me_id').val();
+		var id = $('#id').val();
 		if(id == ''){
-			$('#me_id').focus();
+			$('#id').focus();
 		}else{
-			$('#me_pw').focus();
+			$('#pw').focus();
 		}
 		
 		// 아이디나 비번이 입력되지 않으면 알림을 띄우고 해당 창을 활성화
 		$('#form').submit(function(){
-			var id = $('#me_id').val();
-			var pw = $('#me_pw').val();
+			var id = $('#id').val();
+			var pw = $('#pw').val();
 			if(id == ''){
 				alert('아이디를 입력하세요.');
-				$('#me_id').focus();
+				$('#id').focus();
 				return false;
 			}
 			if(pw == ''){
 				alert('비밀번호를 입력하세요.');
-				$('#me_pw').focus();
+				$('#pw').focus();
 				return false;
 			}
 			return true;

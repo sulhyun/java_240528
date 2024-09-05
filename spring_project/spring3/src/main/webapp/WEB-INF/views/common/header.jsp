@@ -24,7 +24,7 @@
 			</li>
 		</ul>
 		<ul class="navbar-nav">
-				<c:if test="${user eq null}">
+			<c:if test="${user eq null}">
 				<li class="nav-item">
 					<a class="nav-link" href="<c:url value="/guest/signup"/>">회원가입</a>
 				</li>
@@ -33,6 +33,11 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Link 3</a>
+				</li>
+			</c:if>
+			<c:if test="${user ne null}">
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/member/logout"/>">로그아웃</a>
 				</li>
 			</c:if>
 		</ul>
