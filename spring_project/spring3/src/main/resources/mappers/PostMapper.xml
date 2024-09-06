@@ -3,13 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring3.dao.PostDAO">
-	<select id="selectCommunityList" resultType="kr.kh.spring3.model.vo.CommunityVO">
+	<select id="selectCommunityList" resultType="CommunityVO">
 		SELECT * 
 		FROM
 			COMMUNITY 
 		ORDER BY CO_NUM
 	</select>
-	<select id="selectPostList" resultType="kr.kh.spring3.model.vo.PostVO">
+	<select id="selectPostList" resultType="PostVO">
 		SELECT *
 		FROM 
 			POST 
@@ -42,5 +42,26 @@
 				AND ${type} LIKE CONCAT('%', #{search}, '%') 
 			</otherwise>
 		</choose>
+	</select>
+	<select id="selectPost" resultType="PostVO">
+		SELECT *
+		FROM
+			POST
+		WHERE
+			PO_NUM = #{po_num}
+	</select>
+	<update id="updateView">
+		UPDATE POST
+		SET
+			PO_VIEW = PO_VIEW + 1
+		WHERE
+			PO_NUM = #{po_num}
+	</update>
+	<select id="selectFileList" resultType="FileVO">
+		SELECT *
+		FROM
+			FILE
+		WHERE
+			FI_PO_NUM = #{po_num}
 	</select>
 </mapper>
