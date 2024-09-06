@@ -26,11 +26,11 @@
 			<input type="text" class="form-control" readonly value="${post.po_view}">
 		</div>
 		<div class="form-group">
-			<label for="po_title">내용:</label>
-			<div class="form-control" id="po_title" style="min-height: 400px; height: auto;">${post.po_content}</div>
+			<label for="po_content">내용:</label>
+			<div class="form-control" id="po_content" style="min-height: 400px; height: auto;">${post.po_content}</div>
 		</div>
 		<div class="form-group">
-			<label for="po_title">첨부파일</label>
+			<label>첨부파일</label>
 			<c:forEach items="${list}" var="file">
 				<a href="<c:url value="/download${file.fi_name}"/>" class="form-control" download="${file.fi_ori_name}">${file.fi_ori_name}</a>			
 			</c:forEach>

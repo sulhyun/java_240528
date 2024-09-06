@@ -64,4 +64,12 @@
 		WHERE
 			FI_PO_NUM = #{po_num}
 	</select>
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="po_num">
+		INSERT INTO POST(PO_TITLE, PO_CONTENT, PO_ME_ID, PO_CO_NUM) VALUES
+		(#{po_title}, #{po_content}, #{po_me_id}, #{po_co_num})
+	</insert>
+	<insert id="insertFile">
+		INSERT INTO FILE(FI_PO_NUM, FI_NAME, FI_ORI_NAME) VALUES
+		(#{fi_po_num}, #{fi_name}, #{fi_ori_name})
+	</insert>
 </mapper>

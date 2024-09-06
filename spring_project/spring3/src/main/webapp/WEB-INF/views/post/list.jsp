@@ -113,6 +113,7 @@
 				<button class="btn btn-outline-dark">검색</button>
 		    </div>
 		</form>
+		<a class="btn btn-outline-dark" href="<c:url value="/post/insert/${pm.cri.co_num}"/>">글쓰기</a>
 	</c:if>
 </body>
 </html>
