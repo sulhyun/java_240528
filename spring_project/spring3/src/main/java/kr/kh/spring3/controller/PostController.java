@@ -87,4 +87,32 @@ public class PostController {
 		model.addAttribute("message", message);
 		return "/main/message";
 	}
+	
+	@GetMapping("/update/{po_num}")
+	public String update(Model model, @PathVariable("po_num")int po_num) {
+		log.info("/post/update:get");
+		// 게시글을 가져옴
+		PostVO post = postService.getPost(po_num);
+		// 첨부파일 가져옴
+		List<FileVO> list = postService.getFileList(po_num);
+		model.addAttribute("post", post);
+		model.addAttribute("list", list);
+		return "/post/update";
+	}
+	
+	@PostMapping("/update/{po_num}")
+	public String updatePost(Model model, @PathVariable("po_num")int po_num, PostVO post, HttpSession session, MultipartFile[] fileList, int[] nums) {
+		log.info("/post/update:post");
+		post.setPo_num(po_num);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		boolean res = postService.updatePost(post, user, fileList, nums);
+		MessageDTO message;
+		if(res) {
+			message = new MessageDTO("/post/detail/" + po_num, "게시글 수정 성공!!");
+		}else {
+			message = new MessageDTO("/post/detail/" + po_num, "게시글 수정 실패!!");
+		}
+		model.addAttribute("message", message);
+		return "/main/message";
+	}
 }
