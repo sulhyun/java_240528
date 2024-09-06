@@ -103,7 +103,6 @@
 		</ul>
 		<form class="input-group mb-3" action="<c:url value="/post/list/${pm.cri.co_num}"/>" method="get">
 			<select class="form-control" name="type">
-				
 				<option value="" 		 <c:if test="${pm.cri.type == ''}">selected</c:if>>전체</option>
 				<option value="po_me_id" <c:if test="${pm.cri.type == 'po_me_id'}">selected</c:if>>작성자</option>
 				<option value="po_title" <c:if test="${pm.cri.type == 'po_title'}">selected</c:if>>제목</option>
@@ -113,7 +112,19 @@
 				<button class="btn btn-outline-dark">검색</button>
 		    </div>
 		</form>
-		<a class="btn btn-outline-dark" href="<c:url value="/post/insert/${pm.cri.co_num}"/>">글쓰기</a>
+		<a class="btn btn-outline-dark btn-insert" href="<c:url value="/post/insert/${pm.cri.co_num}"/>">글쓰기</a>
 	</c:if>
+	
+	<script type="text/javascript">
+		$('.btn-insert').click(function(e){
+			if('${user.me_id}' != ''){
+				return;
+			}
+			e.preventDefault();
+			if(confirm('로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?')){
+				location.href = "<c:url value="/guest/login"/>"
+			}
+		});
+	</script>
 </body>
 </html>

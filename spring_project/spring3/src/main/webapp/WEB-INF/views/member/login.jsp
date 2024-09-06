@@ -16,7 +16,7 @@
 			<label for="pw">비밀번호:</label>
 			<input type="password" class="form-control" id="pw" name="me_pw">
 		</div>
-		<button type="submit" class="btn btn-outline-primary col-12">로그인</button>
+		<button type="submit" class="btn btn-outline-dark col-12">로그인</button>
 	</form>
 	<script type="text/javascript">
 		// 아이디가 없으면 아이디창 활성화하고 아이디가 있으면 비번창을 활성화
