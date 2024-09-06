@@ -33,4 +33,6 @@ public interface PostDAO {
 
 	void deleteFile(int fi_num);
 
+	boolean deletePost(int po_num);
+
 }

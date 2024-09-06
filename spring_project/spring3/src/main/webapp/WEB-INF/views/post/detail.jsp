@@ -37,6 +37,7 @@
 		</div>
 		<c:if test="${post.po_me_id eq user.me_id}">
 			<a href="<c:url value="/post/update/${post.po_num}"/>" class="btn btn-outline-dark">수정</a>
+			<a href="<c:url value="/post/delete/${post.po_co_num}/${post.po_num}"/>" class="btn btn-outline-dark">삭제</a>
 		</c:if>
 	</div>
 </body>
