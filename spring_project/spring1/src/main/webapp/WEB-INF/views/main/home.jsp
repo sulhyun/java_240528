@@ -6,6 +6,9 @@
 <head>
 </head>
 <body>
-	<h1>Hello world!</h1>
+	<h1>Hello World</h1>
+	<input type="button" value="hi" onclick="alert('click')">
+	<input type="text" onchange="alert('changed')">
+	<input type="text" onkeydown="alert('key down!')">
 </body>
 </html>
