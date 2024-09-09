@@ -1,5 +1,6 @@
 // css 폴더에 App.css가 있고, 연결할 때 사용
 import './css/App.css'
+import {useState} from 'react';
 
 import Button from "./Button";
 
@@ -40,22 +41,40 @@ function App() {
   console.log(orangeCount);
 
   var [text1, text2] = ['버튼on', '버튼off'];
-  var on = true;
+  // var on = true;
+  var [on, setOn] = useState(true);
+  var [input, setInput] = useState("");
 
   function btnOnClick(){
     alert('On 버튼 클릭');
+    // on = false;
+    setOn(false);
+    // console.log(on);
   }
   
   function btnOffClick(){
     alert('Off 버튼 클릭');
+    // on = true;
+    setOn(true);
+    // console.log(on);
+  }
+
+  function change(e){
+    // input창에 입력된 값을 가져옴
+    var value = e.target.value;
+    // 가져온 입력값을 input 스테이트 변수값을 변경
+    setInput(value); // setInput(e.target.value);
   }
 
   return (
     <div>
       {on ? <Button text={text1} type={"button"} className={"btn"} click={btnOnClick} /> : ''}
       {!on ? <Button text={text2} type={"submit"} className={"btn"} click={btnOffClick} /> : ''}
-      {/*<Button type="submit" className={{a:"a"}} /> */}
+      {/* <Button type="submit" className={{a:"a"}} /> */}
       <Button />
+      <br />
+      <input type="text" onChange={change}/>
+      <h1>{input}</h1>
     </div>
   );
 }
