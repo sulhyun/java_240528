@@ -10,6 +10,7 @@ input창과 버튼, 리스트를 구성해서 버튼을 클릭하면 input창에
 4. todoList를 이용해서 ul 태그 안에 li태그들로 구성
 	- 배열의 map을 이용해서 구성(첫번째 예제 참고)
 */
+
 function TodoList(){
 
 	let [todo, setTodo] = useState("");
