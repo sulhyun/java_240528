@@ -1,0 +1,14 @@
+
+.btn{
+	border: 1px solid black;
+	background-color: #fff;
+	height: 34px;
+}
+
+.btn:hover{
+	background-color: red;
+}
+
+.br-5{
+	border-radius: 5px;
+}
