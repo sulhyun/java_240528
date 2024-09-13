@@ -1,4 +1,4 @@
-package kr.kh.spring.service;
+package kr.kh.spring1.service;
 
 import java.util.regex.Pattern;
 
@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import kr.kh.spring.dao.MemberDAO;
-import kr.kh.spring.model.vo.MemberVO;
+import kr.kh.spring1.dao.MemberDAO;
+import kr.kh.spring1.model.vo.MemberVO;
 
 @Service
-public class MemberService {
-	
-	@Autowired
-	private MemberDAO memberDao;
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+public class MemverServiceImp implements MemberService {
 
+	@Autowired
+	MemberDAO memberDao;
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
+	@Override
 	public boolean signup(MemberVO member) {
 		if(member == null) {
 			return false;
@@ -37,25 +37,10 @@ public class MemberService {
 		}
 	}
 	
-	private boolean checkRegex(String str, String regex) {
-		if(str != null && Pattern.matches(regex, str)) {
+	public boolean checkRegex(String data, String regex) {
+		if(data != null && Pattern.matches(regex, data)) {
 			return true;
 		}
 		return false;
-	}
-
-	public MemberVO login(MemberVO member) {
-		if(member == null) {
-			return null;
-		}
-		MemberVO user = memberDao.selectMember(member.getMe_id());
-		if(user == null) {
-			return null;
-		}
-		if(passwordEncoder.matches(member.getMe_pw(), user.getMe_pw())) {
-			return user;
-		}
-		return null;
-	}
-
+	} // 구글 참고
 }
