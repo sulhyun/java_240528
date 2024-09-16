@@ -74,7 +74,7 @@
 		    </c:if>
 		    <c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
 		    	<c:choose>
-		    		<c:when test="${pm.cri.page == i }">
+		    		<c:when test="${pm.cri.page == i}">
 		    			<c:set var="active" value="active" />
 		    		</c:when>
 		    		<c:otherwise>
@@ -86,7 +86,7 @@
 					<c:param name="type" value="${pm.cri.type}"/>
 					<c:param name="search" value="${pm.cri.search}"/>
 				</c:url>
-			    <li class="page-item ${active }">
+			    <li class="page-item ${active}">
 			    	<a class="page-link" href="${url}">${i}</a>
 			    </li>
 		    </c:forEach>

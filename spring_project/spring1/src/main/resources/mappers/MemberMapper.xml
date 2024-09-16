@@ -5,6 +5,13 @@
 <mapper namespace="kr.kh.spring1.dao.MemberDAO">
   	<insert id="insertMember">
   		INSERT INTO MEMBER(ME_ID, ME_PW, ME_EMAIL, ME_MS_NAME) VALUES
-  		{#{m.me_id}, #{m.me_pw}, #{m.me_email}, '사용'}
+  		(#{me_id}, #{me_pw}, #{me_email}, '사용')
   	</insert>
+  	<select id="selectMember" resultType="MemberVO">
+  		SELECT *
+  		FROM
+  			MEMBER
+  		WHERE
+  			ME_ID = #{me_id}
+  	</select>
 </mapper>

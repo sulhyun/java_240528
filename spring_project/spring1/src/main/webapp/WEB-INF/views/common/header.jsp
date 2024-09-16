@@ -13,22 +13,23 @@
 				<a class="nav-link" href="<c:url value="/"/>">HOME</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Link 1</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link 2</a>
+				<a class="nav-link" href="<c:url value="/post/list/0" />">커뮤니티</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a class="nav-link" href="<c:url value="/signup" />">회원가입</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link 2</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Link 3</a>
-			</li>
+			<c:if test="${user eq null}">
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/signup" />">회원가입</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/login" />">로그인</a>
+				</li>
+			</c:if>
+			<c:if test="${user ne null}">
+				<li class="nav-item">
+					<a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
+				</li>
+			</c:if>
 		</ul>
 	</nav>
 </body>

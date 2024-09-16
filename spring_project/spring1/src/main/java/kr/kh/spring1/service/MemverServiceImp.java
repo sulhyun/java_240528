@@ -30,6 +30,7 @@ public class MemverServiceImp implements MemberService {
 		}
 		String encPw = passwordEncoder.encode(member.getMe_pw());
 		member.setMe_pw(encPw);
+		
 		try {
 			return memberDao.insertMember(member);
 		}catch (Exception e) {
@@ -42,5 +43,21 @@ public class MemverServiceImp implements MemberService {
 			return true;
 		}
 		return false;
-	} // 구글 참고
+	}
+
+	@Override
+	public MemberVO login(MemberVO member) {
+		if(member == null) {
+			return null;
+		}
+		MemberVO user = memberDao.selectMember(member.getMe_id());
+		if(user == null) {
+			return null;
+		}
+		boolean res = passwordEncoder.matches(member.getMe_pw(), user.getMe_pw());
+		if(res) {
+			return user;
+		}
+		return null;
+	}
 }

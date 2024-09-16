@@ -1,10 +1,11 @@
 package kr.kh.spring1.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +44,36 @@ public class HomeController {
 			model.addAttribute("msg", "회원가입 실패");
 			model.addAttribute("url", "/signup");
 		}
+		return "/main/message";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		log.info("login:get");
+		return "/member/login";
+	}
+	
+	@PostMapping("/login")
+	public String loginPost(Model model, MemberVO member, HttpSession session) {
+		log.info("login:post");
+		MemberVO user = memberService.login(member);
+		session.setAttribute("user", user);
+		if(user != null) {
+			model.addAttribute("msg", "로그인 성공");
+			model.addAttribute("url", "/");
+		}else {
+			model.addAttribute("msg", "로그인 실패");
+			model.addAttribute("url", "/login");
+		}
+		return "/main/message";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(Model model, HttpSession session) {
+		log.info("logout:get");
+		session.removeAttribute("user");
+		model.addAttribute("msg", "로그아웃 완료");
+		model.addAttribute("url", "/");
 		return "/main/message";
 	}
 
