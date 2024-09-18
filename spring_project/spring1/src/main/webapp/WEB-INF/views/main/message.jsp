@@ -8,7 +8,6 @@
 <body>
 	<script type="text/javascript">
 		var msg = '${msg}';
-		console.log(msg);
 		if(msg != ''){
 			alert(msg);
 		}

@@ -72,7 +72,7 @@
 	</ul>
 	<a href="<c:url value="/post//insert/${pm.cri.co_num}" />" class="btn btn-outline-dark post-insert">글등록</a>
 	<script type="text/javascript">
-		$('.post-insert').click(function(e){
+		document.querySelector('.post-insert').addEventListener('click', function(e){
 			if('${user.me_id}' != ''){
 				return;
 			}
