@@ -73,4 +73,10 @@ public class ReactController {
 		System.out.println(person);
 		return "OK";
 	}
+	
+	@GetMapping("/post/detail/{po_num}")
+	public PostVO postDetail(@PathVariable("po_num")int po_num) {
+		
+		return postService.getPost(po_num);
+	}
 }
