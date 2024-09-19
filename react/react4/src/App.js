@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
+import Signup from './Signup';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <h1>테스트</h1>
+      {/* 
+        1. 회원 가입 화면을 구성  
+        2. 회원가입 버튼을 클릭 -> 스프링으로 회원 정보 전송 
+        3. 전송된 회원 정보를 이용해서 회원 가입하는 기능 구현
+        --------------------------------------------------
+        spring3 프로젝트에 작업
+        TestController를 추가해서 작업
+      */}
+      <Signup />
+     
+    </Container>
   );
 }
 
