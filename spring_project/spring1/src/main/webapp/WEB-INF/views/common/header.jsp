@@ -8,7 +8,6 @@
 <body>
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between">	
 		<ul class="navbar-nav">
-			
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value="/"/>">HOME</a>
 			</li>

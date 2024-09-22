@@ -45,6 +45,12 @@ public class PostServiceImp implements PostService{
 		if(post == null || user == null) {
 			return false;
 		}
+		if(post.getPo_title().trim().length() == 0) {
+			return false;
+		}
+		if(post.getPo_content().trim().length() == 0) {
+			return false;
+		}
 		post.setPo_me_id(user.getMe_id());
 		return postDao.insertPost(post);
 	}
@@ -74,6 +80,12 @@ public class PostServiceImp implements PostService{
 	@Override
 	public boolean updatePost(PostVO post, MemberVO user) {
 		if(post == null || user == null) {
+			return false;
+		}
+		if(post.getPo_title().trim().length() == 0) {
+			return false;
+		}
+		if(post.getPo_content().trim().length() == 0) {
 			return false;
 		}
 		PostVO tmp = getPost(post.getPo_num());

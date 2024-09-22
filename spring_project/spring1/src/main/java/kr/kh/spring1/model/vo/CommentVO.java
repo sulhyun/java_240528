@@ -1,6 +1,7 @@
 package kr.kh.spring1.model.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ public class CommentVO {
 	private String cm_me_id; 
 	private int cm_report; 
 	private int cm_state;
-	
+
 }

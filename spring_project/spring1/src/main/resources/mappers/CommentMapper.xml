@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.spring1.dao.CommentDAO">
+  	<select id="selectCommentList" resultType="CommentVO">
+		SELECT * 
+		FROM 
+			COMMENT 
+		WHERE CM_PO_NUM = #{cri.search}
+		ORDER BY CM_ORI_NUM DESC, CM_NUM ASC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+  	</select>
+
+  	<select id="selectCommentTotalCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM 
+			COMMENT 
+		WHERE CM_PO_NUM = #{cri.search}
+  	</select>
+  	<insert id="insertComment">
+		INSERT INTO COMMENT(CM_NUM, CM_CONTENT, CM_ME_ID, CM_PO_NUM, CM_ORI_NUM)
+		SELECT 
+			IFNULL(MAX(CM_NUM) + 1, 1), 
+			#{comment.cm_content}, 
+			#{comment.cm_me_id},
+			#{comment.cm_po_num},
+		<choose>
+			<when test="comment.cm_ori_num == 0">IFNULL(MAX(CM_NUM) + 1, 1)</when>
+			<otherwise>#{comment.cm_ori_num}</otherwise>
+		</choose>
+		from
+			comment
+	</insert>
+	<delete id="deleteComment">
+		DELETE FROM COMMENT WHERE CM_NUM = #{cm_num}
+	</delete>
+	<select id="selectComment" resultType="CommentVO">
+		SELECT *
+		FROM
+			COMMENT
+		WHERE CM_NUM = #{cm_num}	
+	</select>
+	<update id="updateComment">
+		UPDATE COMMENT SET CM_CONTENT = #{comment.cm_content} WHERE CM_NUM = #{comment.cm_num}
+	</update>
+</mapper>
