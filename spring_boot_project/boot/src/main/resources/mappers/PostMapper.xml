@@ -7,8 +7,17 @@
     		POST
     	WHERE
     		PO_CO_NUM = #{co_num}
+    	ORDER BY PO_NUM DESC
+    	LIMIT #{pageStart}, #{perPageNum}
     </select>
     <select id="selectCommunityList" resultType="CommunityVO">
     	SELECT * FROM COMMUNITY ORDER BY CO_NUM
+    </select>
+    <select id="selectPostTotalCount" resultType="int">
+    	SELECT COUNT(*)
+    	FROM
+    		POST
+    	WHERE
+    		PO_CO_NUM = #{co_num}
     </select>
 </mapper>
