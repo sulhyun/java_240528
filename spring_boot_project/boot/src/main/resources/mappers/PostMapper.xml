@@ -20,4 +20,11 @@
     	WHERE
     		PO_CO_NUM = #{co_num}
     </select>
+    <select id="selectPost" resultType="PostVO">
+    	SELECT *
+    	FROM
+    		POST
+    	WHERE 
+    		PO_NUM = #{po_num}
+    </select>
 </mapper>

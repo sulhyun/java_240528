@@ -28,7 +28,10 @@
 			<tbody>
 				<tr th:each="item : ${list}">
 					<td th:text="${item.po_num}"></td>
-					<td th:text="${item.po_title}"></td>
+					<td>
+						<a  th:text="${item.po_title}" 
+							th:href="@{/post/detail/{po_num}(po_num=${item.po_num})}"></a>
+					</td>
 					<td th:text="${item.po_me_id}"></td>
 					<td th:text="${item.po_view}"></td>
 				</tr>

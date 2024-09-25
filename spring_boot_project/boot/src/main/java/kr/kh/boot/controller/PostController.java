@@ -35,4 +35,23 @@ public class PostController {
 		model.addAttribute("pm", pm);
 		return "/post/list";
 	}
+	
+	@GetMapping("/post/detail/{po_num}")
+	public String postDetail(Model model, @PathVariable int po_num) {
+		PostVO post = postService.getPost(po_num);
+		model.addAttribute("post", post);
+		return "/post/detail";
+	}
+	
+	@GetMapping("/post/update/{po_num}")
+	public String postUpdate(Model model, @PathVariable int po_num) {
+		
+		return "/post/update";
+	}
+	
+	@GetMapping("/post/delete/{po_num}")
+	public String postDelete(Model model, @PathVariable int po_num) {
+		
+		return "/message";
+	}
 }
