@@ -33,7 +33,7 @@
 			</div>
 			<a th:href="@{/post/list/{co_num}(co_num=*{po_co_num})}" class="btn btn-outline-dark mb-2">목록</a>
 			<a th:href="@{/post/update/{po_num}(po_num=*{po_num})}" class="btn btn-outline-dark mb-2">수정</a>
-			<a th:href="@{/post/delete/{po_num}(po_num=*{po_num})}" class="btn btn-outline-dark mb-2">삭제</a>
+			<a th:href="@{/post/delete/{co_num}/{po_num}(co_num=*{po_co_num}, po_num=*{po_num})}" class="btn btn-outline-dark mb-2">삭제</a>
 		</div>
 	</main>
 </body>
