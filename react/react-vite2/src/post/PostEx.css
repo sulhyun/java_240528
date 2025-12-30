@@ -1,0 +1,8 @@
+table, th, td { border : 1px solid black; border-collapse: collapse; } 
+table { width : 500px; } 
+th, td { text-align: center; } 
+.title, .writer, .content, .num, .view { display: block; box-sizing: border-box; width: 500px; margin-bottom: 10px; } 
+.btn { width: 100%; border: 1px solid; border-radius: 5px; cursor: pointer; } 
+#modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.2); padding: 30px 30px; } 
+#modal-content { box-sizing: border-box; background-color: #fff; width: 550px; padding: 15px; } 
+.display-none { display: none !important; } 

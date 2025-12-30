@@ -12,8 +12,6 @@ function Input2(){
 	let [time, setTime] = useState(0);
 	let [flag, setFlag] = useState(true);
 
-
-
 	return(
 		<div>
 			<input type="text" disabled={!flag} value={flag?time:Math.floor(time/60)} onChange={e=>setTime(e.target.value)} />
