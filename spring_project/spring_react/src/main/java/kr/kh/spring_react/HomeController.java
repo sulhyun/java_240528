@@ -6,10 +6,14 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.kh.spring_react.service.MemberService;
 
 /**
  * Handles requests for the application home page.
@@ -34,6 +38,17 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	@Autowired
+	MemberService memberService;
+
+	@RequestMapping(value="/")
+	public ModelAndView main(ModelAndView mv) throws Exception{
+	    mv.setViewName("/main/home");
+	    mv.addObject("setHeader", "타일즈테스트");
+	    System.out.println(memberService.getEmail("abc123"));
+	    return mv;
 	}
 	
 }

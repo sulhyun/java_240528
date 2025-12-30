@@ -1,0 +1,9 @@
+package kr.kh.spring_react.dao;
+
+import org.apache.ibatis.annotations.Param;
+
+public interface MemberDAO {
+	
+	public String getEmail(@Param("id")String id);
+	
+}
