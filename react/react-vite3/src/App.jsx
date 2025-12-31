@@ -1,10 +1,21 @@
+import Community from "./Community";
+import Nav from "./Nav";
+import PostList from "./PostList";
+import PostDetail from "./PostDetail";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
 
-
   return (
     <>
-      <div>Hello World</div>
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path={"/"} exact element={<Community />} />
+          <Route path={"/post/list/:co_num"} element={<PostList />} />
+          <Route path={"/post/detail/:po_num"} element={<PostDetail />} />
+        </Routes>
+      </BrowserRouter>      
     </>
   )
 }
