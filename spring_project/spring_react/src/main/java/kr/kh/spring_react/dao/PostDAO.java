@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.spring_react.model.vo.CommunityVO;
+import kr.kh.spring_react.model.vo.FileVO;
 import kr.kh.spring_react.model.vo.PostVO;
 import kr.kh.spring_react.pagination.PostCriteria;
 
@@ -15,5 +16,9 @@ public interface PostDAO {
 	List<PostVO> selectPostList(@Param("cri")PostCriteria cri);
 
 	int selectPostTotalCount(@Param("cri")PostCriteria cri);
+
+	void insertFile(@Param("file")FileVO fileVo);
+
+	boolean insertPost(@Param("post")PostVO post);
 
 }

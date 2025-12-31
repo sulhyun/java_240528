@@ -48,4 +48,14 @@
 		</choose>
 	</select>
 	
+	<insert id="insertFile">
+		INSERT INTO FILE(FI_PO_NUM, FI_NAME, FI_ORI_NAME) VALUES
+		(#{file.fi_po_num}, #{file.fi_name}, #{file.fi_ori_name})
+	</insert>
+	
+	<insert id="insertPost" useGeneratedKeys="true" keyProperty="post.po_num">
+		INSERT INTO POST(PO_TITLE, PO_CONTENT, PO_ME_ID, PO_CO_NUM) VALUES
+		(#{post.po_title}, #{post.po_content}, #{post.po_me_id}, #{post.po_co_num})
+	</insert>
+	
 </mapper>
