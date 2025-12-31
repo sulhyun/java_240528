@@ -9,9 +9,13 @@
 	<nav class="navbar navbar-expand-sm bg-info navbar-dark">
 		<!-- Brand/logo -->
 		<a class="navbar-brand" href="<c:url value="/" />">Logo</a>
-		
-		<!-- Links -->
 		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" href="<c:url value="/post/list/0" />">커뮤니티</a>
+			</li>
+		</ul>
+		<!-- Links -->
+		<ul class="navbar-nav ml-auto">
 			<c:if test="${user eq null}">
 				<li class="nav-item">
 					<a class="nav-link" href="<c:url value="/signup" />">회원가입</a>

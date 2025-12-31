@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.spring_react.dao.PostDAO">
+	
+	<select id="selectCommunityList" resultType="CommunityVO">
+		SELECT *
+		FROM
+			COMMUNITY
+		ORDER BY
+			CO_NUM
+	</select>
+	
+	<select id="selectPostList" resultType="PostVO">
+		SELECT *
+		FROM
+			POST
+		WHERE
+			PO_CO_NUM = #{cri.co_num}
+		<choose>
+			<when test="cri.type == ''">
+				AND (PO_TITLE LIKE CONCAT('%', #{cri.search}, '%') OR
+				PO_ME_ID LIKE CONCAT('%', #{cri.search}, '%'))
+			</when>
+			<otherwise>
+				AND ${cri.type} LIKE CONCAT('%', #{cri.search}, '%')
+			</otherwise>
+		</choose>
+		ORDER BY PO_NUM DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="selectPostTotalCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM 
+			POST 
+		WHERE 
+			PO_CO_NUM = #{cri.co_num}
+		<choose>
+			<when test="cri.type == ''">
+				AND (PO_TITLE LIKE CONCAT('%', #{cri.search}, '%') OR 
+				PO_ME_ID LIKE CONCAT('%', #{cri.search}, '%'))
+			</when>
+			<otherwise>
+				AND ${cri.type} LIKE CONCAT('%', #{cri.search}, '%') 
+			</otherwise>
+		</choose>
+	</select>
+	
+</mapper>

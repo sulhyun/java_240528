@@ -50,6 +50,7 @@ public class HomeController {
 	@GetMapping("/login")
 	public String login(Model model) {
 		System.out.println("/login : GET");
+		model.addAttribute("title", "로그인");
 		return "/member/login";
 	}
 	
