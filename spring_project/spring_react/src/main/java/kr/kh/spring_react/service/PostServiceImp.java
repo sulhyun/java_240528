@@ -90,4 +90,19 @@ public class PostServiceImp implements PostService {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void updateView(int po_num) {
+		postDao.updateView(po_num);
+	}
+
+	@Override
+	public PostVO getPost(int po_num) {
+		return postDao.selectPost(po_num);
+	}
+
+	@Override
+	public List<FileVO> getFileList(int po_num) {
+		return postDao.selectFileList(po_num);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring_react.model.vo.CommunityVO;
+import kr.kh.spring_react.model.vo.FileVO;
 import kr.kh.spring_react.model.vo.MemberVO;
 import kr.kh.spring_react.model.vo.PostVO;
 import kr.kh.spring_react.pagination.PageMaker;
@@ -19,5 +20,11 @@ public interface PostService {
 	PageMaker getPageMaker(PostCriteria cri);
 
 	boolean addPost(PostVO post, MemberVO user, MultipartFile[] fileList);
+
+	void updateView(int po_num);
+
+	PostVO getPost(int po_num);
+
+	List<FileVO> getFileList(int po_num);
 
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.kh.spring_react.model.vo.CommunityVO;
+import kr.kh.spring_react.model.vo.FileVO;
 import kr.kh.spring_react.model.vo.MemberVO;
 import kr.kh.spring_react.model.vo.PostVO;
 import kr.kh.spring_react.pagination.PageMaker;
@@ -64,6 +66,17 @@ public class PostController {
 			model.addAttribute("msg", "게시글 등록 실패");
 		}
 		return "/util/msg";
+	}
+	
+	@GetMapping("/detail/{po_num}")
+	public String detail(Model model, @PathVariable("po_num")int po_num) {
+		System.out.println("/post/detail : GET");
+		postService.updateView(po_num);
+		PostVO post = postService.getPost(po_num);
+		List<FileVO> list = postService.getFileList(po_num);
+		model.addAttribute("post", post);
+		model.addAttribute("list", list);
+		return "/post/detail";
 	}
 	
 }

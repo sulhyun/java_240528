@@ -58,4 +58,28 @@
 		(#{post.po_title}, #{post.po_content}, #{post.po_me_id}, #{post.po_co_num})
 	</insert>
 	
+	<select id="selectPost" resultType="PostVO">
+		SELECT *
+		FROM
+			POST
+		WHERE
+			PO_NUM = #{po_num}
+	</select>
+	
+	<update id="updateView">
+		UPDATE POST
+		SET
+			PO_VIEW = PO_VIEW + 1
+		WHERE
+			PO_NUM = #{po_num}
+	</update>
+	
+	<select id="selectFileList" resultType="FileVO">
+		SELECT *
+		FROM
+			FILE
+		WHERE
+			FI_PO_NUM = #{po_num}
+	</select>
+	
 </mapper>

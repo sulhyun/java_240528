@@ -35,7 +35,9 @@
 				<c:forEach items="${list}" var="post">
 					<tr>
 						<td>${post.po_num}</td>
-						<td>${post.po_title}</td>
+						<td>
+							<a href="<c:url value="/post/detail/${post.po_num}"/>">${post.po_title}</a>
+						</td>
 						<td>${post.po_me_id}</td>
 						<td>
 							<fmt:formatDate value="${post.po_date}" pattern="yyyy-MM-dd" />
