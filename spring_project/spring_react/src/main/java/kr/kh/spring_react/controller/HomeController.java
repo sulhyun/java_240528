@@ -68,4 +68,13 @@ public class HomeController {
 		return "/util/msg";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(Model model, HttpSession session) {
+		System.out.println("/logout : GET");
+		session.removeAttribute("user");
+		model.addAttribute("url", "/");
+		model.addAttribute("msg", "로그아웃 성공");
+		return "/util/msg";
+	}
+	
 }
