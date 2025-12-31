@@ -33,4 +33,6 @@ public interface PostDAO {
 
 	void deleteFile(@Param("fi_num")int fi_num);
 
+	boolean deletePost(@Param("po_num")int po_num);
+
 }

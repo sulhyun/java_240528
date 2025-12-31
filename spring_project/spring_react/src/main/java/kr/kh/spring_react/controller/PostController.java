@@ -106,4 +106,19 @@ public class PostController {
 		return "/util/msg";
 	}
 	
+	@GetMapping("/delete/{co_num}/{po_num}")
+	public String delete(Model model, @PathVariable("po_num")int po_num, @PathVariable("co_num")int co_num, HttpSession session) {
+		System.out.println("/post/delete : GET");
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		boolean res = postService.deletePost(po_num, user);
+		if(res) {
+			model.addAttribute("url", "/post/list/" + co_num);
+			model.addAttribute("msg", "게시글 삭제 성공");
+		}else {
+			model.addAttribute("url", "/post/detail/" + po_num);
+			model.addAttribute("msg", "게시글 삭제 실패");
+		}
+		return "/util/msg";
+	}
+	
 }

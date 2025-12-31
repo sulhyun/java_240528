@@ -152,4 +152,19 @@ public class PostServiceImp implements PostService {
 		postDao.deleteFile(file.getFi_num());
 	}
 
+	@Override
+	public boolean deletePost(int po_num, MemberVO user) {
+		// 작성자 체크
+		if(!isWriter(po_num, user)) {
+			return false;
+		}
+		// 첨부파일 삭제
+		List<FileVO> list = postDao.selectFileList(po_num);
+		for(FileVO file : list) {
+			deleteFile(file);
+		}
+		// 게시글 삭제
+		return postDao.deletePost(po_num);
+	}
+
 }

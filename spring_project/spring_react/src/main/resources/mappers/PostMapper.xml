@@ -103,4 +103,8 @@
 		DELETE FROM FILE WHERE FI_NUM = #{fi_num}
 	</delete>
 	
+	<delete id="deletePost">
+		DELETE FROM POST WHERE PO_NUM = #{po_num}
+	</delete>
+	
 </mapper>

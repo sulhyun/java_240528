@@ -29,4 +29,6 @@ public interface PostService {
 
 	boolean updatePost(PostVO post, MemberVO user, MultipartFile[] fileList, int[] nums);
 
+	boolean deletePost(int po_num, MemberVO user);
+
 }
