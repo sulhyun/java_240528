@@ -82,4 +82,25 @@
 			FI_PO_NUM = #{po_num}
 	</select>
 	
+	<update id="updatePost">
+		UPDATE POST
+		SET
+			PO_TITLE = #{post.po_title},
+			PO_CONTENT = #{post.po_content}
+		WHERE
+			PO_NUM = #{post.po_num}
+	</update>
+	
+	<select id="selectFile" resultType="FileVO">
+		SELECT *
+		FROM
+			FILE
+		WHERE
+			FI_NUM = #{fi_num}
+	</select>
+	
+	<delete id="deleteFile">
+		DELETE FROM FILE WHERE FI_NUM = #{fi_num}
+	</delete>
+	
 </mapper>

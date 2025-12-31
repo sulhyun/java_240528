@@ -27,4 +27,6 @@ public interface PostService {
 
 	List<FileVO> getFileList(int po_num);
 
+	boolean updatePost(PostVO post, MemberVO user, MultipartFile[] fileList, int[] nums);
+
 }

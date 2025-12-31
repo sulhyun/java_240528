@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,9 +73,37 @@ public class PostController {
 		postService.updateView(po_num);
 		PostVO post = postService.getPost(po_num);
 		List<FileVO> list = postService.getFileList(po_num);
+		model.addAttribute("title", "게시글 상세");
 		model.addAttribute("post", post);
 		model.addAttribute("list", list);
 		return "/post/detail";
+	}
+	
+	@GetMapping("/update/{po_num}")
+	public String update(Model model, @PathVariable("po_num")int po_num) {
+		System.out.println("/post/update : GET");
+		PostVO post = postService.getPost(po_num);
+		List<FileVO> list = postService.getFileList(po_num);
+		model.addAttribute("title", "게시글 수정");
+		model.addAttribute("post", post);
+		model.addAttribute("list", list);
+		return "/post/update";
+	}
+	
+	@PostMapping("/update/{po_num}")
+	public String updatePost(Model model, @PathVariable("po_num")int po_num, PostVO post, HttpSession session, MultipartFile[] fileList, int[] nums) {
+		System.out.println("/post/update : POST");
+		post.setPo_num(po_num);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		boolean res = postService.updatePost(post, user, fileList, nums);
+		if(res) {
+			model.addAttribute("url", "/post/detail/" + po_num);
+			model.addAttribute("msg", "게시글 수정 성공");
+		}else {
+			model.addAttribute("url", "/post/detail/" + po_num);
+			model.addAttribute("msg", "게시글 수정 실패");
+		}
+		return "/util/msg";
 	}
 	
 }
