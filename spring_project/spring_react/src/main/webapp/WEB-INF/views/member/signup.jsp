@@ -5,12 +5,12 @@
 <head>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-	<link rel="stylesheet" href="<c:url value='/resources/css/member.css'/>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/member.css'/>" />
 </head>
 <body>
 	<div class="member-box">
 		<h1>회원가입</h1>
-		<form action="<c:url value="/guest/signup" />" method="post" id="form">
+		<form action="<c:url value="/signup" />" method="post" id="form">
 			<div class="form-group">
 		  		<label for="id">아이디</label>
 		    	<input type="text" class="form-control" id="id" name="me_id">
@@ -31,49 +31,49 @@
 		</form>	
 	</div>
 	<script type="text/javascript">
-	$('#form').validate({
-		rules : {
-			me_id : {
-				required : true,
-				regex : /^\w{6,13}$/
+		$('#form').validate({
+			rules : {
+				me_id : {
+					required : true,
+					regex : /^\w{6,13}$/
+				},
+				me_pw : {
+					required : true,
+					regex : /^[a-zA-Z0-9!@#$]{6,15}$/
+				},
+				me_pw2 : {
+					equalTo : pw
+				},
+				me_email : {
+					required : true,
+					email : true
+				}
 			},
-			me_pw : {
-				required : true,
-				regex : /^[a-zA-Z0-9!@#$]{6,15}$/
+			messages : {
+				me_id : {
+					required : '필수 항목입니다.',
+					regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
+				},
+				me_pw : {
+					required : '필수 항목입니다.',
+					regex : '아이디는 영어, 숫자, 특수문자(!@#$)만 가능하며, 6~15자이어야 합니다.'
+				},
+				me_pw2 : {
+					equalTo : '비번과 일치하지 않습니다.'
+				},
+				me_email : {
+					required : '필수 항목입니다.',
+					email : '이메일 형식이 아닙니다'
+				}
 			},
-			me_pw2 : {
-				equalTo : pw
-			},
-			me_email : {
-				required : true,
-				email : true
+			submitHandler : function(){
+				return true;
 			}
-		},
-		messages : {
-			me_id : {
-				required : '필수 항목입니다.',
-				regex : '아이디는 영어, 숫자만 가능하며, 6~13자이어야 합니다.'
-			},
-			me_pw : {
-				required : '필수 항목입니다.',
-				regex : '아이디는 영어, 숫자, 특수문자(!@#$)만 가능하며, 6~15자이어야 합니다.'
-			},
-			me_pw2 : {
-				equalTo : '비번과 일치하지 않습니다.'
-			},
-			me_email : {
-				required : '필수 항목입니다.',
-				email : '이메일 형식이 아닙니다'
-			}
-		},
-		submitHandler : function(){
-			return true;
-		}
-	});
-	$.validator.addMethod('regex', function(value, element, regex){
-		var re = new RegExp(regex);
-		return this.optional(element) || re.test(value);
-	}, "정규표현식을 확인하세요.");
-</script>
+		});
+		$.validator.addMethod('regex', function(value, element, regex){
+			var re = new RegExp(regex);
+			return this.optional(element) || re.test(value);
+		}, "정규표현식을 확인하세요.");
+	</script>
 </body>
 </html>

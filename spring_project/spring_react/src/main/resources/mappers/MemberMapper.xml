@@ -8,5 +8,13 @@
 		INSERT INTO MEMBER(ME_ID, ME_PW, ME_EMAIL, ME_MS_NAME) VALUES
 		(#{me.me_id}, #{me.me_pw}, #{me.me_email}, '사용')
 	</insert>
+	
+	<select id="selectMember" resultType="MemberVO">
+		SELECT *
+		FROM
+			MEMBER
+		WHERE
+			ME_ID = #{me_id}
+	</select>
   
 </mapper>

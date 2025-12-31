@@ -1,5 +1,7 @@
 package kr.kh.spring_react.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,16 +26,16 @@ public class HomeController {
 	    return "/main/home";
 	}
 	
-	@GetMapping("/guest/signup")
+	@GetMapping("/signup")
 	public String signup(Model model) {
-		System.out.println("/guest/signup : GET");
+		System.out.println("/signup : GET");
 		model.addAttribute("title", "회원가입");
 		return "/member/signup";
 	}
 	
-	@PostMapping("/guest/signup")
+	@PostMapping("/signup")
 	public String signupPost(Model model, MemberVO member) {
-		System.out.println("/guest/signup : POST");
+		System.out.println("/signup : POST");
 		boolean res = memberService.signup(member);
 		if(res) {
 			model.addAttribute("url", "/");
@@ -41,6 +43,27 @@ public class HomeController {
 		}else {
 			model.addAttribute("url", "/guest/signup");
 			model.addAttribute("msg", "회원가입 실패");
+		}
+		return "/util/msg";
+	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
+		System.out.println("/login : GET");
+		return "/member/login";
+	}
+	
+	@PostMapping("/login")
+	public String loginPost(Model model, MemberVO member, HttpSession session) {
+		System.out.println("/login : POST");
+		MemberVO user = memberService.login(member);
+		session.setAttribute("user", user);
+		if(user != null) {
+			model.addAttribute("url", "/");
+			model.addAttribute("msg", "로그인 성공");
+		}else {
+			model.addAttribute("url", "/login");
+			model.addAttribute("msg", "로그인 실패");
 		}
 		return "/util/msg";
 	}

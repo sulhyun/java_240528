@@ -7,5 +7,7 @@ import kr.kh.spring_react.model.vo.MemberVO;
 public interface MemberDAO {
 
 	public boolean insertMember(@Param("me") MemberVO member);
+
+	public MemberVO selectMember(@Param("me_id") String me_id);
 	
 }
