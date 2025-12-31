@@ -4,8 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring_react.dao.MemberDAO">
 
-  <select id="getEmail" resultType="String">
-	select me_id from member where me_id = #{id}
-  </select>
+	<insert id="insertMember">
+		INSERT INTO MEMBER(ME_ID, ME_PW, ME_EMAIL, ME_MS_NAME) VALUES
+		(#{me.me_id}, #{me.me_pw}, #{me.me_email}, '사용')
+	</insert>
   
 </mapper>

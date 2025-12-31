@@ -20,7 +20,9 @@
 	<tiles:insertAttribute name="header"/>
     <div class="container">        
         <tiles:insertAttribute name="body" />
-    </div>                                                  
-    <tiles:insertAttribute name="footer" />
+    </div>
+    <div>
+	    <tiles:insertAttribute name="footer" />    
+    </div>                                         
 </body>
 </html>
