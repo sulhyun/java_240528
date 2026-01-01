@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "theads",
-    "slug": "theads",
+    "name": "threads",
+    "slug": "threads",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "theads",
+    "scheme": "threads",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -20,7 +20,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.sulhyun.theads"
+      "package": "com.sulhyun.threads"
     },
     "web": {
       "output": "static",
@@ -48,7 +48,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "51b9f289-ced0-4b6c-8d89-bf42795c58a0"
+        "projectId": "1e82dcdf-8023-4938-aa04-dfa7bb2f6157"
       }
     }
   }
