@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 type Todo = {
   id: number,
@@ -26,6 +26,18 @@ export default function Index() {
     setId((prev) => prev + 1);
   }
 
+  // 조회
+  const randerItem = ({item} : {item : Todo}) => {
+    return (
+      <View style={styles.list}>
+        <Text style={styles.listText}>{item.text}</Text>
+        <TouchableOpacity style={styles.delBtn}>
+          <Text>삭제</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   return (
     <>
       <View style={styles.contains}>
@@ -38,6 +50,7 @@ export default function Index() {
         </View>
         <View>
           <Text>{text}</Text>
+          <FlatList data={todoList} renderItem={randerItem} keyExtractor={(item) => item.id.toString()}></FlatList>
         </View>
       </View>
     </>
@@ -71,5 +84,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     overflow: 'hidden',
+  },
+  list : {
+    flexDirection: 'row',
+    marginBottom: 4,
+  },
+  listText : {
+    flex: 1,
+    fontSize: 25,
+  },
+  delBtn : {
+    borderWidth: 1,
+    backgroundColor: 'salmon',
+    padding: 5,
+    borderRadius: 5
   }
 })
