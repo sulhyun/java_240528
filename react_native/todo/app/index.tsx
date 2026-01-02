@@ -34,7 +34,7 @@ export default function Index() {
   }
 
   // 조회
-  const randerItem = ({item} : {item : Todo}) => {
+  const renderItem = ({item} : {item : Todo}) => {
     return (
       <View style={styles.list}>
         <TouchableOpacity style={styles.listTextBtn} onPress={() => toggleTodo(item.id)}>
@@ -105,7 +105,7 @@ export default function Index() {
           }
         </View>
         <View>
-          <FlatList data={todoList} renderItem={randerItem} keyExtractor={(item) => item.id.toString()}></FlatList>
+          <FlatList data={todoList} renderItem={renderItem} keyExtractor={(item) => item.id.toString()}></FlatList>
         </View>
       </View>
     </>
