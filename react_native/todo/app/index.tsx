@@ -8,7 +8,7 @@ type Todo = {
 
 export default function Index() {
   const [text, setText] = useState("");
-  const [todoList, SetTodoList] = useState<Todo[]>([]);
+  const [todoList, setTodoList] = useState<Todo[]>([]);
   const [id, setId] = useState(1);
 
   const onChangeText = (content: string) => {
@@ -21,7 +21,7 @@ export default function Index() {
       id : id,
       text : text
     }
-    SetTodoList([...todoList, tmp]);
+    setTodoList([...todoList, tmp]);
     setText("");
     setId((prev) => prev + 1);
   }
@@ -31,11 +31,16 @@ export default function Index() {
     return (
       <View style={styles.list}>
         <Text style={styles.listText}>{item.text}</Text>
-        <TouchableOpacity style={styles.delBtn}>
+        <TouchableOpacity style={styles.delBtn} onPress={() => delTodo(item.id)}>
           <Text>삭제</Text>
         </TouchableOpacity>
       </View>
     )
+  }
+
+  // 삭제
+  const delTodo = (id : number) => {
+    setTodoList(todoList.filter((item) => id !== item.id));
   }
 
   return (
@@ -92,11 +97,13 @@ const styles = StyleSheet.create({
   listText : {
     flex: 1,
     fontSize: 25,
+    borderBottomWidth: 1,
+    borderColor: 'gray',
   },
   delBtn : {
     borderWidth: 1,
     backgroundColor: 'salmon',
     padding: 5,
-    borderRadius: 5
+    borderRadius: 5,
   }
 })
