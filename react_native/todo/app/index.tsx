@@ -3,7 +3,8 @@ import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'r
 
 type Todo = {
   id: number,
-  text: string
+  text: string,
+  done: boolean
 }
 
 export default function Index() {
@@ -24,7 +25,8 @@ export default function Index() {
     }
     const tmp = {
       id : id,
-      text : text
+      text : text,
+      done : false
     }
     setTodoList([...todoList, tmp]);
     setText("");
@@ -35,8 +37,8 @@ export default function Index() {
   const randerItem = ({item} : {item : Todo}) => {
     return (
       <View style={styles.list}>
-        <TouchableOpacity>
-          <Text style={styles.listText}>{item.text}</Text>
+        <TouchableOpacity style={styles.listTextBtn} onPress={() => toggleTodo(item.id)}>
+          <Text style={[styles.listText, item.done ? styles.completed : '']}>{item.text}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.btn, styles.btnUpdateColor]} onPress={() => updateTodo(item)}>
           <Text style={styles.buttonText}>수정</Text>
@@ -73,6 +75,15 @@ export default function Index() {
     setText("");
     setFlag(false);
     setTmp(-1);
+  }
+
+  // 토글
+  const toggleTodo = (id : number) => {
+    setTodoList(todoList.map((item) => {
+      return(
+        item.id === id ? {...item, done: !item.done} : item
+      )
+    }))
   }
 
   return (
@@ -133,9 +144,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
   },
-  listText : {
+  listTextBtn : {
     flex: 1,
-    fontSize: 25,
+  },
+  listText : {
+    fontSize: 22,
   },
   btn : {
     justifyContent: 'center',
@@ -148,5 +161,9 @@ const styles = StyleSheet.create({
   },
   btnUpdateColor : {
     backgroundColor: 'lightgreen',
+  },
+  completed : {
+    textDecorationLine: 'line-through',
+    color: 'gray',
   }
 })
