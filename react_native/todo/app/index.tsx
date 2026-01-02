@@ -10,6 +10,8 @@ export default function Index() {
   const [text, setText] = useState("");
   const [todoList, setTodoList] = useState<Todo[]>([]);
   const [id, setId] = useState(1);
+  const [flag, setFlag] = useState(false);
+  const [tmp, setTmp] = useState(-1);
 
   const onChangeText = (content: string) => {
     setText(content);
@@ -17,6 +19,9 @@ export default function Index() {
 
   // 추가
   const addTodo = () => {
+    if(text === '') {
+      return;
+    }
     const tmp = {
       id : id,
       text : text
@@ -30,9 +35,14 @@ export default function Index() {
   const randerItem = ({item} : {item : Todo}) => {
     return (
       <View style={styles.list}>
-        <Text style={styles.listText}>{item.text}</Text>
-        <TouchableOpacity style={styles.delBtn} onPress={() => delTodo(item.id)}>
-          <Text>삭제</Text>
+        <TouchableOpacity>
+          <Text style={styles.listText}>{item.text}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.btn, styles.btnUpdateColor]} onPress={() => updateTodo(item)}>
+          <Text style={styles.buttonText}>수정</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.btn, styles.btnDelColor]} onPress={() => delTodo(item.id)}>
+          <Text style={styles.buttonText}>삭제</Text>
         </TouchableOpacity>
       </View>
     )
@@ -43,18 +53,47 @@ export default function Index() {
     setTodoList(todoList.filter((item) => id !== item.id));
   }
 
+  // 수정
+  const updateTodo = (item : Todo) => {
+    setText(item.text);
+    setFlag(true);
+    setTmp(item.id);
+  }
+
+  const saveTodo = () => {
+    if(text === '') {
+      setFlag(false);
+      return;
+    }
+    setTodoList(todoList.map((item) => {
+      return (
+        item.id === tmp ? {...item, text: text} : item
+      )
+    }))
+    setText("");
+    setFlag(false);
+    setTmp(-1);
+  }
+
   return (
     <>
       <View style={styles.contains}>
-        <Text style={styles.title}>My Todo</Text>
+        <Text style={styles.title}>My Todo List</Text>
         <View style={styles.inputContainer}>
           <TextInput style={styles.input} value={text} onChangeText={onChangeText} />
-          <TouchableOpacity style={styles.button} onPress={addTodo}>
-            <Text style={styles.buttonText}>추가</Text>
-          </TouchableOpacity>
+          {
+            !flag ? (
+            <TouchableOpacity style={styles.button} onPress={addTodo}>
+              <Text style={styles.buttonText}>추가</Text>
+            </TouchableOpacity> 
+            ) : (
+            <TouchableOpacity style={styles.button} onPress={saveTodo}>
+              <Text style={styles.buttonText}>저장</Text>
+            </TouchableOpacity>
+            )
+          }
         </View>
         <View>
-          <Text>{text}</Text>
           <FlatList data={todoList} renderItem={randerItem} keyExtractor={(item) => item.id.toString()}></FlatList>
         </View>
       </View>
@@ -69,8 +108,7 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   title : {
-    fontWeight: 'bold',
-    fontSize: 40,
+    fontSize: 35,
   },
   input : {
     padding: 10, 
@@ -89,21 +127,26 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     overflow: 'hidden',
+    marginVertical: 15,
   },
   list : {
     flexDirection: 'row',
-    marginBottom: 4,
+    marginBottom: 10,
   },
   listText : {
     flex: 1,
     fontSize: 25,
-    borderBottomWidth: 1,
-    borderColor: 'gray',
   },
-  delBtn : {
-    borderWidth: 1,
-    backgroundColor: 'salmon',
-    padding: 5,
+  btn : {
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     borderRadius: 5,
+  },
+  btnDelColor : {
+    backgroundColor: 'salmon',
+  },
+  btnUpdateColor : {
+    backgroundColor: 'lightgreen',
   }
 })
