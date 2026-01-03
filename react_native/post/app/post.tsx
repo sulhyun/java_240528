@@ -1,26 +1,10 @@
 import PostList from "@/components/postList";
 import { Link } from "expo-router";
-import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
-type Post = {
-  id : number;
-  title : string;
-  writer : string;
-  content : string;
-  view : number;
-}
+import { usePosts } from "./_layout";
 
 export default function Post(){
-  const [postList, setPostList] = useState<Post[]>([
-    {
-      id : 0,
-      title : '공지사항',
-      writer : 'Admin',
-      content : '공지사항',
-      view : 0
-    }
-  ]);
+  const { postList } = usePosts();
 
   return(
     <View style={styles.container}>
@@ -42,6 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 10,
+    paddingVertical: 50,
   },
   titleWrapper : {
     paddingVertical: 20,
