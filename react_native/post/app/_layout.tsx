@@ -13,6 +13,7 @@ type Post = {
 const PostContext = createContext<{
   postList: Post[];
   addPost: (post: Omit<Post, 'id'>) => void;
+  updateView: (id: number) => void;
 } | null>(null);
 
 // 다른 곳에서 쓰기 편하게 만든 Hook
@@ -31,13 +32,23 @@ export default function RootLayout() {
   ]);
 
   const addPost = (post: Omit<Post, 'id'>) => {
-    const postId = { ...post, id: id };
+    const postId = {...post, id: id};
     setPostList(prev => [postId, ...prev]);
     setId(prev => prev + 1);
   };
 
+  const updateView = (postId: number) => {
+    setPostList((prev) => {
+      return(prev.map((item) => {
+        return(
+          item.id === postId ? {...item, view: item.view + 1} : item
+        )
+      }))
+    })
+  }
+
   return (
-    <PostContext.Provider value={{ postList, addPost }}>
+    <PostContext.Provider value={{ postList, addPost, updateView }}>
       <Stack screenOptions={{ headerShown: false }} />
     </PostContext.Provider>
   );
