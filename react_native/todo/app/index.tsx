@@ -36,15 +36,15 @@ export default function Index() {
   // 조회
   const renderItem = ({item} : {item : Todo}) => {
     return (
-      <View style={styles.list}>
-        <TouchableOpacity style={styles.listTextBtn} onPress={() => toggleTodo(item.id)}>
-          <Text style={[styles.listText, item.done ? styles.completed : '']}>{item.text}</Text>
+      <View style={styles.todoItem}>
+        <TouchableOpacity style={styles.todoTextWrapper} onPress={() => toggleTodo(item.id)}>
+          <Text style={[styles.todoText, item.done ? styles.doneText : '']}>{item.text}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.btnUpdateColor]} onPress={() => updateTodo(item)}>
-          <Text style={styles.buttonText}>수정</Text>
+        <TouchableOpacity style={[styles.btnTodo, styles.btnUpdateColor]} onPress={() => updateTodo(item)}>
+          <Text style={styles.btnLabel}>수정</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.btnDelColor]} onPress={() => delTodo(item.id)}>
-          <Text style={styles.buttonText}>삭제</Text>
+        <TouchableOpacity style={[styles.btnTodo, styles.btnDelColor]} onPress={() => delTodo(item.id)}>
+          <Text style={styles.btnLabel}>삭제</Text>
         </TouchableOpacity>
       </View>
     )
@@ -88,18 +88,18 @@ export default function Index() {
 
   return (
     <>
-      <View style={styles.contains}>
+      <View style={styles.container}>
         <Text style={styles.title}>My Todo List</Text>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.input} value={text} onChangeText={onChangeText} />
+        <View style={styles.formContainer}>
+          <TextInput style={styles.textInput} value={text} onChangeText={onChangeText} />
           {
             !flag ? (
-            <TouchableOpacity style={styles.button} onPress={addTodo}>
-              <Text style={styles.buttonText}>추가</Text>
+            <TouchableOpacity style={styles.btnInput} onPress={addTodo}>
+              <Text style={styles.btnLabel}>추가</Text>
             </TouchableOpacity> 
             ) : (
-            <TouchableOpacity style={styles.button} onPress={saveTodo}>
-              <Text style={styles.buttonText}>저장</Text>
+            <TouchableOpacity style={styles.btnInput} onPress={saveTodo}>
+              <Text style={styles.btnLabel}>저장</Text>
             </TouchableOpacity>
             )
           }
@@ -113,44 +113,45 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
-  contains : {
+  container : {
     backgroundColor: 'white',
     flex: 1,
     padding: 15,
+    paddingTop: 70,
   },
   title : {
     fontSize: 35,
   },
-  input : {
+  formContainer : {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginVertical: 15,
+    overflow: 'hidden',
+  },
+  textInput : {
     padding: 10, 
     flex: 1,
   },
-  button : {
+  btnInput : {
     backgroundColor: 'lightblue',
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
-  buttonText : {
+  btnLabel : {
     fontWeight: 'bold',
   },
-  inputContainer : {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderRadius: 8,
-    overflow: 'hidden',
-    marginVertical: 15,
-  },
-  list : {
+  todoItem : {
     flexDirection: 'row',
     marginBottom: 10,
   },
-  listTextBtn : {
+  todoTextWrapper : {
     flex: 1,
   },
-  listText : {
+  todoText : {
     fontSize: 22,
   },
-  btn : {
+  btnTodo: {
     justifyContent: 'center',
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
   btnUpdateColor : {
     backgroundColor: 'lightgreen',
   },
-  completed : {
+  doneText : {
     textDecorationLine: 'line-through',
     color: 'gray',
   }
