@@ -12,7 +12,7 @@ type Post = {
 // 바구니(Context) 생성
 const PostContext = createContext<{
   postList: Post[];
-  addPost: (post: Post) => void;
+  addPost: (post: Omit<Post, 'id'>) => void;
 } | null>(null);
 
 // 다른 곳에서 쓰기 편하게 만든 Hook

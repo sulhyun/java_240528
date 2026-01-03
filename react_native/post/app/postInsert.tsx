@@ -7,7 +7,6 @@ export default function PostInsert() {
   const [title, setTitle] = useState("");
   const [writer, setWriter] = useState("");
   const [content, setContent] = useState("");
-  const [id, setId] = useState(1);
   const { addPost } = usePosts();
   const router = useRouter();
 
@@ -16,14 +15,12 @@ export default function PostInsert() {
       return;
     }
     addPost({
-      id: Date.now(),
       title,
       writer,
       content,
       view: 0
     });
-    setId(prev => prev + 1);
-    router.back(); // 그냥 뒤로 가기만 하면 됨!
+    router.back();
   }
   return (
     <ScrollView style={styles.container}>
