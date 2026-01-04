@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { Link, useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { usePosts } from "../_layout";
@@ -44,9 +44,13 @@ export default function PostDetail() {
         <TouchableOpacity style={[styles.btn, styles.btnDelColor]} onPress={handleDel}>
           <Text style={styles.deleteText}>삭제</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.btnUpdateColor]} onPress={handleDel}>
-          <Text style={styles.deleteText}>수정</Text>
-        </TouchableOpacity>
+        <View style={[styles.btn, styles.btnUpdateColor]}>
+          <Link href={{pathname: "/postUpdate/[id]", params: {id : post.id}}} asChild>
+            <TouchableOpacity>
+              <Text style={styles.deleteText}>수정</Text>
+            </TouchableOpacity>
+          </Link>
+        </View>
       </View>
     </View>
   );
