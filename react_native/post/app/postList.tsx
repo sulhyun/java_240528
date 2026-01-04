@@ -9,6 +9,7 @@ type Post = {
   content: string;
   view: number; 
   };
+  
 export default function Post(){
   const { postList } = usePosts();
 

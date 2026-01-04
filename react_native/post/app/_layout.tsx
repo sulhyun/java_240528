@@ -14,6 +14,7 @@ const PostContext = createContext<{
   postList: Post[];
   addPost: (post: Omit<Post, 'id'>) => void;
   updateView: (id: number) => void;
+  delPost: (id: number) => void;
 } | null>(null);
 
 // 다른 곳에서 쓰기 편하게 만든 Hook
@@ -37,18 +38,26 @@ export default function RootLayout() {
     setId(prev => prev + 1);
   };
 
-  const updateView = (postId: number) => {
+  const updateView = (id: number) => {
     setPostList((prev) => {
       return(prev.map((item) => {
         return(
-          item.id === postId ? {...item, view: item.view + 1} : item
+          item.id === id ? {...item, view: item.view + 1} : item
         )
       }))
     })
   }
 
+  const delPost = (id: number) => {
+    setPostList((prev) => {
+      return(prev.filter((item) => {
+        return(item.id !== id)
+      }))
+    })
+  }
+
   return (
-    <PostContext.Provider value={{ postList, addPost, updateView }}>
+    <PostContext.Provider value={{ postList, addPost, updateView, delPost }}>
       <Stack screenOptions={{ headerShown: false }} />
     </PostContext.Provider>
   );
