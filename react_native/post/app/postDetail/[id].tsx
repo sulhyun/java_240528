@@ -58,7 +58,7 @@ export default function PostDetail() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff', paddingHorizontal: 10, paddingVertical: 70 },
-  headerRow: { flexDirection: 'row', borderWidth: 1, justifyContent: 'space-between', marginBottom: 20, alignItems: 'center' },
+  headerRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20, alignItems: 'center' },
   deleteText: { fontSize: 16, color: 'white', fontWeight: 'bold', textAlign: 'center' },
   btn: { flex: 1, paddingHorizontal: 10, paddingVertical: 15 },
   btnDelColor: {backgroundColor: 'salmon'},
