@@ -1,13 +1,22 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function Index() {
+  const [text, setText] = useState("");
+
+  const onChangeText = (content: string) => (
+    setText(content)
+  )
+  
   return (
     <View style={ styles.container }>
-      <Text>Edit app/todo.tsx to edit this screen.</Text>
+      <Text style={ styles.titleText }>My Todo List</Text>
+      <TextInput value={text} onChangeText={onChangeText}></TextInput>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container : { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "white" }
+  container : { flex: 1, backgroundColor: "white", padding: 20, paddingVertical: 70 },
+  titleText : { fontSize: 25 },
 });
