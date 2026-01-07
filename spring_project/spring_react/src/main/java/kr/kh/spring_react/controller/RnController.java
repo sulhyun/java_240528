@@ -40,6 +40,7 @@ public class RnController {
 	@GetMapping("/post/detail/{po_num}")
 	public PostVO postDetail(@PathVariable("po_num")int po_num) {
 		System.out.println(333);
+		postService.updateView(po_num);
 		return postService.getPost(po_num);
 	}
 }

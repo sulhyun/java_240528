@@ -14,21 +14,26 @@ type Post = {
 }
 export default function PostDetail() {
   const {id} = useLocalSearchParams();
-  const [post, setPost] = useState<Post[]>([]);
+  const [post, setPost] = useState<Post>();
 
   useEffect(() => {
-    fetch('http://192.168.0.222:8080/spring_react/spring/rn/post/detail/' + id)
-  })
+    fetch('http://192.168.219.144:8080/spring_react/spring/rn/post/detail/' + id)
+      .then((res) => res.json())
+      .then((res) => {
+        setPost(res);
+      })
+  } ,[]);
+
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
-        <Text style={styles.title}>제목</Text>
+        <Text style={styles.title}>{post?.po_title}</Text>
         <View style={styles.infoRow}>
-          <Text style={styles.writer}>작성자: 홍길동</Text>
-          <Text style={styles.view}>조회수: 1</Text>
+          <Text style={styles.writer}>작성자: {post?.po_me_id}</Text>
+          <Text style={styles.view}>조회수: {post?.po_view}</Text>
         </View>
         <View style={styles.divider} />
-        <Text style={styles.content}>내용</Text>
+        <Text style={styles.content}>{post?.po_content}</Text>
       </View>
       <View style={styles.headerRow}>
         <TouchableOpacity style={[styles.btn, styles.btnDelColor]}>

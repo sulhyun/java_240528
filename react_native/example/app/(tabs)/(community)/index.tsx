@@ -12,7 +12,7 @@ export default function Index() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('http://192.168.0.222:8080/spring_react/spring/rn/community/list')
+    fetch('http://192.168.219.144:8080/spring_react/spring/rn/community/list')
       .then((res) => res.json())
       .then((res) => {
         setList(res);
