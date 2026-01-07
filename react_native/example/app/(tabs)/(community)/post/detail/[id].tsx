@@ -1,6 +1,20 @@
+import { useLocalSearchParams } from "expo-router";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+type Post = {
+  po_num: number, 
+  po_title: string, 
+  po_content: string, 
+  po_me_id: string, 
+  po_co_num: number, 
+  po_date: Date, 
+  po_view: number, 
+  po_report: number
+}
 export default function PostDetail() {
+  const {id} = useLocalSearchParams();
+  const [post, setPost] = useState<Post[]>([]);
   
   return (
     <View style={styles.container}>

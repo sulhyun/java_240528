@@ -24,14 +24,22 @@ public class RnController {
 	
 	@GetMapping("/community/list")
 	public List<CommunityVO> communityList() {
+		System.out.println(111);
 		return postService.getCommunityList();
 	}
 	
 	@GetMapping("/post/list/{co_num}")
-	public Map<String, Object> list(Model model, @PathVariable("co_num")int co_num) {
+	public Map<String, Object> list(@PathVariable("co_num")int co_num) {
+		System.out.println(222);
 		List<PostVO> list = postService.getPostListRN(co_num);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
 		return map;
+	}
+	
+	@GetMapping("/post/detail/{po_num}")
+	public PostVO postDetail(@PathVariable("po_num")int po_num) {
+		System.out.println(333);
+		return postService.getPost(po_num);
 	}
 }
