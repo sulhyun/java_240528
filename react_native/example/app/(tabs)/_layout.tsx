@@ -18,7 +18,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen 
-        name="(post)"
+        name="(community)"
         options={{
           tabBarLabel: () => null,
           tabBarIcon: ({ focused }) => (

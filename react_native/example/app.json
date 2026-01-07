@@ -20,7 +20,8 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.sulhyun.example"
+      "package": "com.sulhyun.example",
+      "usesCleartextTraffic": true
     },
     "web": {
       "output": "static",
