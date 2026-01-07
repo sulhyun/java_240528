@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -16,6 +16,7 @@ type Post = {
 export default function PostList() {
   const {id} = useLocalSearchParams();
   const [list, setList] = useState<Post[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
   fetch('http://192.168.0.222:8080/spring_react/spring/rn/post/list/' + id)
@@ -28,7 +29,7 @@ export default function PostList() {
   const renderItem = ({item} : {item : Post}) => {
     return(
       <View>
-        <TouchableOpacity style={styles.row}>
+        <TouchableOpacity style={styles.row} onPress={() => router.push({pathname: "/post/detail/[id]", params: {id : item.po_num}})}>
           <Text style={[styles.cell, styles.idCol]}>{item.po_num}</Text>
           <Text style={[styles.cell, styles.titleCol]} numberOfLines={1}>{item.po_title}</Text>
           <Text style={[styles.cell, styles.writerCol]}>{item.po_me_id}</Text>
