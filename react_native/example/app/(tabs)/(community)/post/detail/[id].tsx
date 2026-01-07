@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Post = {
@@ -15,7 +15,10 @@ type Post = {
 export default function PostDetail() {
   const {id} = useLocalSearchParams();
   const [post, setPost] = useState<Post[]>([]);
-  
+
+  useEffect(() => {
+    fetch('http://192.168.0.222:8080/spring_react/spring/rn/post/detail/' + id)
+  })
   return (
     <View style={styles.container}>
       <View style={styles.contentWrapper}>
