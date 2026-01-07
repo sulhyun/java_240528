@@ -63,7 +63,7 @@ export default function postList() {
         data={list}
         renderItem={renderItem}
         keyExtractor={(item) => item.po_num.toString()}
-            />
+      />
     </View>
   )
 }
