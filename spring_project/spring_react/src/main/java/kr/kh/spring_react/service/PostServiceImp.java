@@ -167,4 +167,9 @@ public class PostServiceImp implements PostService {
 		return postDao.deletePost(po_num);
 	}
 
+	@Override
+	public List<PostVO> getPostListRN(int co_num) {
+		return postDao.selectPostListRN(co_num);
+	}
+
 }

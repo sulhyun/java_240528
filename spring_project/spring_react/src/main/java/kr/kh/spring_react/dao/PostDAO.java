@@ -35,4 +35,6 @@ public interface PostDAO {
 
 	boolean deletePost(@Param("po_num")int po_num);
 
+	List<PostVO> selectPostListRN(@Param("co_num")int co_num);
+
 }

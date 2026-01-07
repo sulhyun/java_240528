@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.kh.spring_react.model.vo.CommunityVO;
 import kr.kh.spring_react.model.vo.PostVO;
-import kr.kh.spring_react.pagination.PageMaker;
-import kr.kh.spring_react.pagination.PostCriteria;
 import kr.kh.spring_react.service.PostService;
 
 @RestController
@@ -30,16 +28,10 @@ public class RnController {
 	}
 	
 	@GetMapping("/post/list/{co_num}")
-	public Map<String, Object> list(Model model, @PathVariable("co_num")int co_num, PostCriteria cri) {
-		cri.setCo_num(co_num);
-		cri.setPerPageNum(3);
-		// 게시글 목록을 가져옴(전체)
-		List<PostVO> list = postService.getPostList(cri);
-		// 페이지메이커
-		PageMaker pm = postService.getPageMaker(cri);
+	public Map<String, Object> list(Model model, @PathVariable("co_num")int co_num) {
+		List<PostVO> list = postService.getPostListRN(co_num);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("pm", pm);
 		return map;
 	}
 }

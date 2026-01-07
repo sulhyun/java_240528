@@ -22,7 +22,7 @@ export default function Index() {
   const renderItem = ({item} : {item : Community}) => {
     return (
       <View>
-        <TouchableOpacity onPress={() => router.push({pathname: "/post/[id]", params: {id : item.co_num}})}>
+        <TouchableOpacity onPress={() => router.push({pathname: "/post/list/[id]", params: {id : item.co_num}})}>
           <Text>{item.co_name}</Text>
         </TouchableOpacity>
       </View>

@@ -11,28 +11,17 @@ type Post = {
   po_date: Date, 
   po_view: number, 
   po_report: number,
-  date?: string
 }
 
-export default function postList() {
+export default function PostList() {
   const {id} = useLocalSearchParams();
   const [list, setList] = useState<Post[]>([]);
-	const [pm, setPm] = useState({});
 
   useEffect(() => {
   fetch('http://192.168.0.222:8080/spring_react/spring/rn/post/list/' + id)
     .then((res) => res.json())
-    .then(res=>{
-      // map은 A => B
-      const tmp = res.list.map((item : Post) => {
-        // 정수로 된 날짜 정보를 Date 객체로 변환하기 위해서
-        const date = (new Date(item.po_date)).toLocaleDateString();
-        item = {...item, date};
-        return item;
-      })
-      // setList(res.list);
-      setList(tmp);
-      setPm(res.pm);
+    .then((res) => {
+      setList(res.list);
     })
   }, []);
 
@@ -69,59 +58,15 @@ export default function postList() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    paddingVertical: 50,
-  },
-  titleWrapper : {
-    paddingVertical: 20,
-    flexDirection: 'row'
-  },
-  titleText : {
-    fontSize: 25,
-    fontWeight: 'bold',
-    flex: 1,
-  },
-  writeButton: {
-    backgroundColor: 'skyblue',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 15,
-  },
-  writeButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 14,
-  },
-  header: {
-    flexDirection: 'row',
-    backgroundColor: '#f1f3f5',
-    paddingVertical: 12,
-    borderBottomWidth: 2,
-    borderBottomColor: '#dee2e6',
-    borderTopWidth: 1,
-    borderTopColor: '#adb5bd',
-  },
-  row: {
-    flexDirection: 'row',
-    paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e9ecef',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 14,
-    color: '#495057',
-  },
-  cell: {
-    textAlign: 'center',
-    fontSize: 14,
-    color: '#333',
-  },
+  container: { flex: 1, backgroundColor: '#fff', paddingHorizontal: 10, paddingVertical: 50 },
+  titleWrapper: { paddingVertical: 20, flexDirection: 'row' },
+  titleText: { fontSize: 25, fontWeight: 'bold', flex: 1 },
+  writeButton: { backgroundColor: 'skyblue', paddingVertical: 6, paddingHorizontal: 12, borderRadius: 15 },
+  writeButtonText: { color: '#fff', fontWeight: 'bold', fontSize: 14 },
+  header: { flexDirection: 'row', backgroundColor: '#f1f3f5', paddingVertical: 12, borderBottomWidth: 2, borderBottomColor: '#dee2e6', borderTopWidth: 1, borderTopColor: '#adb5bd' },
+  row: { flexDirection: 'row', paddingVertical: 15, borderBottomWidth: 1, borderBottomColor: '#e9ecef', alignItems: 'center' },
+  headerText: { fontWeight: 'bold', textAlign: 'center', fontSize: 14, color: '#495057' },
+  cell: { textAlign: 'center', fontSize: 14, color: '#333' },
   idCol: { flex: 1 },
   titleCol: { flex: 4 },
   writerCol: { flex: 2 },

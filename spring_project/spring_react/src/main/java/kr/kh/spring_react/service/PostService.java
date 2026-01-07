@@ -31,4 +31,6 @@ public interface PostService {
 
 	boolean deletePost(int po_num, MemberVO user);
 
+	List<PostVO> getPostListRN(int co_num);
+
 }

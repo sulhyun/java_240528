@@ -107,4 +107,11 @@
 		DELETE FROM POST WHERE PO_NUM = #{po_num}
 	</delete>
 	
+	<select id="selectPostListRN" resultType="PostVO">
+		SELECT *
+		FROM
+			POST
+		WHERE
+			PO_CO_NUM = #{co_num}
+	</select>
 </mapper>
