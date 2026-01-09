@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View, Text, Image, TouchableOpacity, TouchableNativeFeedback, Platform, Keyboard } from "react-native";
 
-function AddTodo({onInsert}) {
+function AddTodo({onInsert, onUpdate, edit}) {
   const [text, setText] = useState("");
 
+  useEffect(() => {
+    if(edit) {
+      setText(edit.text);
+    } 
+  }, [edit]);
+
   const onPress = () => {
-    onInsert(text);
+    if(edit) {
+      onUpdate(edit.id, text);
+    }
+    else {
+      onInsert(text);
+    }
     setText("");
     Keyboard.dismiss();
-  }
+  };
+
   const button = (
     <View style={styles.buttonStyle}>
-      <Image source={require("../assets/icons/add_white/add_white.png")} />
+      <Image source={edit ? require("../assets/icons/check_white/check_white.png") : require("../assets/icons/add_white/add_white.png")} />
     </View>
   );
   return(
