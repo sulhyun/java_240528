@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "606495119462",
+    "project_id": "public-gallery-25281",
+    "storage_bucket": "public-gallery-25281.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606495119462:android:17609962ad132922b775a7",
+        "android_client_info": {
+          "package_name": "com.publicgalleryhyun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm9noTWZWpZdZItDA9FTONFCS41dPI77A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
