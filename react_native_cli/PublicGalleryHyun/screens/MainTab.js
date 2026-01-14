@@ -1,32 +1,51 @@
 import React from "react";
-import { useUserContext } from '../contexts/UserContext';
-import { Image, View, StyleSheet, Text } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeStack from './HomeStack';
+import MyProfileStack from './MyProfileStack';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import CameraButton from '../components/CameraButton'
+import { StyleSheet, View } from "react-native";
+
+const Tab = createBottomTabNavigator();
 
 function MainTab() {
-  const {user} = useUserContext();
+  
   return(
-    <View style={styles.block}>
-      {user.photoURL && (
-        <Image 
-          source={{uri: user.photoURL}}
-          style={{width: 128, height: 128, marginBottom: 16}}
-          resizeMode="cover"
-        />
-      )}
-      <Text style={styles.text}>Hello {user.displayName}</Text>
-    </View>
+    <>
+      <View style={styles.block}>
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: '#6200ee',
+          }}
+        >
+          <Tab.Screen 
+            name="Home"
+            component={HomeStack}
+            options={{
+              tabBarIcon: ({color}) => <Icon name="home" color={color} size={24} />
+            }}
+          />
+          <Tab.Screen 
+            name="MyProfileStack"
+            component={MyProfileStack}
+            options={{
+              tabBarIcon: ({color}) => <Icon name="person" color={color} size={24} />
+            }}
+          />
+        </Tab.Navigator>
+      </View>
+      <CameraButton />
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   block: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 24,
-  },
+    zIndex: 0,
+  }
 });
 
 export default MainTab;
