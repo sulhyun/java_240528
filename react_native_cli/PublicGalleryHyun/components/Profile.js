@@ -4,8 +4,6 @@ import { ActivityIndicator, FlatList, StyleSheet, Text, View, RefreshControl } f
 import Avatar from "./Avatar";
 import PostGridItem from './PostGridItem';
 import usePosts from "../hooks/usePosts";
-import { useUserContext } from "../contexts/UserContext";
-import events from "../lib/events";
 
 function Profile({userId}) {
   const [user, setUser] = useState(null);
@@ -14,6 +12,7 @@ function Profile({userId}) {
   useEffect(() => {
     getUser(userId).then(setUser);
   }, [userId]);
+
   if(!user || !posts) {
     return(
       <ActivityIndicator style={styles.spinner} size={32} color='#6200ee' />
