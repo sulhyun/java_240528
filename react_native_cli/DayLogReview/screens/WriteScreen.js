@@ -1,11 +1,13 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-function WriteScreen({route}) {
+function WriteScreen() {
   return(
-    <View>
-      <Text>Write {route.params.name}</Text>
-    </View>
+    <View style={styles.block}></View>
   );
 };
+
+const styles = StyleSheet.create({
+  block: {},
+});
 
 export default WriteScreen;

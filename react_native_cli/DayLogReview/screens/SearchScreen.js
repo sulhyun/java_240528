@@ -1,11 +1,13 @@
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 function SearchScreen() {
   return(
-    <View>
-      <Text>Search</Text>
-    </View>
+    <View style={Styles.block}></View>
   );
 };
+
+const Styles = StyleSheet.create({
+  block: {},
+});
 
 export default SearchScreen;
