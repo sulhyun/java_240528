@@ -1,8 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import WriteHeader from "../components/WriteHeader";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 function WriteScreen() {
   return(
-    <View style={styles.block}></View>
+    <SafeAreaView>
+      <View style={styles.block}>
+        <WriteHeader />
+      </View>
+    </SafeAreaView>
   );
 };
 

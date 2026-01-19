@@ -5,7 +5,6 @@ import WriteScreen from "./WriteScreen";
 const Stack = createNativeStackNavigator();
 
 function RootStack() {
-
   return(
     <Stack.Navigator>
       <Stack.Screen 
