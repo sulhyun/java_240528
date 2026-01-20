@@ -1,45 +1,24 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import TransparentCircleButton from './TransparentCircleButton';
 
-function WriteHeader() {
+function WriteHeader({onSave}) {
   const navigation = useNavigation();
 
   const onGoBack = () => {
     navigation.pop();
-  }
+  };
   return(
     <View style={styles.block}>
-      <View style={styles.iconButtonWrapper}>
-        <Pressable
-          style={styles.iconButton}
-          onPress={onGoBack}
-          android_ripple={{color: '#ededed'}}
-        >
-          <Icon name="arrow-back" size={24} color="#424242" />
-        </Pressable>
-      </View>
+      <TransparentCircleButton name="arrow-back" color="#424242" onPress={onGoBack} />
       <View style={styles.buttons}>
-        <View style={[styles.iconButtonWrapper, styles.marginRight]}>
-          <Pressable
-            style={styles.iconButton}
-            android_ripple={{color: '#ededed'}}
-          >
-            <Icon name="delete-forever" size={24} color="#424242" />
-          </Pressable>
-        </View>
-        <View style={styles.iconButtonWrapper}>
-          <Pressable
-            style={styles.iconButton}
-            android_ripple={{color: '#ededed'}}
-          >
-            <Icon name="check" size={24} color="#424242" />
-          </Pressable>
-        </View>
+        <TransparentCircleButton name="delete-forever" color="#ef5350" hasMarginRight />        
+        <TransparentCircleButton name="check" color="#009688" onPress={onSave} />
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   block: {
@@ -49,25 +28,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  iconButtonWrapper: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-  iconButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-  },
   buttons: {
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  marginRight: {
-    marginRight: 8,
   },
 });
 

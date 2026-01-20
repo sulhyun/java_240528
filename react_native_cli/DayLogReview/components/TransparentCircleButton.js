@@ -1,15 +1,19 @@
 import React from "react";
-import { StyleSheet, View, Pressable } from "react-native";
+import { StyleSheet, View, Pressable, Platform } from "react-native";
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function TransparentCircleButton({name, color, hasMarginRight, onPress}) {
-
   return(
-    <View style={[styles.iconButtonWrapper, styles.marginRight]}>
+    <View style={[styles.iconButtonWrapper, hasMarginRight && styles.marginRight]}>
       <Pressable
-        style={styles.iconButton}
+        style={({pressed}) => [
+          styles.iconButton,
+          Platform.OS === 'ios' && pressed && {backgroundColor: '#efefef'}
+        ]}
         android_ripple={{color: '#ededed'}}
+        onPress={onPress}
       >
-        <Icon name="delete-forever" size={24} color="#424242" />
+        <Icon name={name} size={24} color={color} />
       </Pressable>
     </View>
   );
