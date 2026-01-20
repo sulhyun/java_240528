@@ -17,7 +17,7 @@ function FloatingWriteButton({hidden}) {
       toValue: hidden ? 1 : 0,
       useNativeDriver: true,
     }).start();
-  }, [animation, hidden])
+  }, [animation, hidden]);
 
   return(
     <Animated.View 
