@@ -12,6 +12,7 @@ function WriteScreen({route}) {
   const [body, setBody] = useState(log?.body ?? "");
   const {onCreate, onModify, onRemove} = useContext(LogContext);
   const navigation = useNavigation();
+  const [date, setDate] = useState(log ? new Date(log.date) : new Date());
   
   const onSave = () => {
     if(log) {
@@ -19,13 +20,13 @@ function WriteScreen({route}) {
         id: log.id,
         title,
         body,
-        date: log.date,  
+        date: date.toISOString(),  
       });
     } else {
       onCreate({
         title,
         body,
-        date: new Date().toISOString(),
+        date: date.toISOString(),
       });
     }
     navigation.pop();
@@ -60,7 +61,13 @@ function WriteScreen({route}) {
         style={styles.avoidingView}
         behavior={Platform.select({ios: 'padding'})}
       >
-        <WriteHeader onSave={onSave} onDelete={onDelete} isEditing={!!log}/>
+        <WriteHeader 
+          onSave={onSave} 
+          onDelete={onDelete} 
+          isEditing={!!log}
+          date={date}
+          onChangeDate={setDate}
+        />
         <WriteEditor 
           title={title} 
           body={body} 

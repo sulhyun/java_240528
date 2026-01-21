@@ -1,19 +1,12 @@
-import { createContext, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import logsStorage from '../storages/logsStorage';
 
 const LogContext = createContext();
 
 export function LogContextProvider({children}) {
-  const [logs, setLogs] = useState(
-    Array.from({length: 10})
-      .map((_, index) => ({
-        id: uuidv4(),
-        title: `Log ${index}`,
-        body: `log ${index}`,
-        date: new Date().toISOString(),
-      }))
-      .reverse(),
-  ); // 테스트 하기 위해 배열 초기화
+  const [logs, setLogs] = useState([]);
+  const initialLogsRef = useRef(null);
 
   const onCreate = ({title, body, date}) => {
     const log = {
@@ -34,6 +27,25 @@ export function LogContextProvider({children}) {
     const list = logs.filter((log) => log.id !== id);
     setLogs(list);
   } // 삭제
+
+  useEffect(() => {
+    const save = async () => {
+      const savedLogs = await logsStorage.get();
+      if(savedLogs) {
+        initialLogsRef.current = savedLogs;
+        setLogs(savedLogs);
+      }
+    }
+    save();
+  }, []);
+  
+  useEffect(() => {
+    if(logs === initialLogsRef.current) {
+      return;
+    }
+    logsStorage.set(logs);
+  }, [logs]);
+  
   return(
     <LogContext.Provider value={{logs, onCreate, onModify, onRemove}}>
       {children}
