@@ -1,24 +1,58 @@
 import React, { useContext, useState } from "react";
-import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
+import { Alert, KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import WriteHeader from "../components/WriteHeader";
 import WriteEditor from "../components/WirteEditor";
 import LogContext from "../contexts/LogContext";
 import { useNavigation } from "@react-navigation/native";
 
-function WriteScreen() {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const {onCreate} = useContext(LogContext);
+function WriteScreen({route}) {
+  const log = route.params?.log;
+  const [title, setTitle] = useState(log?.title ?? "");
+  const [body, setBody] = useState(log?.body ?? "");
+  const {onCreate, onModify, onRemove} = useContext(LogContext);
   const navigation = useNavigation();
-
+  
   const onSave = () => {
-    onCreate({
-      title,
-      body,
-      date: new Date().toISOString(),
-    });
+    if(log) {
+      onModify({
+        id: log.id,
+        title,
+        body,
+        date: log.date,  
+      });
+    } else {
+      onCreate({
+        title,
+        body,
+        date: new Date().toISOString(),
+      });
+    }
     navigation.pop();
+  }; // 로그 객체가 있다면 수정 없다면 추가
+
+  const onDelete = () => {
+    Alert.alert(
+      '삭제',
+      '정말로 삭제하시겠어요?',
+      [
+        {
+          text: '취소',
+          style: 'cancel',
+        },
+        {
+          text: '삭제',
+          onPress: () => {
+            onRemove(log?.id);
+            navigation.pop();
+          },
+          style: 'destructive',
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
   };
   return(
     <SafeAreaView style={styles.block}>
@@ -26,9 +60,9 @@ function WriteScreen() {
         style={styles.avoidingView}
         behavior={Platform.select({ios: 'padding'})}
       >
-        <WriteHeader onSave={onSave} />
+        <WriteHeader onSave={onSave} onDelete={onDelete} isEditing={!!log}/>
         <WriteEditor 
-          titie={title} 
+          title={title} 
           body={body} 
           onChangeTitle={setTitle} 
           onChangeBody={setBody} 
