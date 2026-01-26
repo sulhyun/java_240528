@@ -32,5 +32,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: 'white',
   },
-})
+});
+
 export default DateHead;
