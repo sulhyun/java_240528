@@ -1,18 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Keyboard, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 
-function AppTodo() {
+function AppTodo({onInsert, onUpdate, edit}) {
   const [text, setText] = useState('');
 
+  useEffect(() => {
+    if(edit) {
+      setText(edit.text);
+    }
+  }, [edit]);
+
   const onPress = () => {
+    if(edit) {
+      onUpdate(edit.id, text);
+    } else {
+      onInsert(text);
+    }
     setText('');
     Keyboard.dismiss();
-  }
+  };
   return(
     <View style={styles.block}>
       <TextInput 
         style={styles.input} 
-        placeholder="할일을 입력하세요..." 
+        placeholder={edit ? '할일을 수정하세요...' : "할일을 입력하세요..."} 
         value={text}
         onChangeText={setText}
         onSubmitEditing={onPress}
@@ -53,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AppTodo
+export default AppTodo;
