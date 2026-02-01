@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAvoidingView, Platform, StyleSheet } from "react-native";
 import DateHead from './components/DateHead';
 import AppTodo from './components/AppTodo';
 import Empty from './components/Empty';
 import TodoList from './components/TodoList';
+import todosStorage from "./storages/todosStorage";
 
 function App() {
   const today = new Date();
   const [edit, setEdit] = useState(null);
-  const [todos, setTodos] = useState([
-    {id: 1, text: '작업환경 설정', done: true},
-    {id: 2, text: '리액트 네이티브 기초 공부', done: false},
-    {id: 3, text: '투두 리스트 만들어보기', done: false},
-  ]);
+  const [todos, setTodos] = useState([]);
+
+  // 불러오기
+  useEffect(() => {
+    todosStorage
+      .get()
+      .then(setTodos)
+      .catch(console.error);
+  }, []);
+
+  // 저장하기
+  useEffect(() => {
+    todosStorage
+      .set(todos)
+      .catch(console.error);
+  }, [todos]);
   
   const onInsert = text => {
     // 새로 등록할 항목의 id를 구합니다.
