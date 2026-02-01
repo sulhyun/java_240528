@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.reactnative5"
+    namespace "com.daylog1"
     defaultConfig {
-        applicationId "com.reactnative5"
+        applicationId "com.daylog1"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -117,9 +117,3 @@ dependencies {
         implementation jscFlavor
     }
 }
-
-project.ext.vectoricons = [
-  iconFontNames: ['MaterialIcons.ttf']
-]
-
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
