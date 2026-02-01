@@ -5,6 +5,7 @@
 // 4-1. @react-navigation/native-stack
 
 import React from "react";
+
 // 2. 라이브러리 적용
 import { NavigationContainer } from "@react-navigation/native";
 
