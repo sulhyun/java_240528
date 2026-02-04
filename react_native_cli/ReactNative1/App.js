@@ -17,8 +17,8 @@ function App() {
       {/* <Counter /> */}
       {/* <UuidEx /> */}
       {/* <DateFnsEx /> */}
-      {/* <AnimationEx1 /> */}
-      {/* <AnimationEx2 /> */}
+      <AnimationEx1 />
+      <AnimationEx2 />
       <AnimationEx3 />
     </SafeAreaView>
   );
