@@ -3,12 +3,12 @@ package kr.kh.boot2.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.boot2.domain.Member;
 import kr.kh.boot2.repository.MemberRepository;
 
-@Service
 public class MemberService {
 	
 	private final MemberRepository memberRepository;

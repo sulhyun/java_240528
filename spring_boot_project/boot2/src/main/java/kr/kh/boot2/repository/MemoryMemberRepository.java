@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import kr.kh.boot2.domain.Member;
 
-// 동시성 문제가 고려되어 있지 않음, 실무에서는 ConcurrentHashMap, AtomicLong 사용 고려
 public class MemoryMemberRepository implements MemberRepository {
 	
+	// 동시성 문제가 고려되어 있지 않음, 실무에서는 ConcurrentHashMap, AtomicLong 사용 고려
 	private static Map<Long, Member> store = new HashMap<Long, Member>(); 	// 회원 저장소
 	private static long sequence = 0L;										// 회원 ID
 	
