@@ -23,9 +23,17 @@ public class MemberService {
 	 * 회원가입 
 	 */
 	public Long join(Member member) {
-		validateDuplicateMember(member);
-		memberRepository.save(member);
-		return member.getId();
+		long start = System.currentTimeMillis();
+		
+		try {
+			validateDuplicateMember(member);
+			memberRepository.save(member);
+			return member.getId();
+		} finally {
+			long finish = System.currentTimeMillis();
+			long timeMs = finish - start;
+			System.out.println("join = " + timeMs + "ms");
+		}
 	}
 
 	/**
@@ -42,7 +50,15 @@ public class MemberService {
 	 * 전체 회원 조회
 	 */
 	public List<Member> findMembers() {
-		return 	memberRepository.findAll();
+		long start = System.currentTimeMillis();
+		
+		try {
+			return 	memberRepository.findAll();
+		} finally {
+			long finish = System.currentTimeMillis();
+			long timeMs = finish - start;
+			System.out.println("findMembers = " + timeMs + "ms");
+		}
 	}
 	
 	/**
