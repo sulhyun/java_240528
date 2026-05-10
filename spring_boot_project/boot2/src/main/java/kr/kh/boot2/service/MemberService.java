@@ -5,10 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.kh.boot2.domain.Member;
 import kr.kh.boot2.repository.MemberRepository;
 
+@Transactional
 public class MemberService {
 	
 	private final MemberRepository memberRepository;
