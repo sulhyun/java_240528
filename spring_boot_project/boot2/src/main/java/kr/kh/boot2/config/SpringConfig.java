@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import jakarta.persistence.EntityManager;
+import kr.kh.boot2.aop.TimeTraceAop;
 import kr.kh.boot2.repository.JdbcMemberRepository;
 import kr.kh.boot2.repository.JdbcTemplateMemberRepositrory;
 import kr.kh.boot2.repository.JpaMemberRepository;
