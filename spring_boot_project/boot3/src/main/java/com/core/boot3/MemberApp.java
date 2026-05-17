@@ -1,16 +1,21 @@
 package com.core.boot3;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import com.core.boot3.member.domain.Grade;
 import com.core.boot3.member.domain.Member;
-import com.core.boot3.member.repository.MemoryMemberRepository;
 import com.core.boot3.member.service.MemberService;
-import com.core.boot3.member.service.MemberServiceImpl;
 
 public class MemberApp {
 
 	public static void main(String[] args) {
+		// AppConfig appConfig = new AppConfig();
+		// MemberService memberService = appConfig.memberService();
 		
-		MemberService memberService = new MemberServiceImpl(new MemoryMemberRepository());
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+		MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+		
 		Member member = new Member(1L, "MemberA", Grade.VIP);
 		memberService.join(member);
 		
