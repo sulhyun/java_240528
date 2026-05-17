@@ -1,18 +1,20 @@
 package com.core.boot3;
 
+import com.core.boot3.discount.RateDiscountPolicy;
 import com.core.boot3.member.domain.Grade;
 import com.core.boot3.member.domain.Member;
+import com.core.boot3.member.repository.MemoryMemberRepository;
 import com.core.boot3.member.service.MemberService;
 import com.core.boot3.member.service.MemberServiceImpl;
-import com.core.boot3.order.Order;
+import com.core.boot3.order.domain.Order;
 import com.core.boot3.order.service.OrderService;
 import com.core.boot3.order.service.OrderServiceImpl;
 
 public class OrderApp {
 
 	public static void main(String[] args) {
-		MemberService memberService = new MemberServiceImpl();
-		OrderService orderService =  new OrderServiceImpl();
+		MemberService memberService = new MemberServiceImpl(new MemoryMemberRepository());
+		OrderService orderService =  new OrderServiceImpl(new MemoryMemberRepository(), new RateDiscountPolicy());
 		
 		Long memberId = 1L;
 		Member member = new Member(memberId, "memberA", Grade.VIP);

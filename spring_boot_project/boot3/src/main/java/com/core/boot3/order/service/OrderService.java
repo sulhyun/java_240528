@@ -1,6 +1,6 @@
 package com.core.boot3.order.service;
 
-import com.core.boot3.order.Order;
+import com.core.boot3.order.domain.Order;
 
 public interface OrderService {
 

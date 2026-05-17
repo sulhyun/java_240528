@@ -1,4 +1,4 @@
-package com.core.boot3.order;
+package com.core.boot3.order.domain;
 
 public class Order {
 

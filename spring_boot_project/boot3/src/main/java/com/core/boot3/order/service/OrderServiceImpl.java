@@ -1,16 +1,19 @@
 package com.core.boot3.order.service;
 
 import com.core.boot3.discount.DiscountPolicy;
-import com.core.boot3.discount.FixDiscountPolicy;
 import com.core.boot3.member.domain.Member;
 import com.core.boot3.member.repository.MemberRepository;
-import com.core.boot3.member.repository.MemoryMemberRepository;
-import com.core.boot3.order.Order;
+import com.core.boot3.order.domain.Order;
 
 public class OrderServiceImpl implements OrderService {
 
-	private final MemberRepository memberRepository = new MemoryMemberRepository();
-	private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+	private final MemberRepository memberRepository;
+	private final DiscountPolicy discountPolicy;
+	
+	public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+		this.memberRepository = memberRepository;
+		this.discountPolicy = discountPolicy;
+	}
 	
 	@Override
 	public Order createOrder(Long memberId, String itemName, int itemPrice) {
