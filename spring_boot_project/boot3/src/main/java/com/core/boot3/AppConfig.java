@@ -14,7 +14,7 @@ import com.core.boot3.order.service.OrderServiceImpl;
 
 @Configuration
 public class AppConfig {
-
+	
 	@Bean
 	public MemberService memberService() {
 		return new MemberServiceImpl(memberRepository());
@@ -35,4 +35,5 @@ public class AppConfig {
 		// return new FixDiscountPolicy();
 		return new RateDiscountPolicy();
 	}
+	
 }
