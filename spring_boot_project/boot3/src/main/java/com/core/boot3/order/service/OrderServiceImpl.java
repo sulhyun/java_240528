@@ -1,6 +1,5 @@
 package com.core.boot3.order.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.core.boot3.discount.DiscountPolicy;
@@ -8,17 +7,14 @@ import com.core.boot3.member.domain.Member;
 import com.core.boot3.member.repository.MemberRepository;
 import com.core.boot3.order.domain.Order;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-	private MemberRepository memberRepository;
-	private DiscountPolicy discountPolicy;
-	
-	@Autowired
-	public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-		this.memberRepository = memberRepository;
-		this.discountPolicy = discountPolicy;
-	}
+	private final MemberRepository memberRepository;
+	private final DiscountPolicy discountPolicy;
 	
 	@Override
 	public Order createOrder(Long memberId, String itemName, int itemPrice) {
