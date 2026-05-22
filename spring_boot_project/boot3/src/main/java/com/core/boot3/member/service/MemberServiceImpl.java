@@ -1,21 +1,18 @@
 package com.core.boot3.member.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.core.boot3.member.domain.Member;
 import com.core.boot3.member.repository.MemberRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 	
 	private final MemberRepository memberRepository;
-	
-	@Autowired
-	public MemberServiceImpl(MemberRepository memberRepository) {
-		this.memberRepository = memberRepository;
-	}
-	
+
 	@Override
 	public void join(Member member) {
 		memberRepository.save(member);
