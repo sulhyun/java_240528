@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "memberListServlet", urlPatterns = "/members")
+@WebServlet(name = "memberListServlet", urlPatterns = "/servlet/members/list")
 public class MemberListServlet extends HttpServlet {
 
 	private MemberRepository memberRepository = MemberRepository.getInstance();

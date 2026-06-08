@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "MemberSaveServlet", urlPatterns = "/members/save")
+@WebServlet(name = "MemberSaveServlet", urlPatterns = "/servlet/members/save")
 public class MemberSaveServlet extends HttpServlet {
 
 	private MemberRepository memberRepository = MemberRepository.getInstance();
@@ -37,7 +37,7 @@ public class MemberSaveServlet extends HttpServlet {
 			"	<meta charset=\"UTF-8\">\n" +
 			"</head>\n" +
 			"<body>\n" +
-			"	성공\n" +
+			"   성공\n" +
 			"	<ul>\n" +
 			"		<li>id="+member.getId()+"</li>\n" +
 			" 		<li>username="+member.getUsername()+"</li>\n" +

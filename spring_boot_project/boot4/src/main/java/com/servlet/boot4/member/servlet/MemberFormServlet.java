@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "memberFormServlet", urlPatterns = "/members/form")
+@WebServlet(name = "memberFormServlet", urlPatterns = "/servlet/members/form")
 public class MemberFormServlet extends HttpServlet {
 
 	@Override
@@ -26,7 +26,7 @@ public class MemberFormServlet extends HttpServlet {
 			" 	<title>Title</title>\n" +
 			"</head>\n" +
 			"<body>\n" +
-			"	<form action=\"/members/save\" method=\"post\">\n" +
+			"	<form action=\"/servlet/members/save\" method=\"post\">\n" +
 			" 		username: <input type=\"text\" name=\"username\" />\n" +
 			" 		age: <input type=\"text\" name=\"age\" />\n" +
 			" 		<button type=\"submit\">전송</button>\n" +
