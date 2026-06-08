@@ -7,10 +7,8 @@
 </head>
 <body>
 	<form action="/jsp/members/save.jsp" method="post">
-		<label for="username">username: </label>
-		<input type="text" name="username" id="username" />
-		<label for="age">age: </label>
-		<input type="text" name="age"  id="age" />
+		username: <input type="text" name="username" />
+		age:	  <input type="text" name="age" />
 		<button type="submit">전송</button>
 	</form>
 </body>

@@ -20,7 +20,7 @@
 	<title>Title</title>
 </head>
 <body>
-	<p>성공</p>
+	성공
 	<ul>
 		<li>id = <%=member.getId()%></li>
 		<li>username = <%=member.getUsername()%></li>
