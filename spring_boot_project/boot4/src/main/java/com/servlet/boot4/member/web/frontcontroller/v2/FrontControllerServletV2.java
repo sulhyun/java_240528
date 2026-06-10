@@ -1,10 +1,10 @@
-package com.servlet.boot4.member.frontcontroller.v2;
+package com.servlet.boot4.member.web.frontcontroller.v2;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.servlet.boot4.member.frontcontroller.MyView;
+import com.servlet.boot4.member.web.frontcontroller.MyView;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

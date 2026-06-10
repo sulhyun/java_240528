@@ -1,6 +1,7 @@
-package com.servlet.boot4.member.frontcontroller.v1;
+package com.servlet.boot4.member.web.frontcontroller.v1;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.servlet.boot4.member.domain.Member;
 import com.servlet.boot4.member.repository.MemberRepository;
@@ -10,21 +11,17 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class MemberSaveControllerV1 implements ControllerV1 {
+public class MemberListControllerV1 implements ControllerV1{
 
 	private MemberRepository memberRepository = MemberRepository.getInstance();
 	
 	@Override
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		int age = Integer.parseInt(request.getParameter("age"));
+		List<Member> members = memberRepository.findAll();
 		
-		Member member = new Member(username, age);
-		memberRepository.save(member);
+		request.setAttribute("members", members);
 		
-		request.setAttribute("member", member);
-		
-		String viewPath = "/WEB-INF/views/save.jsp";
+		String viewPath = "/WEB-INF/views/list.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
 		dispatcher.forward(request, response);
 	}

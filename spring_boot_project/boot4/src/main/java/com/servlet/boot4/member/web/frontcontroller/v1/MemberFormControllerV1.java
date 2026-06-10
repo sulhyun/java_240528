@@ -1,4 +1,4 @@
-package com.servlet.boot4.member.frontcontroller.v1;
+package com.servlet.boot4.member.web.frontcontroller.v1;
 
 import java.io.IOException;
 
