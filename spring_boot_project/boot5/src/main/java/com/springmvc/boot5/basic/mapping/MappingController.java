@@ -1,4 +1,4 @@
-package com.springmvc.boot5.basic;
+package com.springmvc.boot5.basic.mapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
