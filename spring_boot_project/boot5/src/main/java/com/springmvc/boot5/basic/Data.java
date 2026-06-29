@@ -1,0 +1,14 @@
+package com.springmvc.boot5.basic;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter
+@RequiredArgsConstructor
+public class Data {
+
+	private String username;
+	private int age;
+	
+}
