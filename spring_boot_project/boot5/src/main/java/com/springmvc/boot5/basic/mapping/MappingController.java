@@ -46,11 +46,11 @@ public class MappingController {
 	
 	/**
 	 * PathVariable 사용
-	 * 변수명이 같으면 생략 가능 (스프링 3.2 부터는 안됨)
+	 * 변수명이 같으면 생략 가능 
 	 * @PathVariable("userId") String userId -> @Pathvariable String userId
 	 */
 	@GetMapping("/mapping/{userId}")
-	public String mappingPath(@PathVariable("userId") String userId) {
+	public String mappingPath(@PathVariable String userId) {
 		log.info("--- Mapping Path ---");
 		log.info("userId: {}", userId);
 		return "ok";
@@ -58,11 +58,11 @@ public class MappingController {
 	
 	/**
 	 * PathVariable 사용 다중
-	 * 변수명이 같으면 생략 가능 (스프링 3.2 부터는 안됨)
+	 * 변수명이 같으면 생략 가능
 	 * @PathVariable("userId") String userId -> @Pathvariable String userId
 	 */
 	@GetMapping("/mapping/users/{userId}/orders/{orderId}")
-	public String mappingPath(@PathVariable("userId") String userId, @PathVariable("orderId") long orderId) {
+	public String mappingPath(@PathVariable String userId, @PathVariable long orderId) {
 		log.info("--- Mapping Path ---");
 		log.info("userId: {}, orderId: {}", userId, orderId);
 		return "ok";
