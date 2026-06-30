@@ -3,7 +3,9 @@ package com.springmvc.boot5.basic;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 public class Data {
