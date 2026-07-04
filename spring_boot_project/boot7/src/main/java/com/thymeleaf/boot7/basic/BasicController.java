@@ -21,16 +21,16 @@ import lombok.Data;
 @RequestMapping("/basic")
 public class BasicController {
 
-	@GetMapping("/text-basic")
+	@GetMapping("/text")
 	public String textBasic(Model model) {
 		model.addAttribute("data", "<b>Hello Spring!</b>");
-		return "basic/text-basic";
+		return "basic/text";
 	}
 	
-	@GetMapping("/utext-basic")
+	@GetMapping("/utext")
 	public String utextBasic(Model model) {
 		model.addAttribute("data", "<b>Hello Spring!</b>");
-		return "basic/utext-basic";
+		return "basic/utext";
 	}
 	
 	@GetMapping("/variable")
@@ -87,6 +87,11 @@ public class BasicController {
 		model.addAttribute("nullData", null);
 		model.addAttribute("data", "spring");
 		return "basic/operation";
+	}
+	
+	@GetMapping("/attribute")
+	public String attribute() {
+		return "basic/attribute";
 	}
 	
 	@Component("bean")
