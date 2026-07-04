@@ -76,6 +76,12 @@ public class BasicController {
 		return "basic/link";
 	}
 	
+	@GetMapping("/literal")
+	public String literal(Model model) {
+		model.addAttribute("data", "spring!");
+		return "basic/literal";
+	}
+	
 	@Component("bean")
 	static class Bean {
 		
