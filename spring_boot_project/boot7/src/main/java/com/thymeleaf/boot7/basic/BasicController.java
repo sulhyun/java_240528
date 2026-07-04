@@ -63,6 +63,12 @@ public class BasicController {
 		return "basic/objects";
 	}
 	
+	@GetMapping("/date")
+	public String date(Model model) {
+		model.addAttribute("localDateTime", LocalDateTime.now());
+		return "basic/date";
+	}
+	
 	@Component("bean")
 	static class Bean {
 		
