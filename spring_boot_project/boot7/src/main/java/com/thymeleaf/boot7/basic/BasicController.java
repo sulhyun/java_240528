@@ -1,15 +1,20 @@
 package com.thymeleaf.boot7.basic;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 @Controller
@@ -46,6 +51,25 @@ public class BasicController {
 		model.addAttribute("map", map);
 		
 		return "basic/variable";
+	}
+	
+	@GetMapping("/objects")
+	public String objects(Model model, HttpSession session, 
+			HttpServletRequest request, HttpServletResponse response) {
+		session.setAttribute("sessionData", "Hello Session");
+		model.addAttribute("request", request);
+		model.addAttribute("response", response);
+		model.addAttribute("servletContext", request.getServletContext());
+		return "basic/objects";
+	}
+	
+	@Component("bean")
+	static class Bean {
+		
+		public String beanData(String data) {
+			return "Hello " + data;
+		}
+		
 	}
 	
 	@Data
