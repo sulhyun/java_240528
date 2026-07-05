@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.boot8.domain.Item;
+import com.springmvc.boot8.domain.ItemType;
 import com.springmvc.boot8.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,20 @@ import lombok.extern.slf4j.Slf4j;
 public class FormItemController {
 
     private final ItemRepository itemRepository;
+	
+	@ModelAttribute("regions")
+	public Map<String, String> regions() {
+		Map<String, String> regions = new LinkedHashMap<>();
+		regions.put("SEOUL", "서울");
+		regions.put("BUSAN", "부산");
+		regions.put("JEJU", "제주");
+		return regions;
+	}
+	
+	@ModelAttribute("itemTypes")
+	public ItemType[] itemTypes() {
+		return ItemType.values();
+	}
 
     @GetMapping
     public String items(Model model) {
@@ -37,6 +52,7 @@ public class FormItemController {
     @GetMapping("/{itemId}")
     public String item(@PathVariable long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
+        log.info("Item Detail: {}", item);
         model.addAttribute("item", item);
         return "form/item";
     }
@@ -49,8 +65,9 @@ public class FormItemController {
 
     @PostMapping("/add")
     public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
-        Item savedItem = itemRepository.save(item);
-        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        Item saveItem = itemRepository.save(item);
+        log.info("Item Add Form Data: {}", saveItem);
+        redirectAttributes.addAttribute("itemId", saveItem.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/form/items/{itemId}";
     }
@@ -65,6 +82,7 @@ public class FormItemController {
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
         itemRepository.update(itemId, item);
+        log.info("Item Update Form Data: {}", item);
         return "redirect:/form/items/{itemId}";
     }
     
@@ -75,14 +93,5 @@ public class FormItemController {
 		model.addAttribute("items", items);
 		return "redirect:/form/items";
 	}
-	
-	@ModelAttribute("regions")
-	public Map<String, String> regions() {
-		Map<String, String> regions = new LinkedHashMap<>();
-		regions.put("SEOUL", "서울");
-		regions.put("BUSAN", "부산");
-		regions.put("JEJU", "제주");
-		return regions;
-	}
-    
+
 }
