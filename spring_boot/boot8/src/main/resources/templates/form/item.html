@@ -42,6 +42,12 @@
 	                    type="button">상품 수정</button>
 	        </div>
 	        <div class="col">
+				<button class="w-100 btn btn-danger btn-lg" 
+						onclick="location.href='items.html'" 
+						th:onclick="|location.href='@{/form/items/{itemId}/delete(itemId=${item.id})}'|"
+						type="button">상품 삭제</button>
+			</div>
+	        <div class="col">
 	            <button class="w-100 btn btn-secondary btn-lg"
 	                    onclick="location.href='items.html'"
 	                    th:onclick="|location.href='@{/form/items}'|"

@@ -38,7 +38,8 @@ public class FormItemController {
     }
 
     @GetMapping("/add")
-    public String addForm() {
+    public String addForm(Model model) {
+    	model.addAttribute("item", new Item());
         return "form/addForm";
     }
 
@@ -62,5 +63,13 @@ public class FormItemController {
         itemRepository.update(itemId, item);
         return "redirect:/form/items/{itemId}";
     }
+    
+	@GetMapping("/{itemId}/delete")
+	public String delete(@PathVariable long itemId, Model model) {
+		itemRepository.delete(itemId);
+		List<Item> items = itemRepository.findAll();
+		model.addAttribute("items", items);
+		return "redirect:/form/items";
+	}
     
 }
