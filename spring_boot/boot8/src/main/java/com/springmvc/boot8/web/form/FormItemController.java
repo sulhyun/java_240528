@@ -1,6 +1,8 @@
 package com.springmvc.boot8.web.form;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,6 +74,15 @@ public class FormItemController {
 		List<Item> items = itemRepository.findAll();
 		model.addAttribute("items", items);
 		return "redirect:/form/items";
+	}
+	
+	@ModelAttribute("regions")
+	public Map<String, String> regions() {
+		Map<String, String> regions = new LinkedHashMap<>();
+		regions.put("SEOUL", "서울");
+		regions.put("BUSAN", "부산");
+		regions.put("JEJU", "제주");
+		return regions;
 	}
     
 }
