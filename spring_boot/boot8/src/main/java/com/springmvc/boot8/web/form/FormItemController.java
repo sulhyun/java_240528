@@ -15,7 +15,9 @@ import com.springmvc.boot8.domain.Item;
 import com.springmvc.boot8.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/form/items")
 @RequiredArgsConstructor
