@@ -1,4 +1,4 @@
-package com.springmvc.boot8.web.form;
+package com.springmvc.boot8.web.item;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/form/items")
 @RequiredArgsConstructor
-public class FormItemController {
+public class ItemController {
 
     private final ItemRepository itemRepository;
 	
