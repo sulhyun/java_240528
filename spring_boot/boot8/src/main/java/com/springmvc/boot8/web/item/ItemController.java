@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/form/items")
+@RequestMapping("/item/items")
 @RequiredArgsConstructor
 public class ItemController {
 
@@ -57,7 +57,7 @@ public class ItemController {
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        return "form/items";
+        return "item/items";
     }
 
     @GetMapping("/{itemId}")
@@ -65,13 +65,13 @@ public class ItemController {
         Item item = itemRepository.findById(itemId);
         log.info("Item Detail: {}", item);
         model.addAttribute("item", item);
-        return "form/item";
+        return "item/item";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
     	model.addAttribute("item", new Item());
-        return "form/addForm";
+        return "item/addForm";
     }
 
     @PostMapping("/add")
@@ -80,21 +80,21 @@ public class ItemController {
         log.info("Item Add Form Data: {}", saveItem);
         redirectAttributes.addAttribute("itemId", saveItem.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/form/items/{itemId}";
+        return "redirect:/item/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "form/editForm";
+        return "item/editForm";
     }
 
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
         itemRepository.update(itemId, item);
         log.info("Item Update Form Data: {}", item);
-        return "redirect:/form/items/{itemId}";
+        return "redirect:/item/items/{itemId}";
     }
     
 	@GetMapping("/{itemId}/delete")
@@ -102,7 +102,7 @@ public class ItemController {
 		itemRepository.delete(itemId);
 		List<Item> items = itemRepository.findAll();
 		model.addAttribute("items", items);
-		return "redirect:/form/items";
+		return "redirect:/item/items";
 	}
 
 }
