@@ -1,9 +1,13 @@
 package com.springmvc.boot8.web.validation;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.boot8.domain.Item;
+import com.springmvc.boot8.domain.ItemType;
 import com.springmvc.boot8.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +27,20 @@ import lombok.RequiredArgsConstructor;
 public class ValidationControllerV1 {
 
     private final ItemRepository itemRepository;
+    
+	@ModelAttribute("regions")
+	public Map<String, String> regions() {
+		Map<String, String> regions = new LinkedHashMap<>();
+		regions.put("SEOUL", "서울");
+		regions.put("BUSAN", "부산");
+		regions.put("JEJU", "제주");
+		return regions;
+	}
+	
+	@ModelAttribute("itemTypes")
+	public ItemType[] itemTypes() {
+		return ItemType.values();
+	}
 
     @GetMapping
     public String items(Model model) {
@@ -44,7 +63,35 @@ public class ValidationControllerV1 {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
+    public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes, Model model) {
+    	// 검증 오류 결과를 보관
+    	Map<String, String> errors = new HashMap<>();
+    	
+    	// 검증 로직
+    	if (!StringUtils.hasText(item.getItemName())) {
+    		errors.put("itemName", "상품 이름은 필수입니다.");
+    	}
+    	if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
+    		errors.put("price", "가격은 1,000 ~ 1,000,000 까지 허용합니다.");
+    	}
+    	if (item.getQuantity() == null || item.getQuantity() > 9999) {
+    		errors.put("quantity", "수량은 최대 9,999 까지 허용합니다.");
+    	}
+    	
+    	// 특정 필드가 아닌 복합 룰 검증
+    	if (item.getPrice() != null && item.getQuantity() != null) {
+    		int resultPrice = item.getPrice() * item.getQuantity();
+    		if (resultPrice < 10000) {
+    			errors.put("globalError", "가격 x 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice);
+    		}
+    	}
+    	
+    	// 검증이 실패하면 다시 업력 폼으로
+    	if (!errors.isEmpty()) {
+    		model.addAttribute("errors", errors);
+    		return "validation/v1/addForm";
+    	}
+    	
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
@@ -59,9 +106,45 @@ public class ValidationControllerV1 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item, Model model) {
+    	// 검증 오류 결과를 보관
+    	Map<String, String> errors = new HashMap<>();
+    	
+    	// 검증 로직
+    	if (!StringUtils.hasText(item.getItemName())) {
+    		errors.put("itemName", "상품 이름은 필수입니다.");
+    	}
+    	if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
+    		errors.put("price", "가격은 1,000 ~ 1,000,000 까지 허용합니다.");
+    	}
+    	if (item.getQuantity() == null || item.getQuantity() > 9999) {
+    		errors.put("quantity", "수량은 최대 9,999 까지 허용합니다.");
+    	}
+    	
+    	// 특정 필드가 아닌 복합 룰 검증
+    	if (item.getPrice() != null && item.getQuantity() != null) {
+    		int resultPrice = item.getPrice() * item.getQuantity();
+    		if (resultPrice < 10000) {
+    			errors.put("globalError", "가격 x 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice);
+    		}
+    	}
+    	
+    	// 검증이 실패하면 다시 업력 폼으로
+    	if (!errors.isEmpty()) {
+    		model.addAttribute("errors", errors);
+    		return "validation/v1/editForm";
+    	}
+    	
         itemRepository.update(itemId, item);
         return "redirect:/validation/v1/items/{itemId}";
     }
+    
+	@GetMapping("/{itemId}/delete")
+	public String delete(@PathVariable long itemId, Model model) {
+		itemRepository.delete(itemId);
+		List<Item> items = itemRepository.findAll();
+		model.addAttribute("items", items);
+		return "redirect:/validation/v1/items";
+	}
 
 }
