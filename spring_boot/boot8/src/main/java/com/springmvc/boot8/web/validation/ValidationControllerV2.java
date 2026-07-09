@@ -1,6 +1,5 @@
 package com.springmvc.boot8.web.validation;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +7,9 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,9 @@ import com.springmvc.boot8.domain.ItemType;
 import com.springmvc.boot8.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/validation/v2/items")
 @RequiredArgsConstructor
@@ -62,33 +66,63 @@ public class ValidationControllerV2 {
         return "validation/v2/addForm";
     }
 
-    @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes, Model model) {
-    	// 검증 오류 결과를 보관
-    	Map<String, String> errors = new HashMap<>();
-    	
+    // @PostMapping("/add")
+    public String addItemV1(@ModelAttribute Item item, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
     	// 검증 로직
     	if (!StringUtils.hasText(item.getItemName())) {
-    		errors.put("itemName", "상품 이름은 필수입니다.");
+    		bindingResult.addError(new FieldError("item", "itemName", "상품 이름은 필수입니다."));
     	}
     	if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
-    		errors.put("price", "가격은 1,000 ~ 1,000,000 까지 허용합니다.");
+    		bindingResult.addError(new FieldError("item", "price", "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
     	}
     	if (item.getQuantity() == null || item.getQuantity() > 9999) {
-    		errors.put("quantity", "수량은 최대 9,999 까지 허용합니다.");
+    		bindingResult.addError(new FieldError("item", "quantity", "수량은 최대 9,999 까지 허용합니다."));
     	}
     	
     	// 특정 필드가 아닌 복합 룰 검증
     	if (item.getPrice() != null && item.getQuantity() != null) {
     		int resultPrice = item.getPrice() * item.getQuantity();
     		if (resultPrice < 10000) {
-    			errors.put("globalError", "가격 x 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice);
+    			bindingResult.addError(new ObjectError("item", "가격 x 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
     		}
     	}
     	
     	// 검증이 실패하면 다시 업력 폼으로
-    	if (!errors.isEmpty()) {
-    		model.addAttribute("errors", errors);
+    	if (bindingResult.hasErrors()) {
+    		log.info("errors={}", bindingResult);
+    		return "validation/v2/addForm";
+    	}
+    	
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/validation/v2/items/{itemId}";
+    }
+    
+    @PostMapping("/add")
+    public String addItemV2(@ModelAttribute Item item, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+    	// 검증 로직
+    	if (!StringUtils.hasText(item.getItemName())) {
+    		bindingResult.addError(new FieldError("item", "itemName", item.getItemName(), false, null, null, "상품 이름은 필수입니다."));
+    	}
+    	if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
+    		bindingResult.addError(new FieldError("item", "price", item.getPrice(), false, null, null,  "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
+    	}
+    	if (item.getQuantity() == null || item.getQuantity() > 9999) {
+    		bindingResult.addError(new FieldError("item", "quantity", item.getQuantity(), false, null, null,  "수량은 최대 9,999 까지 허용합니다."));
+    	}
+    	
+    	// 특정 필드가 아닌 복합 룰 검증
+    	if (item.getPrice() != null && item.getQuantity() != null) {
+    		int resultPrice = item.getPrice() * item.getQuantity();
+    		if (resultPrice < 10000) {
+    			bindingResult.addError(new ObjectError("item", null, null, "가격 x 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
+    		}
+    	}
+
+    	// 검증이 실패하면 다시 업력 폼으로
+    	if (bindingResult.hasErrors()) {
+    		log.info("errors={}", bindingResult);
     		return "validation/v2/addForm";
     	}
     	
@@ -106,35 +140,7 @@ public class ValidationControllerV2 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute Item item, Model model) {
-    	// 검증 오류 결과를 보관
-    	Map<String, String> errors = new HashMap<>();
-    	
-    	// 검증 로직
-    	if (!StringUtils.hasText(item.getItemName())) {
-    		errors.put("itemName", "상품 이름은 필수입니다.");
-    	}
-    	if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
-    		errors.put("price", "가격은 1,000 ~ 1,000,000 까지 허용합니다.");
-    	}
-    	if (item.getQuantity() == null || item.getQuantity() > 9999) {
-    		errors.put("quantity", "수량은 최대 9,999 까지 허용합니다.");
-    	}
-    	
-    	// 특정 필드가 아닌 복합 룰 검증
-    	if (item.getPrice() != null && item.getQuantity() != null) {
-    		int resultPrice = item.getPrice() * item.getQuantity();
-    		if (resultPrice < 10000) {
-    			errors.put("globalError", "가격 x 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice);
-    		}
-    	}
-    	
-    	// 검증이 실패하면 다시 업력 폼으로
-    	if (!errors.isEmpty()) {
-    		model.addAttribute("errors", errors);
-    		return "validation/v2/editForm";
-    	}
-    	
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
         itemRepository.update(itemId, item);
         return "redirect:/validation/v2/items/{itemId}";
     }
