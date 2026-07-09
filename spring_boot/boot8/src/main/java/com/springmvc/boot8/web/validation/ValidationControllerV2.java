@@ -67,7 +67,7 @@ public class ValidationControllerV2 {
     }
 
     // @PostMapping("/add")
-    public String addItemV1(@ModelAttribute Item item, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+    public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     	// 검증 로직
     	if (!StringUtils.hasText(item.getItemName())) {
     		bindingResult.addError(new FieldError("item", "itemName", "상품 이름은 필수입니다."));
@@ -100,7 +100,7 @@ public class ValidationControllerV2 {
     }
     
     @PostMapping("/add")
-    public String addItemV2(@ModelAttribute Item item, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+    public String addItemV2(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     	// 검증 로직
     	if (!StringUtils.hasText(item.getItemName())) {
     		bindingResult.addError(new FieldError("item", "itemName", item.getItemName(), false, null, null, "상품 이름은 필수입니다."));
