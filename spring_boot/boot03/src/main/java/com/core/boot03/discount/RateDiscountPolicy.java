@@ -1,0 +1,24 @@
+package com.core.boot03.discount;
+
+import org.springframework.stereotype.Component;
+
+import com.core.boot03.annotation.MainDiscountPolicy;
+import com.core.boot03.member.domain.Grade;
+import com.core.boot03.member.domain.Member;
+
+@Component
+@MainDiscountPolicy
+public class RateDiscountPolicy implements DiscountPolicy {
+
+	private int discountPercent = 10;
+	
+	@Override
+	public int discount(Member member, int price) {
+		if (member.getGrade() == Grade.VIP) {
+			return price * discountPercent / 100;
+		} else {
+			return 0;
+		}
+	}
+
+}

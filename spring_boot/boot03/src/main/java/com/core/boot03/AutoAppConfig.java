@@ -1,17 +1,11 @@
 package com.core.boot03;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
-@SpringBootApplication
+@Configuration
 @ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class))
-public class Boot03Application {
-
-	public static void main(String[] args) {
-		SpringApplication.run(Boot03Application.class, args);
-	}
+public class AutoAppConfig {
 
 }
