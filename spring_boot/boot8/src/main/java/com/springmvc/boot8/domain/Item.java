@@ -11,18 +11,18 @@ import lombok.Data;
 
 @Data
 public class Item {
-	@NotNull(groups = UpdateCheck.class)
+	// @NotNull(groups = UpdateCheck.class)
     private Long id;				// 상품 ID
     
-    @NotBlank(groups = {SaveCheck.class, UpdateCheck.class})
+    // @NotBlank(groups = {SaveCheck.class, UpdateCheck.class})
     private String itemName;		// 상품명
     
-    @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
-    @Range(min = 1000, max = 10000, groups = {SaveCheck.class, UpdateCheck.class})
+    // @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
+    // @Range(min = 1000, max = 10000, groups = {SaveCheck.class, UpdateCheck.class})
     private Integer price;			// 가격
     
-    @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
-    @Max(value = 9999, groups = SaveCheck.class)
+    // @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
+    // @Max(value = 9999, groups = SaveCheck.class)
     private Integer quantity;		// 수량
     
     private Boolean open;			// 판매 여부
