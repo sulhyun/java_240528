@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.boot8.domain.Item;
+import com.springmvc.boot8.domain.SaveCheck;
+import com.springmvc.boot8.domain.UpdateCheck;
 import com.springmvc.boot8.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -47,8 +49,28 @@ public class ValidationControllerV3 {
         return "validation/v3/addForm";
     }
     
+    //@PostMapping("/add")
+    public String addItemV1(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    	if(item.getPrice() != null && item.getQuantity() != null) {
+    		int resultPrice = item.getPrice() * item.getQuantity();
+    		if(resultPrice < 10000) {
+    			bindingResult.reject("totalPriceMin", new Object[] {10000, resultPrice}, null);
+    		}
+    	}
+    	
+    	if (bindingResult.hasErrors()) {
+    		log.info("errors={}", bindingResult);
+    		return "validation/v3/addForm";
+    	}
+    	
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/validation/v3/items/{itemId}";
+    }
+    
     @PostMapping("/add")
-    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addItemV2(@Validated(SaveCheck.class) @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
     	if(item.getPrice() != null && item.getQuantity() != null) {
     		int resultPrice = item.getPrice() * item.getQuantity();
     		if(resultPrice < 10000) {
@@ -74,8 +96,26 @@ public class ValidationControllerV3 {
         return "validation/v3/editForm";
     }
 
+    // @PostMapping("/{itemId}/edit")
+    public String editV1(@PathVariable Long itemId,@Validated @ModelAttribute Item item, BindingResult bindingResult) {
+    	if(item.getPrice() != null && item.getQuantity() != null) {
+    		int resultPrice = item.getPrice() * item.getQuantity();
+    		if(resultPrice < 10000) {
+    			bindingResult.reject("totalPriceMin", new Object[] {10000, resultPrice}, null);
+    		}
+    	}
+    	
+    	if(bindingResult.hasErrors()) {
+    		log.info("errors={}", bindingResult);
+    		return "validation/v3/editForm";
+    	}
+    	
+        itemRepository.update(itemId, item);
+        return "redirect:/validation/v3/items/{itemId}";
+    }
+    
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId,@Validated @ModelAttribute Item item, BindingResult bindingResult) {
+    public String editV2(@PathVariable Long itemId, @Validated(UpdateCheck.class) @ModelAttribute Item item, BindingResult bindingResult) {
     	if(item.getPrice() != null && item.getQuantity() != null) {
     		int resultPrice = item.getPrice() * item.getQuantity();
     		if(resultPrice < 10000) {
