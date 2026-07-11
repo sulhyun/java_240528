@@ -2,14 +2,27 @@ package com.springmvc.boot8.domain;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.Range;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class Item {
 
     private Long id;				// 상품 ID
+    
+    @NotBlank
     private String itemName;		// 상품명
+    
+    @NotNull
+    @Range(min = 1000, max = 10000)
     private Integer price;			// 가격
+    
+    @NotNull
+    @Max(9999)
     private Integer quantity;		// 수량
     
     private Boolean open;			// 판매 여부
