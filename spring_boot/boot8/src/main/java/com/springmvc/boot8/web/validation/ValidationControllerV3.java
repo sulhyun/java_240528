@@ -1,19 +1,12 @@
 package com.springmvc.boot8.web.validation;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.boot8.domain.Item;
-import com.springmvc.boot8.domain.ItemType;
 import com.springmvc.boot8.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -34,20 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ValidationControllerV3 {
 
     private final ItemRepository itemRepository;
-    
-	@ModelAttribute("regions")
-	public Map<String, String> regions() {
-		Map<String, String> regions = new LinkedHashMap<>();
-		regions.put("SEOUL", "서울");
-		regions.put("BUSAN", "부산");
-		regions.put("JEJU", "제주");
-		return regions;
-	}
-	
-	@ModelAttribute("itemTypes")
-	public ItemType[] itemTypes() {
-		return ItemType.values();
-	}
 
     @GetMapping
     public String items(Model model) {

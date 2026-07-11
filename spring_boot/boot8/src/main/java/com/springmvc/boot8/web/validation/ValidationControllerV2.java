@@ -1,8 +1,6 @@
 package com.springmvc.boot8.web.validation;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.boot8.domain.Item;
-import com.springmvc.boot8.domain.ItemType;
 import com.springmvc.boot8.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -41,20 +38,6 @@ public class ValidationControllerV2 {
 	    log.info("init binder {}", dataBinder);
 	    dataBinder.addValidators(itemValidator);
     }
-    
-	@ModelAttribute("regions")
-	public Map<String, String> regions() {
-		Map<String, String> regions = new LinkedHashMap<>();
-		regions.put("SEOUL", "서울");
-		regions.put("BUSAN", "부산");
-		regions.put("JEJU", "제주");
-		return regions;
-	}
-	
-	@ModelAttribute("itemTypes")
-	public ItemType[] itemTypes() {
-		return ItemType.values();
-	}
 
     @GetMapping
     public String items(Model model) {
