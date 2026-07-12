@@ -11,6 +11,8 @@ import com.login.boot10.member.domain.Member;
 import com.login.boot10.member.dto.LoginForm;
 import com.login.boot10.member.service.LoginService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +29,8 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult) {
+	public String login(@Validated @ModelAttribute LoginForm form,
+			BindingResult bindingResult, HttpServletResponse response) {
 		if (bindingResult.hasErrors()) {
 			return "login/loginForm";
 		}
@@ -40,8 +43,10 @@ public class LoginController {
 			return "login/loginForm";
 		}
 		
-		// 로그인 성공 처리 TODO
-		
+		// 로그인 성공 처리
+		// 쿠키에 시간 정보를 주지 않으면 세션 쿠키(브라우저 종료시 모두 종료)
+		Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+		response.addCookie(idCookie);
 		return "redirect:/";
 	}
 	
