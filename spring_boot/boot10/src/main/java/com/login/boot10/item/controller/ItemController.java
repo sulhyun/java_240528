@@ -80,7 +80,7 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateForm form, BindingResult bindingResult) {
+    public String editItem(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemUpdateForm form, BindingResult bindingResult) {
 
         //특정 필드 예외가 아닌 전체 예외
         if (form.getPrice() != null && form.getQuantity() != null) {
@@ -105,7 +105,7 @@ public class ItemController {
     }
     
 	@GetMapping("/{itemId}/delete")
-	public String delete(@PathVariable long itemId, Model model) {
+	public String deleteItem(@PathVariable long itemId, Model model) {
 		itemRepository.delete(itemId);
 		List<Item> items = itemRepository.findAll();
 		model.addAttribute("items", items);
