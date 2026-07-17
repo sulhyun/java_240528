@@ -26,7 +26,7 @@ public class HomeController {
         return "home";
     }
     
-    @GetMapping("/")
+    // @GetMapping("/")
     public String homeLoginV1(@CookieValue(name = "memberId", required = false) Long memberId, Model model) {
     	if (memberId == null) {
     		return "home";
