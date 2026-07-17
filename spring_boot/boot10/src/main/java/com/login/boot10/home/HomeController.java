@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.login.boot10.member.domain.Member;
 import com.login.boot10.member.repository.MemberRepository;
-import com.login.boot10.web.SessionManager;
+import com.login.boot10.web.session.SessionManager;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
