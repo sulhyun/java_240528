@@ -1,5 +1,6 @@
 package com.exception.boot11.resolver;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +48,7 @@ public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
 				}
 				
 			}
-		} catch (Exception e) {
+		} catch (IOException e) {
 			log.error("resolver ex", ex);
 		}
 		return null;
