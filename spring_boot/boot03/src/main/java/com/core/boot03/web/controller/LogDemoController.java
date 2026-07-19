@@ -10,7 +10,6 @@ import com.core.boot03.web.service.LogDemoService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
-
 @Controller
 @RequiredArgsConstructor
 public class LogDemoController {
