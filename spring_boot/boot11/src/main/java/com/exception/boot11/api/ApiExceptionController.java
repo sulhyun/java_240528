@@ -18,7 +18,11 @@ public class ApiExceptionController {
 			throw new RuntimeException("잘못된 사용자");
 		}
 		
-		return new MemberDto(id, "spring " + id);
+		if (id.equals("bad")) {
+			throw new IllegalArgumentException("잘못된 입력 값");
+		}
+		
+		return new MemberDto(id, "Hello " + id);
 	}
 	
 	@Data
